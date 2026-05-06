@@ -139,7 +139,7 @@ document.addEventListener('DOMContentLoaded', () => {
         isMenuOpen = false;
         gsap.to(menu, { 
             clipPath: "circle(0% at 95% 5%)", 
-            duration: 0.8, 
+            duration: 1.2, 
             ease: "power4.inOut",
             onComplete: () => {
                 menu.classList.add('hidden');
@@ -158,11 +158,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 menu.classList.add('flex');
                 gsap.fromTo(menu, 
                     { clipPath: "circle(0% at 95% 5%)" }, 
-                    { clipPath: "circle(150% at 95% 5%)", duration: 0.8, ease: "power4.inOut" }
+                    { clipPath: "circle(150% at 95% 5%)", duration: 1.2, ease: "power4.inOut" }
                 );
                 gsap.fromTo('.menu-link', 
                     { y: "100%" }, 
-                    { y: "0%", duration: 0.8, ease: "power4.out", stagger: 0.1, delay: 0.3 }
+                    { y: "0%", duration: 1.2, ease: "power4.out", stagger: 0.15, delay: 0.4 }
                 );
                 menuToggle.innerText = "CLOSE";
                 lenis.stop();
@@ -205,7 +205,7 @@ document.addEventListener('DOMContentLoaded', () => {
             scrollTrigger: {
                 trigger: section,
                 start: "top 80%",
-                toggleActions: "play none none reverse"
+                toggleActions: "play reverse play reverse"
             }
         });
     });
