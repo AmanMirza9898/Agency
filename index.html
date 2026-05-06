@@ -14,7 +14,7 @@
             theme: {
                 extend: {
                     colors: {
-                        primary: '#ffffff',
+                        primary: '#FFB800',
                         dark: '#0a0a0a',
                         light: '#f8f8f8',
                     }
@@ -38,8 +38,8 @@
     <div id="cursor-follower"></div>
 
     <!-- Header -->
-    <header class="fixed top-0 left-0 w-full z-[100] py-6 px-6 md:px-12 flex justify-between items-center mix-difference">
-        <a href="/" class="text-2xl font-black tracking-tighter uppercase magnetic">ICB.</a>
+    <header id="main-header" class="fixed top-0 left-0 w-full z-[100] py-6 px-6 md:px-12 flex justify-between items-center transition-colors duration-300">
+        <a href="/" class="block"><img src="Assets/images/ICB-white.png" alt="ICB Logo" class="h-12 md:h-16"></a>
         <div class="flex gap-8 items-center">
             <button class="text-sm font-bold tracking-[0.2em] uppercase hidden md:block magnetic">LET'S TALK!</button>
             <button id="menu-toggle" class="text-sm font-bold tracking-[0.2em] uppercase magnetic">MENU</button>
@@ -49,29 +49,32 @@
     <!-- Fullscreen Menu -->
     <div id="menu" class="fixed inset-0 z-[90] bg-dark text-light hidden flex-col justify-center items-start text-left px-6 md:px-24">
         <div class="flex flex-col gap-4">
-            <div class="overflow-hidden"><a href="#home" class="menu-link block text-7xl md:text-[140px] font-black tracking-tighter leading-[0.85] pr-4 hover-stroke transition-all">HOME</a></div>
-            <div class="overflow-hidden"><a href="#services" class="menu-link block text-7xl md:text-[140px] font-black tracking-tighter leading-[0.85] pr-4 hover-stroke transition-all">SERVICES</a></div>
-            <div class="overflow-hidden"><a href="#projects" class="menu-link block text-7xl md:text-[140px] font-black tracking-tighter leading-[0.85] pr-4 hover-stroke transition-all">PROJECTS</a></div>
-            <div class="overflow-hidden"><a href="#about" class="menu-link block text-7xl md:text-[140px] font-black tracking-tighter leading-[0.85] pr-4 hover-stroke transition-all">ABOUT</a></div>
-            <div class="overflow-hidden"><a href="#contact" class="menu-link block text-7xl md:text-[140px] font-black tracking-tighter leading-[0.85] pr-4 hover-stroke transition-all">CONTACT</a></div>
+            <div class="overflow-hidden"><a href="index.html" class="menu-link block text-7xl md:text-[140px] font-black tracking-tighter leading-[0.85] pr-4 hover-stroke transition-all">HOME</a></div>
+            <div class="overflow-hidden"><a href="services.html" class="menu-link block text-7xl md:text-[140px] font-black tracking-tighter leading-[0.85] pr-4 hover-stroke transition-all">SERVICES</a></div>
+            <div class="overflow-hidden"><a href="projects.html" class="menu-link block text-7xl md:text-[140px] font-black tracking-tighter leading-[0.85] pr-4 hover-stroke transition-all">PROJECTS</a></div>
+            <div class="overflow-hidden"><a href="about.html" class="menu-link block text-7xl md:text-[140px] font-black tracking-tighter leading-[0.85] pr-4 hover-stroke transition-all">ABOUT</a></div>
+            <div class="overflow-hidden"><a href="contact.html" class="menu-link block text-7xl md:text-[140px] font-black tracking-tighter leading-[0.85] pr-4 hover-stroke transition-all">CONTACT</a></div>
         </div>
     </div>
 
     <main>
         <!-- 1. Banner (Hero) -->
-        <section id="home" class="relative min-h-screen flex flex-col justify-center items-center text-center px-6 pt-20 overflow-hidden bg-white">
-            <div class="hero-content">
+        <section id="home" class="relative min-h-screen flex flex-col justify-center items-center text-center px-6 pt-20 overflow-hidden bg-primary text-dark">
+            <div class="hero-content relative z-10">
                 <h1 class="text-7xl md:text-[10vw] font-black tracking-tighter leading-[0.85] hero-title">
                     WE CREATE<br/>
-                    <span class="italic opacity-30">ICONIC</span> BRANDS
+                    <span class="italic opacity-50">ICONIC</span> BRANDS
                 </h1>
-                <p class="mt-8 text-xl md:text-2xl text-zinc-500 max-w-2xl font-medium mx-auto hero-desc">
+                <p class="mt-8 text-xl md:text-2xl text-dark/70 max-w-2xl font-medium mx-auto hero-desc">
                     A boutique creative agency crafting high-end digital experiences that captivate, convert, and inspire.
                 </p>
                 <div class="mt-12 hero-cta">
                     <button class="bg-dark text-light px-10 py-5 rounded-full text-lg font-bold hover:bg-white hover:text-dark transition-all shadow-2xl border border-dark magnetic">Start Your Project</button>
                 </div>
             </div>
+            
+            <!-- Promise Hand -->
+            <img src="Assets/images/promise_hand.png" alt="Promise Hand" class="promise-hand absolute right-0 md:right-[5%] bottom-10 md:bottom-[5%] w-[300px] md:w-[500px] object-contain z-0 pointer-events-none" />
         </section>
 
         <!-- 2. Services (Stacking Cards) -->
@@ -212,7 +215,7 @@
             <div class="max-w-7xl mx-auto flex flex-col md:flex-row gap-20 items-center">
                 <div class="flex-1">
                     <span class="font-bold tracking-[0.3em] uppercase text-xs opacity-50">About Us</span>
-                    <h2 class="text-5xl md:text-8xl font-black mt-4 tracking-tighter leading-none">WE ARE MAKERS OF<br/><span class="text-stroke">ICONIC BRANDS.</span></h2>
+                    <h2 class="text-5xl md:text-8xl font-black mt-4 tracking-tighter leading-none">WE ARE MAKERS OF<br/><span class="text-primary text-stroke">ICONIC BRANDS.</span></h2>
                 </div>
                 <div class="flex-1">
                     <p class="text-xl md:text-2xl text-zinc-500 leading-tight">
@@ -328,7 +331,7 @@
             <div class="max-w-7xl mx-auto relative z-10">
                 <div class="flex flex-col lg:flex-row justify-between items-start gap-20 mb-32">
                     <div>
-                        <h2 class="text-6xl md:text-9xl font-black leading-none tracking-tighter">LET'S<br/><span class="italic opacity-30">CONNECT.</span></h2>
+                        <h2 class="text-6xl md:text-9xl font-black leading-none tracking-tighter">LET'S<br/><span class="italic text-primary opacity-100">CONNECT.</span></h2>
                         <div class="mt-16 flex flex-col gap-6">
                             <a href="mailto:hello@icb.agency" class="text-2xl md:text-4xl font-bold hover:opacity-50 transition-all">hello@icb.agency</a>
                             <div class="flex gap-8">

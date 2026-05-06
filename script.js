@@ -45,16 +45,16 @@ document.addEventListener('DOMContentLoaded', () => {
                 else if (size > 40) dynamicScale = 1.8;
                 else if (size > 20) dynamicScale = 1.5;
                 
+                follower.classList.add('invert-backdrop');
                 gsap.to(follower, { 
                     scale: dynamicScale, 
-                    backgroundColor: 'white', 
-                    borderColor: 'white', 
                     duration: 0.3 
                 });
                 gsap.to(cursor, { scale: 0, duration: 0.3 });
             });
             el.addEventListener('mouseleave', () => {
-                gsap.to(follower, { scale: 1, backgroundColor: 'transparent', borderColor: 'white', duration: 0.3 });
+                follower.classList.remove('invert-backdrop');
+                gsap.to(follower, { scale: 1, duration: 0.3 });
                 gsap.to(cursor, { scale: 1, duration: 0.3 });
             });
         });
@@ -128,11 +128,46 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // 8. Menu Toggle Logic
+    // 8. Promise Hand Parallax Animation
+    const promiseHand = document.querySelector('.promise-hand');
+    if (promiseHand) {
+        gsap.to(promiseHand, {
+            y: -150,
+            rotation: -5,
+            ease: "none",
+            scrollTrigger: {
+                trigger: "#home",
+                start: "top top",
+                end: "bottom top",
+                scrub: 1
+            }
+        });
+    }
+
+    // 9. Smart Header Color Toggle
+    const header = document.getElementById('main-header');
+    const darkSections = document.querySelectorAll('.bg-dark, .bg-zinc-900');
+    
+    if (header && darkSections.length > 0) {
+        darkSections.forEach(section => {
+            ScrollTrigger.create({
+                trigger: section,
+                start: "top 50px", // When the dark section reaches near the top (header area)
+                end: "bottom 50px",
+                onEnter: () => header.classList.add('text-invert'),
+                onLeave: () => header.classList.remove('text-invert'),
+                onEnterBack: () => header.classList.add('text-invert'),
+                onLeaveBack: () => header.classList.remove('text-invert'),
+            });
+        });
+    }
+
+    // 10. Menu Toggle Logic
     const menu = document.getElementById('menu');
     const menuToggle = document.getElementById('menu-toggle');
     const menuLinks = document.querySelectorAll('.menu-link');
     let isMenuOpen = false;
+    let headerOriginalState = false;
 
     function closeMenu() {
         if (!isMenuOpen) return;
@@ -154,6 +189,10 @@ document.addEventListener('DOMContentLoaded', () => {
         menuToggle.addEventListener('click', () => {
             if (!isMenuOpen) {
                 isMenuOpen = true;
+                if (header) {
+                    headerOriginalState = header.classList.contains('text-invert');
+                    header.classList.add('text-invert');
+                }
                 menu.classList.remove('hidden');
                 menu.classList.add('flex');
                 gsap.fromTo(menu, 
@@ -167,6 +206,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 menuToggle.innerText = "CLOSE";
                 lenis.stop();
             } else {
+                if (header && !headerOriginalState) {
+                    header.classList.remove('text-invert');
+                }
                 closeMenu();
             }
         });
@@ -174,11 +216,16 @@ document.addEventListener('DOMContentLoaded', () => {
         // Close menu when a link is clicked
         menuLinks.forEach(link => {
             link.addEventListener('click', (e) => {
-                closeMenu();
-                // We use Lenis to scroll to the target section smoothly
-                e.preventDefault();
                 const targetId = link.getAttribute('href');
-                lenis.scrollTo(targetId);
+                if (targetId && targetId.startsWith('#')) {
+                    e.preventDefault();
+                    closeMenu();
+                    // We use Lenis to scroll to the target section smoothly
+                    lenis.scrollTo(targetId);
+                } else if (targetId) {
+                    e.preventDefault(); // Ensure no conflict
+                    window.location.href = targetId;
+                }
             });
         });
     }

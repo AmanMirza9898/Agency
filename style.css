@@ -57,6 +57,14 @@ body.dark-mode {
     transition: transform 0.15s ease-out, background-color 0.3s ease, border-color 0.3s ease;
 }
 
+.invert-backdrop {
+    backdrop-filter: grayscale(1) invert(1) contrast(10) !important;
+    -webkit-backdrop-filter: grayscale(1) invert(1) contrast(10) !important;
+    mix-blend-mode: normal !important;
+    background-color: transparent !important;
+    border-color: transparent !important;
+}
+
 /* Typography */
 h1, h2, h3, h4, h5 {
     line-height: 0.9;
@@ -73,7 +81,7 @@ h1, h2, h3, h4, h5 {
 }
 
 .hover-stroke:hover {
-    -webkit-text-stroke: 1px white;
+    -webkit-text-stroke: 1px #FFB800;
     color: transparent;
 }
 
@@ -205,8 +213,18 @@ h1, h2, h3, h4, h5 {
     }
 }
 
-/* Custom Mix Blend Mode for Header */
-.mix-difference {
-    mix-blend-mode: difference;
-    color: white;
+/* Smart Header Theme */
+#main-header {
+    color: #0a0a0a;
+}
+#main-header img {
+    filter: brightness(0);
+    transition: filter 0.3s ease;
+}
+
+#main-header.text-invert {
+    color: #ffffff;
+}
+#main-header.text-invert img {
+    filter: none;
 }
