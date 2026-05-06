@@ -39,25 +39,21 @@
 
     <!-- Header -->
     <header class="fixed top-0 left-0 w-full z-[100] py-6 px-6 md:px-12 flex justify-between items-center mix-difference">
-        <a href="/" class="text-xl font-black tracking-tighter uppercase magnetic">ICB.</a>
+        <a href="/" class="text-2xl font-black tracking-tighter uppercase magnetic">ICB.</a>
         <div class="flex gap-8 items-center">
-            <button class="text-[10px] font-bold tracking-[0.2em] uppercase hidden md:block magnetic">LET'S TALK!</button>
-            <button id="menu-toggle" class="text-[10px] font-bold tracking-[0.2em] uppercase magnetic">MENU</button>
+            <button class="text-sm font-bold tracking-[0.2em] uppercase hidden md:block magnetic">LET'S TALK!</button>
+            <button id="menu-toggle" class="text-sm font-bold tracking-[0.2em] uppercase magnetic">MENU</button>
         </div>
     </header>
 
     <!-- Fullscreen Menu -->
-    <div id="menu" class="fixed inset-0 z-[90] bg-dark text-light hidden flex-col justify-center px-6 md:px-24">
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-x-20">
-            <div class="flex flex-col">
-                <a href="#home" class="menu-link text-6xl md:text-[120px] font-black tracking-tighter leading-[0.85] hover-stroke transition-all">HOME</a>
-                <a href="#services" class="menu-link text-6xl md:text-[120px] font-black tracking-tighter leading-[0.85] hover-stroke transition-all">SERVICES</a>
-                <a href="#projects" class="menu-link text-6xl md:text-[120px] font-black tracking-tighter leading-[0.85] hover-stroke transition-all">PROJECTS</a>
-            </div>
-            <div class="flex flex-col mt-10 md:mt-0">
-                <a href="#about" class="menu-link text-6xl md:text-[120px] font-black tracking-tighter leading-[0.85] hover-stroke transition-all">ABOUT</a>
-                <a href="#contact" class="menu-link text-6xl md:text-[120px] font-black tracking-tighter leading-[0.85] hover-stroke transition-all">CONTACT</a>
-            </div>
+    <div id="menu" class="fixed inset-0 z-[90] bg-dark text-light hidden flex-col justify-center items-start text-left px-6 md:px-24">
+        <div class="flex flex-col gap-4">
+            <div class="overflow-hidden"><a href="#home" class="menu-link block text-7xl md:text-[140px] font-black tracking-tighter leading-[0.85] pr-4 hover-stroke transition-all">HOME</a></div>
+            <div class="overflow-hidden"><a href="#services" class="menu-link block text-7xl md:text-[140px] font-black tracking-tighter leading-[0.85] pr-4 hover-stroke transition-all">SERVICES</a></div>
+            <div class="overflow-hidden"><a href="#projects" class="menu-link block text-7xl md:text-[140px] font-black tracking-tighter leading-[0.85] pr-4 hover-stroke transition-all">PROJECTS</a></div>
+            <div class="overflow-hidden"><a href="#about" class="menu-link block text-7xl md:text-[140px] font-black tracking-tighter leading-[0.85] pr-4 hover-stroke transition-all">ABOUT</a></div>
+            <div class="overflow-hidden"><a href="#contact" class="menu-link block text-7xl md:text-[140px] font-black tracking-tighter leading-[0.85] pr-4 hover-stroke transition-all">CONTACT</a></div>
         </div>
     </div>
 
@@ -74,12 +70,6 @@
                 </p>
                 <div class="mt-12 hero-cta">
                     <button class="bg-dark text-light px-10 py-5 rounded-full text-lg font-bold hover:bg-white hover:text-dark transition-all shadow-2xl border border-dark magnetic">Start Your Project</button>
-                </div>
-            </div>
-            <div class="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2">
-                <span class="text-[10px] font-bold tracking-[0.2em] uppercase opacity-30">Scroll to Explore</span>
-                <div class="w-[1px] h-20 bg-dark/10 relative overflow-hidden">
-                    <div class="absolute top-0 left-0 w-full h-1/2 bg-dark animate-scroll-line"></div>
                 </div>
             </div>
         </section>

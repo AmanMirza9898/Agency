@@ -131,33 +131,55 @@ document.addEventListener('DOMContentLoaded', () => {
     // 8. Menu Toggle Logic
     const menu = document.getElementById('menu');
     const menuToggle = document.getElementById('menu-toggle');
+    const menuLinks = document.querySelectorAll('.menu-link');
     let isMenuOpen = false;
+
+    function closeMenu() {
+        if (!isMenuOpen) return;
+        isMenuOpen = false;
+        gsap.to(menu, { 
+            clipPath: "circle(0% at 95% 5%)", 
+            duration: 0.8, 
+            ease: "power4.inOut",
+            onComplete: () => {
+                menu.classList.add('hidden');
+                menu.classList.remove('flex');
+            }
+        });
+        menuToggle.innerText = "MENU";
+        lenis.start();
+    }
 
     if (menu && menuToggle) {
         menuToggle.addEventListener('click', () => {
-            isMenuOpen = !isMenuOpen;
-            if (isMenuOpen) {
+            if (!isMenuOpen) {
+                isMenuOpen = true;
                 menu.classList.remove('hidden');
                 menu.classList.add('flex');
                 gsap.fromTo(menu, 
                     { clipPath: "circle(0% at 95% 5%)" }, 
                     { clipPath: "circle(150% at 95% 5%)", duration: 0.8, ease: "power4.inOut" }
                 );
+                gsap.fromTo('.menu-link', 
+                    { y: "100%" }, 
+                    { y: "0%", duration: 0.8, ease: "power4.out", stagger: 0.1, delay: 0.3 }
+                );
                 menuToggle.innerText = "CLOSE";
                 lenis.stop();
             } else {
-                gsap.to(menu, { 
-                    clipPath: "circle(0% at 95% 5%)", 
-                    duration: 0.8, 
-                    ease: "power4.inOut",
-                    onComplete: () => {
-                        menu.classList.add('hidden');
-                        menu.classList.remove('flex');
-                    }
-                });
-                menuToggle.innerText = "MENU";
-                lenis.start();
+                closeMenu();
             }
+        });
+
+        // Close menu when a link is clicked
+        menuLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                closeMenu();
+                // We use Lenis to scroll to the target section smoothly
+                e.preventDefault();
+                const targetId = link.getAttribute('href');
+                lenis.scrollTo(targetId);
+            });
         });
     }
 
