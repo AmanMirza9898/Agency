@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ICB | I Create Brand - Premium Creative Agency</title>
+    <meta name="description" content="I Create Brand (ICB) - A premium creative agency specialized in building iconic brands. We offer branding, digital design, and high-performance development.">
+    <meta name="keywords" content="Creative Agency, Branding, UI/UX Design, Web Development, ICB, I Create Brand">
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#ffffff',
+                        dark: '#0a0a0a',
+                        light: '#f8f8f8',
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <!-- External CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-light text-dark">
+
+    <!-- Custom Cursor -->
+    <div id="cursor"></div>
+    <div id="cursor-follower"></div>
+
+    <!-- Header -->
+    <header class="fixed top-0 left-0 w-full z-[100] py-6 px-6 md:px-12 flex justify-between items-center mix-difference">
+        <a href="/" class="text-xl font-black tracking-tighter uppercase magnetic">ICB.</a>
+        <div class="flex gap-8 items-center">
+            <button class="text-[10px] font-bold tracking-[0.2em] uppercase hidden md:block magnetic">LET'S TALK!</button>
+            <button id="menu-toggle" class="text-[10px] font-bold tracking-[0.2em] uppercase magnetic">MENU</button>
+        </div>
+    </header>
+
+    <!-- Fullscreen Menu -->
+    <div id="menu" class="fixed inset-0 z-[90] bg-dark text-light hidden flex-col justify-center px-6 md:px-24">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-x-20">
+            <div class="flex flex-col">
+                <a href="#home" class="menu-link text-6xl md:text-[120px] font-black tracking-tighter leading-[0.85] hover-stroke transition-all">HOME</a>
+                <a href="#services" class="menu-link text-6xl md:text-[120px] font-black tracking-tighter leading-[0.85] hover-stroke transition-all">SERVICES</a>
+                <a href="#projects" class="menu-link text-6xl md:text-[120px] font-black tracking-tighter leading-[0.85] hover-stroke transition-all">PROJECTS</a>
+            </div>
+            <div class="flex flex-col mt-10 md:mt-0">
+                <a href="#about" class="menu-link text-6xl md:text-[120px] font-black tracking-tighter leading-[0.85] hover-stroke transition-all">ABOUT</a>
+                <a href="#contact" class="menu-link text-6xl md:text-[120px] font-black tracking-tighter leading-[0.85] hover-stroke transition-all">CONTACT</a>
+            </div>
+        </div>
+    </div>
+
+    <main>
+        <!-- 1. Banner (Hero) -->
+        <section id="home" class="relative min-h-screen flex flex-col justify-center items-center text-center px-6 pt-20 overflow-hidden bg-white">
+            <div class="hero-content">
+                <h1 class="text-7xl md:text-[10vw] font-black tracking-tighter leading-[0.85] hero-title">
+                    WE CREATE<br/>
+                    <span class="italic opacity-30">ICONIC</span> BRANDS
+                </h1>
+                <p class="mt-8 text-xl md:text-2xl text-zinc-500 max-w-2xl font-medium mx-auto hero-desc">
+                    A boutique creative agency crafting high-end digital experiences that captivate, convert, and inspire.
+                </p>
+                <div class="mt-12 hero-cta">
+                    <button class="bg-dark text-light px-10 py-5 rounded-full text-lg font-bold hover:bg-white hover:text-dark transition-all shadow-2xl border border-dark magnetic">Start Your Project</button>
+                </div>
+            </div>
+            <div class="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2">
+                <span class="text-[10px] font-bold tracking-[0.2em] uppercase opacity-30">Scroll to Explore</span>
+                <div class="w-[1px] h-20 bg-dark/10 relative overflow-hidden">
+                    <div class="absolute top-0 left-0 w-full h-1/2 bg-dark animate-scroll-line"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. Services (Stacking Cards) -->
+        <section id="services" class="relative py-32 px-6 bg-dark text-light">
+            <div class="max-w-7xl mx-auto mb-20 text-center">
+                <span class="font-bold tracking-[0.3em] uppercase text-xs opacity-50">Our Expertise</span>
+                <h2 class="text-5xl md:text-8xl font-black mt-4 tracking-tighter">WE SOLVE PROBLEMS<br/>WITH DESIGN.</h2>
+            </div>
+
+            <div class="stack-container">
+                <div class="stack-card bg-zinc-900 border border-zinc-800" style="z-index: 1;">
+                    <span class="text-4xl font-black opacity-20 mb-10">01 /</span>
+                    <h3 class="text-5xl md:text-8xl font-black tracking-tighter mb-8">BRAND IDENTITY</h3>
+                    <p class="max-w-xl text-xl text-zinc-400">Crafting unique visual languages that define your brand's soul and resonate with your audience on a primal level.</p>
+                </div>
+                <div class="stack-card bg-zinc-800 border border-zinc-700" style="z-index: 2;">
+                    <span class="text-4xl font-black opacity-20 mb-10">02 /</span>
+                    <h3 class="text-5xl md:text-8xl font-black tracking-tighter mb-8">DIGITAL DESIGN</h3>
+                    <p class="max-w-xl text-xl text-zinc-400">Creating high-end UI/UX experiences that are as intuitive as they are beautiful. We design for the future.</p>
+                </div>
+                <div class="stack-card bg-zinc-700 border border-zinc-600" style="z-index: 3;">
+                    <span class="text-4xl font-black opacity-20 mb-10">03 /</span>
+                    <h3 class="text-5xl md:text-8xl font-black tracking-tighter mb-8">DEVELOPMENT</h3>
+                    <p class="max-w-xl text-xl text-zinc-400">Building robust, scalable, and high-performance applications using the latest technologies and clean code practices.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. Our Projects (Horizontal Scroll) -->
+        <section id="projects" class="bg-white text-dark min-h-screen overflow-hidden">
+            <div class="horizontal-wrapper">
+                <div class="min-w-[40vw] flex flex-col justify-center pr-20">
+                    <span class="font-bold tracking-[0.3em] uppercase text-xs opacity-50">Featured Work</span>
+                    <h2 class="text-6xl md:text-9xl font-black mt-4 tracking-tighter">SELECTED<br/>CASES.</h2>
+                </div>
+                <div class="horizontal-item bg-zinc-100 flex items-end p-12">
+                    <div class="relative z-10">
+                        <span class="text-xs font-bold tracking-widest uppercase opacity-40">Luxury Branding</span>
+                        <h3 class="text-5xl md:text-7xl font-black mt-2">AETERNA</h3>
+                    </div>
+                </div>
+                <div class="horizontal-item bg-zinc-200 flex items-end p-12">
+                    <div class="relative z-10">
+                        <span class="text-xs font-bold tracking-widest uppercase opacity-40">Fintech UI</span>
+                        <h3 class="text-5xl md:text-7xl font-black mt-2">NEO.CAPITAL</h3>
+                    </div>
+                </div>
+                <div class="horizontal-item bg-zinc-300 flex items-end p-12">
+                    <div class="relative z-10">
+                        <span class="text-xs font-bold tracking-widest uppercase opacity-40">3D Experience</span>
+                        <h3 class="text-5xl md:text-7xl font-black mt-2">VIRTUA.HUB</h3>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. Our Clients (Marquee) -->
+        <section id="clients" class="py-20 bg-dark overflow-hidden">
+            <div class="marquee-container">
+                <div class="marquee-content flex gap-20 items-center">
+                    <span class="text-6xl md:text-8xl font-black text-white/10 uppercase hover:text-white transition-colors cursor-pointer">Google</span>
+                    <span class="text-6xl md:text-8xl font-black text-white/10 uppercase hover:text-white transition-colors cursor-pointer">Apple</span>
+                    <span class="text-6xl md:text-8xl font-black text-white/10 uppercase hover:text-white transition-colors cursor-pointer">Tesla</span>
+                    <span class="text-6xl md:text-8xl font-black text-white/10 uppercase hover:text-white transition-colors cursor-pointer">Netflix</span>
+                    <span class="text-6xl md:text-8xl font-black text-white/10 uppercase hover:text-white transition-colors cursor-pointer">Amazon</span>
+                    <span class="text-6xl md:text-8xl font-black text-white/10 uppercase hover:text-white transition-colors cursor-pointer">SpaceX</span>
+                    <!-- Duplicate for infinite effect -->
+                    <span class="text-6xl md:text-8xl font-black text-white/10 uppercase hover:text-white transition-colors cursor-pointer">Google</span>
+                    <span class="text-6xl md:text-8xl font-black text-white/10 uppercase hover:text-white transition-colors cursor-pointer">Apple</span>
+                    <span class="text-6xl md:text-8xl font-black text-white/10 uppercase hover:text-white transition-colors cursor-pointer">Tesla</span>
+                    <span class="text-6xl md:text-8xl font-black text-white/10 uppercase hover:text-white transition-colors cursor-pointer">Netflix</span>
+                    <span class="text-6xl md:text-8xl font-black text-white/10 uppercase hover:text-white transition-colors cursor-pointer">Amazon</span>
+                    <span class="text-6xl md:text-8xl font-black text-white/10 uppercase hover:text-white transition-colors cursor-pointer">SpaceX</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. Industries We Cater (Bento) -->
+        <section id="industries" class="section-padding bg-light">
+            <div class="max-w-7xl mx-auto">
+                <div class="mb-20">
+                    <span class="font-bold tracking-[0.3em] uppercase text-xs opacity-50">Industries</span>
+                    <h2 class="text-5xl md:text-7xl font-black mt-4 tracking-tighter">THE SPACES WE<br/>REVOLUTIONIZE.</h2>
+                </div>
+                <div class="bento-grid">
+                    <div class="bento-item col-span-2 row-span-2 bg-white flex flex-col justify-end group cursor-pointer hover:bg-dark hover:text-white">
+                        <div class="text-6xl mb-6">💎</div>
+                        <h4 class="text-3xl font-black uppercase">Luxury & Lifestyle</h4>
+                        <p class="mt-4 text-sm opacity-60">Elevating high-end brands through sophisticated digital storytelling and premium aesthetics.</p>
+                    </div>
+                    <div class="bento-item col-span-2 bg-dark text-white flex items-center justify-between group cursor-pointer hover:bg-white hover:text-dark border border-dark transition-all">
+                        <h4 class="text-3xl font-black uppercase">Tech Startups</h4>
+                        <span class="text-4xl group-hover:scale-125 transition-transform">🚀</span>
+                    </div>
+                    <div class="bento-item bg-white flex flex-col justify-center items-center text-center hover:bg-dark hover:text-white transition-all cursor-pointer">
+                        <div class="text-4xl mb-2">🧠</div>
+                        <h4 class="font-bold uppercase text-xs tracking-widest">AI Tools</h4>
+                    </div>
+                    <div class="bento-item bg-zinc-900 text-white flex flex-col justify-center items-center text-center hover:bg-white hover:text-dark transition-all cursor-pointer">
+                        <div class="text-4xl mb-2">💸</div>
+                        <h4 class="font-bold uppercase text-xs tracking-widest">Fintech</h4>
+                    </div>
+                    <div class="bento-item col-span-2 bg-white flex items-center gap-6 hover:bg-dark hover:text-white transition-all cursor-pointer group">
+                        <div class="text-5xl group-hover:rotate-12 transition-transform">🎨</div>
+                        <div>
+                            <h4 class="text-xl font-black uppercase">Creative Arts</h4>
+                            <p class="text-xs opacity-50">Empowering artists with iconic digital presence.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. About Us -->
+        <section id="about" class="section-padding bg-white">
+            <div class="max-w-7xl mx-auto flex flex-col md:flex-row gap-20 items-center">
+                <div class="flex-1">
+                    <span class="font-bold tracking-[0.3em] uppercase text-xs opacity-50">About Us</span>
+                    <h2 class="text-5xl md:text-8xl font-black mt-4 tracking-tighter leading-none">WE ARE MAKERS OF<br/><span class="text-stroke">ICONIC BRANDS.</span></h2>
+                </div>
+                <div class="flex-1">
+                    <p class="text-xl md:text-2xl text-zinc-500 leading-tight">
+                        ICB is a globally distributed creative powerhouse. We believe that exceptional design is the intersection of strategy, aesthetics, and technology. Our mission is to transform ambitious ideas into iconic digital legacies.
+                    </p>
+                    <div class="mt-12 flex gap-12">
+                        <div>
+                            <span class="text-5xl font-black block">150+</span>
+                            <span class="text-[10px] font-bold uppercase tracking-widest opacity-40">Projects</span>
+                        </div>
+                        <div>
+                            <span class="text-5xl font-black block">12+</span>
+                            <span class="text-[10px] font-bold uppercase tracking-widest opacity-40">Awards</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 7. Our Process (Vertical Timeline) -->
+        <section id="process" class="section-padding bg-dark text-light overflow-hidden">
+            <div class="max-w-7xl mx-auto flex flex-col md:flex-row gap-20">
+                <div class="md:w-1/3 sticky top-32 h-fit">
+                    <span class="font-bold tracking-[0.3em] uppercase text-xs opacity-50">The Journey</span>
+                    <h2 class="text-5xl md:text-7xl font-black mt-4 tracking-tighter">HOW WE<br/>CRAFT MAGIC.</h2>
+                </div>
+                <div class="md:w-2/3 space-y-32 relative">
+                    <div class="absolute left-[-20px] top-0 w-[1px] h-full bg-zinc-800">
+                        <div id="process-progress" class="w-full bg-white h-0"></div>
+                    </div>
+                    <div class="process-step">
+                        <span class="text-8xl font-black text-zinc-900 block leading-none">01</span>
+                        <h3 class="text-3xl font-black mt-4 uppercase">Discovery & Immersion</h3>
+                        <p class="mt-4 text-zinc-500 text-lg">We dive deep into your brand DNA, market positioning, and core values to find the unique "why" behind your business.</p>
+                    </div>
+                    <div class="process-step">
+                        <span class="text-8xl font-black text-zinc-900 block leading-none">02</span>
+                        <h3 class="text-3xl font-black mt-4 uppercase">Strategy & Ideation</h3>
+                        <p class="mt-4 text-zinc-500 text-lg">We map out the architectural blueprint and creative direction that will set you apart from the noise.</p>
+                    </div>
+                    <div class="process-step">
+                        <span class="text-8xl font-black text-zinc-900 block leading-none">03</span>
+                        <h3 class="text-3xl font-black mt-4 uppercase">Design & Development</h3>
+                        <p class="mt-4 text-zinc-500 text-lg">Pixel-perfect craftsmanship meets robust engineering to bring the vision to life with precision.</p>
+                    </div>
+                    <div class="process-step">
+                        <span class="text-8xl font-black text-zinc-900 block leading-none">04</span>
+                        <h3 class="text-3xl font-black mt-4 uppercase">Launch & Evolution</h3>
+                        <p class="mt-4 text-zinc-500 text-lg">We release your brand into the world and continue to optimize for long-term growth and impact.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 8. Testimonials -->
+        <section id="testimonials" class="section-padding bg-white overflow-hidden">
+            <div class="max-w-7xl mx-auto">
+                <div class="flex flex-col md:flex-row gap-20 items-end mb-20">
+                    <h2 class="text-6xl md:text-9xl font-black tracking-tighter leading-none">WHAT THEY<br/>SAY ABOUT US.</h2>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+                    <div class="p-12 bg-zinc-50 rounded-[40px] flex flex-col justify-between h-[400px]">
+                        <p class="text-2xl md:text-3xl font-medium italic">"ICB didn't just build a website; they built a legacy. The attention to detail is staggering."</p>
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 bg-zinc-200 rounded-full"></div>
+                            <div>
+                                <h4 class="font-bold">Alex Rivera</h4>
+                                <span class="text-xs opacity-40 uppercase">CEO, Flow State</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-12 bg-dark text-light rounded-[40px] flex flex-col justify-between h-[400px]">
+                        <p class="text-2xl md:text-3xl font-medium italic">"The team at ICB is the secret weapon for any startup. They define excellence."</p>
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 bg-zinc-800 rounded-full"></div>
+                            <div>
+                                <h4 class="font-bold">Sarah Chen</h4>
+                                <span class="text-xs opacity-40 uppercase">Founder, Nova</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 9. Keywords / Meta data (SEO Bento Wall) -->
+        <section id="seo" class="section-padding bg-zinc-900 text-light">
+            <div class="max-w-7xl mx-auto">
+                <div class="mb-20 text-center">
+                    <span class="font-bold tracking-[0.3em] uppercase text-xs opacity-50">SEO & Keywords</span>
+                    <h2 class="text-5xl md:text-7xl font-black mt-4 tracking-tighter">BUILT FOR<br/>DISCOVERY.</h2>
+                </div>
+                <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
+                    <div class="bg-zinc-800 p-6 rounded-2xl flex items-center justify-center font-bold text-xs tracking-widest uppercase hover:bg-white hover:text-dark transition-all cursor-pointer">Branding</div>
+                    <div class="bg-zinc-800 p-6 rounded-2xl flex items-center justify-center font-bold text-xs tracking-widest uppercase hover:bg-white hover:text-dark transition-all cursor-pointer">UI/UX Design</div>
+                    <div class="bg-zinc-800 p-6 rounded-2xl flex items-center justify-center font-bold text-xs tracking-widest uppercase hover:bg-white hover:text-dark transition-all cursor-pointer col-span-2">Web Development</div>
+                    <div class="bg-zinc-800 p-6 rounded-2xl flex items-center justify-center font-bold text-xs tracking-widest uppercase hover:bg-white hover:text-dark transition-all cursor-pointer">SEO</div>
+                    <div class="bg-zinc-800 p-6 rounded-2xl flex items-center justify-center font-bold text-xs tracking-widest uppercase hover:bg-white hover:text-dark transition-all cursor-pointer">Mobile Apps</div>
+                    <div class="bg-zinc-800 p-6 rounded-2xl flex items-center justify-center font-bold text-xs tracking-widest uppercase hover:bg-white hover:text-dark transition-all cursor-pointer">E-commerce</div>
+                    <div class="bg-zinc-800 p-6 rounded-2xl flex items-center justify-center font-bold text-xs tracking-widest uppercase hover:bg-white hover:text-dark transition-all cursor-pointer col-span-2">Digital Strategy</div>
+                    <div class="bg-zinc-800 p-6 rounded-2xl flex items-center justify-center font-bold text-xs tracking-widest uppercase hover:bg-white hover:text-dark transition-all cursor-pointer">Content</div>
+                    <div class="bg-zinc-800 p-6 rounded-2xl flex items-center justify-center font-bold text-xs tracking-widest uppercase hover:bg-white hover:text-dark transition-all cursor-pointer">Social Media</div>
+                    <div class="bg-zinc-800 p-6 rounded-2xl flex items-center justify-center font-bold text-xs tracking-widest uppercase hover:bg-white hover:text-dark transition-all cursor-pointer col-span-2">Copywriting</div>
+                    <div class="bg-zinc-800 p-6 rounded-2xl flex items-center justify-center font-bold text-xs tracking-widest uppercase hover:bg-white hover:text-dark transition-all cursor-pointer">Logo Design</div>
+                    <div class="bg-zinc-800 p-6 rounded-2xl flex items-center justify-center font-bold text-xs tracking-widest uppercase hover:bg-white hover:text-dark transition-all cursor-pointer">Motion</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 10. Footer -->
+        <footer class="bg-dark text-light pt-32 pb-12 px-6 md:px-12 relative overflow-hidden">
+            <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-white/5 rounded-full blur-[150px]"></div>
+            <div class="max-w-7xl mx-auto relative z-10">
+                <div class="flex flex-col lg:flex-row justify-between items-start gap-20 mb-32">
+                    <div>
+                        <h2 class="text-6xl md:text-9xl font-black leading-none tracking-tighter">LET'S<br/><span class="italic opacity-30">CONNECT.</span></h2>
+                        <div class="mt-16 flex flex-col gap-6">
+                            <a href="mailto:hello@icb.agency" class="text-2xl md:text-4xl font-bold hover:opacity-50 transition-all">hello@icb.agency</a>
+                            <div class="flex gap-8">
+                                <a href="#" class="text-sm font-bold uppercase tracking-widest opacity-40 hover:opacity-100 transition-opacity magnetic">Instagram</a>
+                                <a href="#" class="text-sm font-bold uppercase tracking-widest opacity-40 hover:opacity-100 transition-opacity magnetic">Twitter</a>
+                                <a href="#" class="text-sm font-bold uppercase tracking-widest opacity-40 hover:opacity-100 transition-opacity magnetic">LinkedIn</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w-full lg:w-1/3">
+                        <form class="space-y-6">
+                            <input type="text" placeholder="Name" class="w-full bg-transparent border-b border-zinc-800 py-4 outline-none focus:border-white transition-colors">
+                            <input type="email" placeholder="Email" class="w-full bg-transparent border-b border-zinc-800 py-4 outline-none focus:border-white transition-colors">
+                            <textarea placeholder="Message" rows="4" class="w-full bg-transparent border-b border-zinc-800 py-4 outline-none focus:border-white transition-colors"></textarea>
+                            <button class="bg-white text-dark px-12 py-5 rounded-full font-bold w-full hover:bg-dark hover:text-white border border-white transition-all magnetic">Send Message</button>
+                        </form>
+                    </div>
+                </div>
+                <div class="pt-12 border-t border-zinc-900 flex flex-col md:flex-row justify-between items-center gap-10">
+                    <span class="text-[10px] font-bold uppercase tracking-widest opacity-30">© 2026 ICB Agency / All Rights Reserved</span>
+                    <div class="flex gap-8">
+                        <a href="#" class="text-[10px] font-bold uppercase tracking-widest opacity-30 hover:opacity-100 transition-opacity">Privacy</a>
+                        <a href="#" class="text-[10px] font-bold uppercase tracking-widest opacity-30 hover:opacity-100 transition-opacity">Terms</a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </main>
+
+    <!-- GSAP & Lenis CDNs -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
+
+    <!-- External JS -->
+    <script src="script.js"></script>
+</body>
+</html>
