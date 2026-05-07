@@ -146,7 +146,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 9. Smart Header Color Toggle
     const header = document.getElementById('main-header');
-    const darkSections = document.querySelectorAll('.bg-dark, .bg-zinc-900');
+    const darkSections = document.querySelectorAll('section.bg-dark, section.bg-zinc-900, footer.bg-dark');
     
     if (header && darkSections.length > 0) {
         darkSections.forEach(section => {
