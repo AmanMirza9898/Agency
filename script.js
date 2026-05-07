@@ -39,11 +39,11 @@ document.addEventListener('DOMContentLoaded', () => {
             el.addEventListener('mouseenter', () => {
                 const fontSize = window.getComputedStyle(el).fontSize;
                 const size = parseInt(fontSize);
-                let dynamicScale = 1.2; // Default for small text
+                let dynamicScale = 1.0; // Default for small text
                 
-                if (size > 80) dynamicScale = 2.2;
-                else if (size > 40) dynamicScale = 1.8;
-                else if (size > 20) dynamicScale = 1.5;
+                if (size > 80) dynamicScale = 1.6;
+                else if (size > 40) dynamicScale = 1.4;
+                else if (size > 20) dynamicScale = 1.2;
                 
                 follower.classList.add('invert-backdrop');
                 gsap.to(follower, { 
