@@ -47,13 +47,14 @@
     </header>
 
     <!-- Fullscreen Menu -->
-    <div id="menu" class="fixed inset-0 z-[90] bg-dark text-light hidden flex-col justify-center items-start text-left px-6 md:px-24">
-        <div class="flex flex-col gap-4">
-            <div class="overflow-hidden"><a href="index.html" class="menu-link block text-7xl md:text-[140px] font-black tracking-tighter leading-[0.85] pr-4 hover-stroke transition-all">HOME</a></div>
-            <div class="overflow-hidden"><a href="services.html" class="menu-link block text-7xl md:text-[140px] font-black tracking-tighter leading-[0.85] pr-4 hover-stroke transition-all">SERVICES</a></div>
-            <div class="overflow-hidden"><a href="projects.html" class="menu-link block text-7xl md:text-[140px] font-black tracking-tighter leading-[0.85] pr-4 hover-stroke transition-all">PROJECTS</a></div>
-            <div class="overflow-hidden"><a href="about.html" class="menu-link block text-7xl md:text-[140px] font-black tracking-tighter leading-[0.85] pr-4 hover-stroke transition-all">ABOUT</a></div>
-            <div class="overflow-hidden"><a href="contact.html" class="menu-link block text-7xl md:text-[140px] font-black tracking-tighter leading-[0.85] pr-4 hover-stroke transition-all">CONTACT</a></div>
+    <div id="menu" class="fixed inset-0 z-[90] bg-dark text-light hidden flex-col justify-start pt-32 md:pt-40 items-start text-left px-6 md:px-24">
+        <div class="flex flex-col gap-2 md:gap-4">
+            <div class="overflow-hidden"><a href="index.html" class="menu-link block text-5xl md:text-[90px] font-black tracking-tighter leading-[0.85] pr-4 hover-stroke transition-all">HOME</a></div>
+            <div class="overflow-hidden"><a href="about.html" class="menu-link block text-5xl md:text-[90px] font-black tracking-tighter leading-[0.85] pr-4 hover-stroke transition-all">ABOUT</a></div>
+            <div class="overflow-hidden"><a href="projects.html" class="menu-link block text-5xl md:text-[90px] font-black tracking-tighter leading-[0.85] pr-4 hover-stroke transition-all">WORK</a></div>
+            <div class="overflow-hidden"><a href="services.html" class="menu-link block text-5xl md:text-[90px] font-black tracking-tighter leading-[0.85] pr-4 hover-stroke transition-all">SERVICE</a></div>
+            <div class="overflow-hidden"><a href="index.html#clients" class="menu-link block text-5xl md:text-[90px] font-black tracking-tighter leading-[0.85] pr-4 hover-stroke transition-all">CLIENT</a></div>
+            <div class="overflow-hidden"><a href="contact.html" class="menu-link block text-5xl md:text-[90px] font-black tracking-tighter leading-[0.85] pr-4 hover-stroke transition-all">CONTACT</a></div>
         </div>
     </div>
 
@@ -84,21 +85,48 @@
                 <h2 class="text-5xl md:text-8xl font-black mt-4 tracking-tighter">WE SOLVE PROBLEMS<br/>WITH DESIGN.</h2>
             </div>
 
-            <div class="stack-container">
-                <div class="stack-card bg-zinc-900 border border-zinc-800" style="z-index: 1;">
-                    <span class="text-4xl font-black opacity-20 mb-10">01 /</span>
-                    <h3 class="text-5xl md:text-8xl font-black tracking-tighter mb-8">BRAND IDENTITY</h3>
-                    <p class="max-w-xl text-xl text-zinc-400">Crafting unique visual languages that define your brand's soul and resonate with your audience on a primal level.</p>
+            <div class="stack-container mt-20">
+                <div class="stack-card bg-[#0a0a0a] border border-white/10 group overflow-hidden" style="z-index: 1;">
+                    <div class="absolute top-[-10%] right-[-5%] text-[20vw] font-black opacity-[0.03] pointer-events-none group-hover:scale-110 transition-transform duration-1000">BRAND</div>
+                    <div class="relative z-10">
+                        <span class="text-xs font-bold tracking-[0.5em] text-primary/50 uppercase block mb-12">Expertise / 01</span>
+                        <h3 class="text-5xl md:text-8xl font-black tracking-tighter mb-8 max-w-2xl leading-none">STRATEGIC<br/><span class="text-white text-stroke">BRANDING.</span></h3>
+                        <p class="max-w-xl text-xl text-zinc-400 mb-12 leading-relaxed">We don't just design logos; we build emotional connections. Our branding process dives deep into your core values to create a visual identity that resonates and lasts.</p>
+                        <button class="flex items-center gap-6 group/btn magnetic">
+                            <span class="w-16 h-16 rounded-full border border-white/20 flex items-center justify-center group-hover/btn:bg-white group-hover/btn:text-dark transition-all duration-500">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+                            </span>
+                            <span class="text-sm font-bold uppercase tracking-widest">Explore Service</span>
+                        </button>
+                    </div>
                 </div>
-                <div class="stack-card bg-zinc-800 border border-zinc-700" style="z-index: 2;">
-                    <span class="text-4xl font-black opacity-20 mb-10">02 /</span>
-                    <h3 class="text-5xl md:text-8xl font-black tracking-tighter mb-8">DIGITAL DESIGN</h3>
-                    <p class="max-w-xl text-xl text-zinc-400">Creating high-end UI/UX experiences that are as intuitive as they are beautiful. We design for the future.</p>
+                <div class="stack-card bg-[#111111] border border-white/10 group overflow-hidden" style="z-index: 2;">
+                    <div class="absolute top-[-10%] right-[-5%] text-[20vw] font-black opacity-[0.03] pointer-events-none group-hover:scale-110 transition-transform duration-1000">DESIGN</div>
+                    <div class="relative z-10">
+                        <span class="text-xs font-bold tracking-[0.5em] text-primary/50 uppercase block mb-12">Expertise / 02</span>
+                        <h3 class="text-5xl md:text-8xl font-black tracking-tighter mb-8 max-w-2xl leading-none">DIGITAL<br/><span class="text-white text-stroke">EXPERIENCES.</span></h3>
+                        <p class="max-w-xl text-xl text-zinc-400 mb-12 leading-relaxed">High-end UI/UX design that prioritizes both aesthetics and conversion. We create immersive digital journeys that turn visitors into loyal advocates.</p>
+                        <button class="flex items-center gap-6 group/btn magnetic">
+                            <span class="w-16 h-16 rounded-full border border-white/20 flex items-center justify-center group-hover/btn:bg-white group-hover/btn:text-dark transition-all duration-500">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+                            </span>
+                            <span class="text-sm font-bold uppercase tracking-widest">Explore Service</span>
+                        </button>
+                    </div>
                 </div>
-                <div class="stack-card bg-zinc-700 border border-zinc-600" style="z-index: 3;">
-                    <span class="text-4xl font-black opacity-20 mb-10">03 /</span>
-                    <h3 class="text-5xl md:text-8xl font-black tracking-tighter mb-8">DEVELOPMENT</h3>
-                    <p class="max-w-xl text-xl text-zinc-400">Building robust, scalable, and high-performance applications using the latest technologies and clean code practices.</p>
+                <div class="stack-card bg-[#161616] border border-white/10 group overflow-hidden" style="z-index: 3;">
+                    <div class="absolute top-[-10%] right-[-5%] text-[20vw] font-black opacity-[0.03] pointer-events-none group-hover:scale-110 transition-transform duration-1000">CODE</div>
+                    <div class="relative z-10">
+                        <span class="text-xs font-bold tracking-[0.5em] text-primary/50 uppercase block mb-12">Expertise / 03</span>
+                        <h3 class="text-5xl md:text-8xl font-black tracking-tighter mb-8 max-w-2xl leading-none">CREATIVE<br/><span class="text-white text-stroke">DEVELOPMENT.</span></h3>
+                        <p class="max-w-xl text-xl text-zinc-400 mb-12 leading-relaxed">Robust engineering meets creative vision. We build performant, scalable solutions using cutting-edge technology that keeps you ahead of the curve.</p>
+                        <button class="flex items-center gap-6 group/btn magnetic">
+                            <span class="w-16 h-16 rounded-full border border-white/20 flex items-center justify-center group-hover/btn:bg-white group-hover/btn:text-dark transition-all duration-500">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+                            </span>
+                            <span class="text-sm font-bold uppercase tracking-widest">Explore Service</span>
+                        </button>
+                    </div>
                 </div>
             </div>
         </section>
@@ -175,60 +203,27 @@
         </section>
 
         <!-- 5. Industries We Cater (Bento) -->
-        <section id="industries" class="section-padding bg-primary">
-            <div class="max-w-7xl mx-auto">
-                <div class="mb-20">
-                    <span class="font-bold tracking-[0.3em] uppercase text-xs opacity-50">Industries</span>
-                    <h2 class="text-5xl md:text-7xl font-black mt-4 tracking-tighter">THE SPACES WE<br/>REVOLUTIONIZE.</h2>
-                </div>
-                <div class="bento-grid">
-                    <div class="bento-item col-span-2 row-span-2 bg-white flex flex-col justify-end group cursor-pointer hover:bg-dark hover:text-white">
-                        <div class="text-6xl mb-6">💎</div>
-                        <h4 class="text-3xl font-black uppercase">Luxury & Lifestyle</h4>
-                        <p class="mt-4 text-sm opacity-60">Elevating high-end brands through sophisticated digital storytelling and premium aesthetics.</p>
-                    </div>
-                    <div class="bento-item col-span-2 bg-dark text-white flex items-center justify-between group cursor-pointer hover:bg-white hover:text-dark border border-dark transition-all">
-                        <h4 class="text-3xl font-black uppercase">Tech Startups</h4>
-                        <span class="text-4xl group-hover:scale-125 transition-transform">🚀</span>
-                    </div>
-                    <div class="bento-item bg-white flex flex-col justify-center items-center text-center hover:bg-dark hover:text-white transition-all cursor-pointer">
-                        <div class="text-4xl mb-2">🧠</div>
-                        <h4 class="font-bold uppercase text-xs tracking-widest">AI Tools</h4>
-                    </div>
-                    <div class="bento-item bg-zinc-900 text-white flex flex-col justify-center items-center text-center hover:bg-white hover:text-dark transition-all cursor-pointer">
-                        <div class="text-4xl mb-2">💸</div>
-                        <h4 class="font-bold uppercase text-xs tracking-widest">Fintech</h4>
-                    </div>
-                    <div class="bento-item col-span-2 bg-white flex items-center gap-6 hover:bg-dark hover:text-white transition-all cursor-pointer group">
-                        <div class="text-5xl group-hover:rotate-12 transition-transform">🎨</div>
-                        <div>
-                            <h4 class="text-xl font-black uppercase">Creative Arts</h4>
-                            <p class="text-xs opacity-50">Empowering artists with iconic digital presence.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+
 
         <!-- 6. About Us -->
         <section id="about" class="section-padding bg-primary">
             <div class="max-w-7xl mx-auto flex flex-col md:flex-row gap-20 items-center">
                 <div class="flex-1">
                     <span class="font-bold tracking-[0.3em] uppercase text-xs opacity-50">About Us</span>
-                    <h2 class="text-5xl md:text-8xl font-black mt-4 tracking-tighter leading-none">WE ARE MAKERS OF<br/><span class="text-white text-stroke">ICONIC BRANDS.</span></h2>
+                    <h2 class="text-5xl md:text-8xl font-black mt-4 tracking-tighter leading-none">WE ARE MAKERS OF<br/><span class="transition-all duration-500 cursor-pointer">ICONIC BRANDS.</span></h2>
                 </div>
                 <div class="flex-1">
-                    <p class="text-xl md:text-2xl text-zinc-500 leading-tight">
+                    <p class="text-xl md:text-2xl text-white leading-tight">
                         ICB is a globally distributed creative powerhouse. We believe that exceptional design is the intersection of strategy, aesthetics, and technology. Our mission is to transform ambitious ideas into iconic digital legacies.
                     </p>
                     <div class="mt-12 flex gap-12">
                         <div>
                             <span class="text-5xl font-black block">150+</span>
-                            <span class="text-[10px] font-bold uppercase tracking-widest opacity-40">Projects</span>
+                            <span class="text-[10px] font-bold uppercase tracking-widest opacity-70 text-zinc-900">Projects</span>
                         </div>
                         <div>
                             <span class="text-5xl font-black block">12+</span>
-                            <span class="text-[10px] font-bold uppercase tracking-widest opacity-40">Awards</span>
+                            <span class="text-[10px] font-bold uppercase tracking-widest opacity-70 text-zinc-900">Awards</span>
                         </div>
                     </div>
                 </div>
@@ -249,22 +244,22 @@
                     <div class="process-step">
                         <span class="text-8xl font-black text-zinc-900 block leading-none">01</span>
                         <h3 class="text-3xl font-black mt-4 uppercase">Discovery & Immersion</h3>
-                        <p class="mt-4 text-zinc-500 text-lg">We dive deep into your brand DNA, market positioning, and core values to find the unique "why" behind your business.</p>
+                        <p class="mt-4 text-white text-lg">We dive deep into your brand DNA, market positioning, and core values to find the unique "why" behind your business.</p>
                     </div>
                     <div class="process-step">
                         <span class="text-8xl font-black text-zinc-900 block leading-none">02</span>
                         <h3 class="text-3xl font-black mt-4 uppercase">Strategy & Ideation</h3>
-                        <p class="mt-4 text-zinc-500 text-lg">We map out the architectural blueprint and creative direction that will set you apart from the noise.</p>
+                        <p class="mt-4 text-white text-lg">We map out the architectural blueprint and creative direction that will set you apart from the noise.</p>
                     </div>
                     <div class="process-step">
                         <span class="text-8xl font-black text-zinc-900 block leading-none">03</span>
                         <h3 class="text-3xl font-black mt-4 uppercase">Design & Development</h3>
-                        <p class="mt-4 text-zinc-500 text-lg">Pixel-perfect craftsmanship meets robust engineering to bring the vision to life with precision.</p>
+                        <p class="mt-4 text-white text-lg">Pixel-perfect craftsmanship meets robust engineering to bring the vision to life with precision.</p>
                     </div>
                     <div class="process-step">
                         <span class="text-8xl font-black text-zinc-900 block leading-none">04</span>
                         <h3 class="text-3xl font-black mt-4 uppercase">Launch & Evolution</h3>
-                        <p class="mt-4 text-zinc-500 text-lg">We release your brand into the world and continue to optimize for long-term growth and impact.</p>
+                        <p class="mt-4 text-white text-lg">We release your brand into the world and continue to optimize for long-term growth and impact.</p>
                     </div>
                 </div>
             </div>

@@ -85,12 +85,15 @@ document.addEventListener('DOMContentLoaded', () => {
     cards.forEach((card, index) => {
         if (index === 0) return;
         gsap.to(cards[index - 1], {
-            scale: 0.9,
-            opacity: 0.5,
+            scale: 0.95,
+            opacity: 0.3,
+            rotateX: -10,
+            y: -50,
+            filter: "blur(10px)",
             scrollTrigger: {
                 trigger: card,
-                start: "top 80%",
-                end: "top 20%",
+                start: "top 90%",
+                end: "top 10%",
                 scrub: true,
             }
         });
