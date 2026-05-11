@@ -26,6 +26,18 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <!-- External CSS -->
     <link rel="stylesheet" href="style.css">
+    <style>
+        .service-img-wrapper {
+            transition: transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .service-row:hover .service-img-wrapper {
+            transform: scale(1.02);
+        }
+        .service-number {
+            -webkit-text-stroke: 1px rgba(0,0,0,0.1);
+            color: transparent;
+        }
+    </style>
 </head>
 <body class="bg-light text-dark">
     <!-- Custom Cursor -->
@@ -36,7 +48,7 @@
     <header id="main-header" class="fixed top-0 left-0 w-full z-[100] py-6 px-6 md:px-12 flex justify-between items-center transition-colors duration-300">
         <a href="index.html" class="block"><img src="Assets/images/ICB-white.png" alt="ICB Logo" class="h-12 md:h-16"></a>
         <div class="flex gap-8 items-center">
-            <button class="text-sm font-bold tracking-[0.2em] uppercase hidden md:block magnetic">LET'S TALK!</button>
+            <a href="contact.html" class="text-sm font-bold tracking-[0.2em] uppercase hidden md:block magnetic">LET'S TALK!</a>
             <button id="menu-toggle" class="text-sm font-bold tracking-[0.2em] uppercase magnetic">MENU</button>
         </div>
     </header>
@@ -55,97 +67,209 @@
 
     <main>
         <!-- Hero Section -->
-        <section class="relative min-h-[60vh] flex flex-col justify-end items-start px-6 md:px-12 pb-20 pt-40 bg-primary text-dark overflow-hidden">
-            <span class="font-bold tracking-[0.3em] uppercase text-xs opacity-70 mb-4">Our Expertise</span>
-            <h1 class="text-6xl md:text-[10vw] font-black tracking-tighter leading-none">OUR<br/><span class="italic opacity-50">SERVICES.</span></h1>
-        </section>
-
-        <!-- Detailed Services Content -->
-        <section class="relative py-32 px-6 bg-light text-dark">
-            <div class="max-w-7xl mx-auto space-y-32">
-                <!-- Service 1 -->
-                <div class="flex flex-col md:flex-row gap-20">
-                    <div class="md:w-1/3">
-                        <span class="text-4xl font-black opacity-20 block mb-4">01 /</span>
-                        <h3 class="text-5xl font-black tracking-tighter mb-4">BRAND IDENTITY</h3>
-                    </div>
-                    <div class="md:w-2/3">
-                        <p class="text-xl text-zinc-500 mb-8">Crafting unique visual languages that define your brand's soul and resonate with your audience on a primal level. Our brand identity process is rigorous and deeply rooted in strategy.</p>
-                        <ul class="space-y-4 font-bold text-lg">
-                            <li class="flex items-center gap-4"><span class="w-2 h-2 bg-dark rounded-full"></span> Logo Design & Systems</li>
-                            <li class="flex items-center gap-4"><span class="w-2 h-2 bg-dark rounded-full"></span> Brand Guidelines</li>
-                            <li class="flex items-center gap-4"><span class="w-2 h-2 bg-dark rounded-full"></span> Typography & Color Theory</li>
-                            <li class="flex items-center gap-4"><span class="w-2 h-2 bg-dark rounded-full"></span> Tone of Voice & Messaging</li>
-                        </ul>
-                    </div>
-                </div>
-                <!-- Service 2 -->
-                <div class="flex flex-col md:flex-row gap-20 border-t border-zinc-200 pt-32">
-                    <div class="md:w-1/3">
-                        <span class="text-4xl font-black opacity-20 block mb-4">02 /</span>
-                        <h3 class="text-5xl font-black tracking-tighter mb-4">DIGITAL DESIGN</h3>
-                    </div>
-                    <div class="md:w-2/3">
-                        <p class="text-xl text-zinc-500 mb-8">Creating high-end UI/UX experiences that are as intuitive as they are beautiful. We design for the future, ensuring your digital presence stands out.</p>
-                        <ul class="space-y-4 font-bold text-lg">
-                            <li class="flex items-center gap-4"><span class="w-2 h-2 bg-dark rounded-full"></span> UI/UX Design</li>
-                            <li class="flex items-center gap-4"><span class="w-2 h-2 bg-dark rounded-full"></span> Prototyping & Wireframing</li>
-                            <li class="flex items-center gap-4"><span class="w-2 h-2 bg-dark rounded-full"></span> Motion Design & Interactions</li>
-                            <li class="flex items-center gap-4"><span class="w-2 h-2 bg-dark rounded-full"></span> Design Systems</li>
-                        </ul>
-                    </div>
-                </div>
-                <!-- Service 3 -->
-                <div class="flex flex-col md:flex-row gap-20 border-t border-zinc-200 pt-32">
-                    <div class="md:w-1/3">
-                        <span class="text-4xl font-black opacity-20 block mb-4">03 /</span>
-                        <h3 class="text-5xl font-black tracking-tighter mb-4">DEVELOPMENT</h3>
-                    </div>
-                    <div class="md:w-2/3">
-                        <p class="text-xl text-zinc-500 mb-8">Building robust, scalable, and high-performance applications using the latest technologies and clean code practices. Your platform will be built to scale.</p>
-                        <ul class="space-y-4 font-bold text-lg">
-                            <li class="flex items-center gap-4"><span class="w-2 h-2 bg-dark rounded-full"></span> Front-End Development</li>
-                            <li class="flex items-center gap-4"><span class="w-2 h-2 bg-dark rounded-full"></span> Back-End Architecture</li>
-                            <li class="flex items-center gap-4"><span class="w-2 h-2 bg-dark rounded-full"></span> E-Commerce Solutions</li>
-                            <li class="flex items-center gap-4"><span class="w-2 h-2 bg-dark rounded-full"></span> Creative Coding & WebGL</li>
-                        </ul>
-                    </div>
-                </div>
+        <section class="relative h-[70vh] flex flex-col justify-center items-center px-6 text-center overflow-hidden bg-light">
+            <div class="absolute inset-0 bg-gradient-to-b from-primary/10 to-transparent pointer-events-none"></div>
+            <div class="relative z-10">
+                <span class="font-bold tracking-[0.5em] uppercase text-[10px] text-primary mb-6 block hero-sub">What we do</span>
+                <h1 class="text-[12vw] font-black tracking-tighter leading-[0.8] uppercase hero-main">
+                    OUR<br/>
+                    <span class="text-stroke-dark">SERVICES.</span>
+                </h1>
             </div>
         </section>
-    </main>
 
-    <!-- Footer -->
-    <footer class="bg-dark text-light pt-32 pb-12 px-6 md:px-12 relative overflow-hidden">
-        <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-white/5 rounded-full blur-[150px]"></div>
-        <div class="max-w-7xl mx-auto relative z-10">
-            <div class="flex flex-col lg:flex-row justify-between items-start gap-20 mb-32">
-                <div>
-                    <h2 class="text-6xl md:text-9xl font-black leading-none tracking-tighter">LET'S<br/><span class="italic opacity-30">CONNECT.</span></h2>
-                    <div class="mt-16 flex flex-col gap-6">
-                        <a href="mailto:hello@icb.agency" class="text-2xl md:text-4xl font-bold hover:opacity-50 transition-all">hello@icb.agency</a>
-                        <div class="flex gap-8">
-                            <a href="#" class="text-sm font-bold uppercase tracking-widest opacity-40 hover:opacity-100 transition-opacity magnetic">Instagram</a>
-                            <a href="#" class="text-sm font-bold uppercase tracking-widest opacity-40 hover:opacity-100 transition-opacity magnetic">Twitter</a>
-                            <a href="#" class="text-sm font-bold uppercase tracking-widest opacity-40 hover:opacity-100 transition-opacity magnetic">LinkedIn</a>
+        <!-- Services Detailed List -->
+        <section class="py-32 px-6 bg-light">
+            <div class="max-w-7xl mx-auto">
+                <!-- Service 01 -->
+                <div class="service-row flex flex-col md:flex-row items-center gap-20 mb-60 reveal">
+                    <div class="md:w-1/2">
+                        <div class="service-img-wrapper relative rounded-[3rem] overflow-hidden aspect-video bg-primary/20">
+                            <img src="Assets/images/services1.webp" alt="Creative Branding" class="w-full h-full object-cover">
+                        </div>
+                    </div>
+                    <div class="md:w-1/2">
+                        <span class="service-number text-9xl font-black block leading-none mb-6">01</span>
+                        <span class="text-xs font-bold tracking-[0.4em] uppercase text-primary mb-2 block">Creative</span>
+                        <h2 class="text-5xl md:text-7xl font-black tracking-tighter mb-8 uppercase">Branding Solutions</h2>
+                        <p class="text-xl text-zinc-500 mb-10 leading-relaxed">We craft strategic and visually compelling branding solutions tailored to your business needs and budget. Elevate your brand identity, enhance recognition, and connect with your audience effectively.</p>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="flex items-center gap-3 font-bold uppercase text-[10px] tracking-widest"><span class="w-2 h-2 bg-primary rounded-full"></span> Logo Design</div>
+                            <div class="flex items-center gap-3 font-bold uppercase text-[10px] tracking-widest"><span class="w-2 h-2 bg-primary rounded-full"></span> Brand Identity</div>
+                            <div class="flex items-center gap-3 font-bold uppercase text-[10px] tracking-widest"><span class="w-2 h-2 bg-primary rounded-full"></span> Business Communication</div>
+                            <div class="flex items-center gap-3 font-bold uppercase text-[10px] tracking-widest"><span class="w-2 h-2 bg-primary rounded-full"></span> Packaging Design</div>
                         </div>
                     </div>
                 </div>
-                <div class="w-full lg:w-1/3">
-                    <form class="space-y-6">
-                        <input type="text" placeholder="Name" class="w-full bg-transparent border-b border-zinc-800 py-4 outline-none focus:border-white transition-colors">
-                        <input type="email" placeholder="Email" class="w-full bg-transparent border-b border-zinc-800 py-4 outline-none focus:border-white transition-colors">
-                        <textarea placeholder="Message" rows="4" class="w-full bg-transparent border-b border-zinc-800 py-4 outline-none focus:border-white transition-colors"></textarea>
-                        <button class="bg-white text-dark px-12 py-5 rounded-full font-bold w-full hover:bg-dark hover:text-white border border-white transition-all magnetic">Send Message</button>
-                    </form>
+
+                <!-- Service 02 -->
+                <div class="service-row flex flex-col md:flex-row-reverse items-center gap-20 mb-60 reveal">
+                    <div class="md:w-1/2">
+                        <div class="service-img-wrapper relative rounded-[3rem] overflow-hidden aspect-video bg-primary/20">
+                            <img src="Assets/images/service2.webp" alt="Web Development" class="w-full h-full object-cover">
+                        </div>
+                    </div>
+                    <div class="md:w-1/2">
+                        <span class="service-number text-9xl font-black block leading-none mb-6">02</span>
+                        <span class="text-xs font-bold tracking-[0.4em] uppercase text-primary mb-2 block">Development</span>
+                        <h2 class="text-5xl md:text-7xl font-black tracking-tighter mb-8 uppercase">Web Development</h2>
+                        <p class="text-xl text-zinc-500 mb-10 leading-relaxed">We design and develop high-performing, user-friendly websites tailored to your business needs and budget. Enhance your online presence, improve engagement, and drive conversions with our expert web solutions.</p>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="flex items-center gap-3 font-bold uppercase text-[10px] tracking-widest"><span class="w-2 h-2 bg-primary rounded-full"></span> Web design & Dev</div>
+                            <div class="flex items-center gap-3 font-bold uppercase text-[10px] tracking-widest"><span class="w-2 h-2 bg-primary rounded-full"></span> E-Commerce</div>
+                            <div class="flex items-center gap-3 font-bold uppercase text-[10px] tracking-widest"><span class="w-2 h-2 bg-primary rounded-full"></span> Maintenance</div>
+                            <div class="flex items-center gap-3 font-bold uppercase text-[10px] tracking-widest"><span class="w-2 h-2 bg-primary rounded-full"></span> Landing Pages</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Service 03 -->
+                <div class="service-row flex flex-col md:flex-row items-center gap-20 mb-60 reveal">
+                    <div class="md:w-1/2">
+                        <div class="service-img-wrapper relative rounded-[3rem] overflow-hidden aspect-video bg-primary/20">
+                            <img src="Assets/images/service3.webp" alt="UI/UX Design" class="w-full h-full object-cover">
+                        </div>
+                    </div>
+                    <div class="md:w-1/2">
+                        <span class="service-number text-9xl font-black block leading-none mb-6">03</span>
+                        <span class="text-xs font-bold tracking-[0.4em] uppercase text-primary mb-2 block">Excellence</span>
+                        <h2 class="text-5xl md:text-7xl font-black tracking-tighter mb-8 uppercase">UI/UX Design</h2>
+                        <p class="text-xl text-zinc-500 mb-10 leading-relaxed">We craft intuitive and visually engaging user experiences tailored to your brand and audience. Enhance usability, improve engagement, and create seamless digital interactions with our expert UI/UX solutions.</p>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="flex items-center gap-3 font-bold uppercase text-[10px] tracking-widest"><span class="w-2 h-2 bg-primary rounded-full"></span> UI Design</div>
+                            <div class="flex items-center gap-3 font-bold uppercase text-[10px] tracking-widest"><span class="w-2 h-2 bg-primary rounded-full"></span> UX Design</div>
+                            <div class="flex items-center gap-3 font-bold uppercase text-[10px] tracking-widest"><span class="w-2 h-2 bg-primary rounded-full"></span> Wireframing</div>
+                            <div class="flex items-center gap-3 font-bold uppercase text-[10px] tracking-widest"><span class="w-2 h-2 bg-primary rounded-full"></span> Microinteractions</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Service 04 -->
+                <div class="service-row flex flex-col md:flex-row-reverse items-center gap-20 mb-60 reveal">
+                    <div class="md:w-1/2">
+                        <div class="service-img-wrapper relative rounded-[3rem] overflow-hidden aspect-video bg-primary/20">
+                            <img src="Assets/images/service4.webp" alt="Mobile Apps" class="w-full h-full object-cover">
+                        </div>
+                    </div>
+                    <div class="md:w-1/2">
+                        <span class="service-number text-9xl font-black block leading-none mb-6">04</span>
+                        <span class="text-xs font-bold tracking-[0.4em] uppercase text-primary mb-2 block">Development</span>
+                        <h2 class="text-5xl md:text-7xl font-black tracking-tighter mb-8 uppercase">Mobile Apps</h2>
+                        <p class="text-xl text-zinc-500 mb-10 leading-relaxed">We design and develop high-performing mobile applications tailored to your business goals and user needs. Enhance customer engagement, boost functionality, and create seamless digital experiences with our expert mobile app solutions.</p>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="flex items-center gap-3 font-bold uppercase text-[10px] tracking-widest"><span class="w-2 h-2 bg-primary rounded-full"></span> Custom App Dev</div>
+                            <div class="flex items-center gap-3 font-bold uppercase text-[10px] tracking-widest"><span class="w-2 h-2 bg-primary rounded-full"></span> Cross-Platform</div>
+                            <div class="flex items-center gap-3 font-bold uppercase text-[10px] tracking-widest"><span class="w-2 h-2 bg-primary rounded-full"></span> Business Apps</div>
+                            <div class="flex items-center gap-3 font-bold uppercase text-[10px] tracking-widest"><span class="w-2 h-2 bg-primary rounded-full"></span> App Maintenance</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Service 05 -->
+                <div class="service-row flex flex-col md:flex-row items-center gap-20 mb-60 reveal">
+                    <div class="md:w-1/2">
+                        <div class="service-img-wrapper relative rounded-[3rem] overflow-hidden aspect-video bg-primary/20">
+                            <img src="Assets/images/service5.webp" alt="Software Solutions" class="w-full h-full object-cover">
+                        </div>
+                    </div>
+                    <div class="md:w-1/2">
+                        <span class="service-number text-9xl font-black block leading-none mb-6">05</span>
+                        <span class="text-xs font-bold tracking-[0.4em] uppercase text-primary mb-2 block">Custom</span>
+                        <h2 class="text-5xl md:text-7xl font-black tracking-tighter mb-8 uppercase">Software Solutions</h2>
+                        <p class="text-xl text-zinc-500 mb-10 leading-relaxed">We develop innovative and scalable software solutions tailored to your business needs. Enhance efficiency, streamline operations, and drive digital transformation with our expert software services.</p>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="flex items-center gap-3 font-bold uppercase text-[10px] tracking-widest"><span class="w-2 h-2 bg-primary rounded-full"></span> Custom Software</div>
+                            <div class="flex items-center gap-3 font-bold uppercase text-[10px] tracking-widest"><span class="w-2 h-2 bg-primary rounded-full"></span> Enterprise Solutions</div>
+                            <div class="flex items-center gap-3 font-bold uppercase text-[10px] tracking-widest"><span class="w-2 h-2 bg-primary rounded-full"></span> Cloud Apps</div>
+                            <div class="flex items-center gap-3 font-bold uppercase text-[10px] tracking-widest"><span class="w-2 h-2 bg-primary rounded-full"></span> Support</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Service 06 -->
+                <div class="service-row flex flex-col md:flex-row-reverse items-center gap-20 reveal">
+                    <div class="md:w-1/2">
+                        <div class="service-img-wrapper relative rounded-[3rem] overflow-hidden aspect-video bg-primary/20">
+                            <img src="Assets/images/service6.webp" alt="Content Creation" class="w-full h-full object-cover">
+                        </div>
+                    </div>
+                    <div class="md:w-1/2">
+                        <span class="service-number text-9xl font-black block leading-none mb-6">06</span>
+                        <span class="text-xs font-bold tracking-[0.4em] uppercase text-primary mb-2 block">Creative</span>
+                        <h2 class="text-5xl md:text-7xl font-black tracking-tighter mb-8 uppercase">Content Creation</h2>
+                        <p class="text-xl text-zinc-500 mb-10 leading-relaxed">We craft engaging and high-quality content tailored to your brand’s voice and audience. Strengthen your digital presence, enhance engagement, and drive conversions with our expert content solutions.</p>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="flex items-center gap-3 font-bold uppercase text-[10px] tracking-widest"><span class="w-2 h-2 bg-primary rounded-full"></span> SEO Content</div>
+                            <div class="flex items-center gap-3 font-bold uppercase text-[10px] tracking-widest"><span class="w-2 h-2 bg-primary rounded-full"></span> Social Media</div>
+                            <div class="flex items-center gap-3 font-bold uppercase text-[10px] tracking-widest"><span class="w-2 h-2 bg-primary rounded-full"></span> Video & Multimedia</div>
+                            <div class="flex items-center gap-3 font-bold uppercase text-[10px] tracking-widest"><span class="w-2 h-2 bg-primary rounded-full"></span> Storytelling</div>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="pt-12 border-t border-zinc-900 flex flex-col md:flex-row justify-between items-center gap-10">
-                <span class="text-[10px] font-bold uppercase tracking-widest opacity-30">© 2026 ICB Agency / All Rights Reserved</span>
-                <div class="flex gap-8">
-                    <a href="#" class="text-[10px] font-bold uppercase tracking-widest opacity-30 hover:opacity-100 transition-opacity">Privacy</a>
-                    <a href="#" class="text-[10px] font-bold uppercase tracking-widest opacity-30 hover:opacity-100 transition-opacity">Terms</a>
+        </section>
+
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-light pt-20 pb-10 px-6 md:px-12 relative overflow-hidden border-t border-white/5">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-16 mb-20">
+                <!-- Col 1: Logo & Newsletter -->
+                <div class="space-y-8">
+                    <img src="Assets/images/ICB-white.png" alt="ICB Logo" class="h-12">
+                    <p class="text-zinc-400 text-sm max-w-xs">A Gurgaon-based design and development agency</p>
+                    <div class="space-y-4">
+                        <h4 class="text-xl font-bold">Newsletter</h4>
+                        <div class="relative max-w-sm">
+                            <input type="email" placeholder="Enter your email" class="w-full bg-zinc-900 border border-white/10 rounded-full py-4 px-6 outline-none focus:border-primary transition-colors text-sm">
+                            <button class="absolute right-2 top-1/2 -translate-y-1/2 bg-primary text-dark w-10 h-10 rounded-full flex items-center justify-center hover:scale-110 transition-transform">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                            </button>
+                        </div>
+                    </div>
                 </div>
+
+                <!-- Col 2: Useful Links -->
+                <div class="md:border-l md:border-white/10 md:pl-16 space-y-8">
+                    <h4 class="text-2xl font-bold">Useful Links</h4>
+                    <div class="grid grid-cols-2 gap-y-4 gap-x-8 text-zinc-400 font-medium">
+                        <a href="index.html" class="hover:text-white transition-colors">Home</a>
+                        <a href="services.html" class="hover:text-white transition-colors">Services</a>
+                        <a href="projects.html" class="hover:text-white transition-colors">Projects</a>
+                        <a href="about.html" class="hover:text-white transition-colors">About</a>
+                        <a href="contact.html" class="hover:text-white transition-colors">Contact</a>
+                        <a href="#" class="hover:text-white transition-colors">Blogs</a>
+                    </div>
+                    <div class="flex flex-wrap gap-3 pt-4">
+                        <a href="#" class="px-6 py-2 border border-white/10 rounded-full text-[10px] font-bold uppercase tracking-widest hover:bg-white hover:text-dark transition-all">Linkedin</a>
+                        <a href="#" class="px-6 py-2 border border-white/10 rounded-full text-[10px] font-bold uppercase tracking-widest hover:bg-white hover:text-dark transition-all">Facebook</a>
+                        <a href="#" class="px-6 py-2 border border-white/10 rounded-full text-[10px] font-bold uppercase tracking-widest hover:bg-white hover:text-dark transition-all">Instagram</a>
+                    </div>
+                </div>
+
+                <!-- Col 3: Contact Info -->
+                <div class="md:border-l md:border-white/10 md:pl-16 space-y-8">
+                    <h4 class="text-2xl font-bold">Contact</h4>
+                    <div class="space-y-6 text-zinc-400 text-sm leading-relaxed">
+                        <p>716 - Ocus Quantum, Sector 51, Gurgaon,<br>Haryana India - 122003</p>
+                        <div class="pt-4 border-t border-white/5 space-y-4">
+                            <p class="font-bold text-white">P: +91 84489 97129</p>
+                            <p class="font-bold text-white uppercase">E: CONTACT@ICREATEBRAND.COM</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bottom Bar -->
+            <div class="pt-8 border-t border-white/10 flex flex-col md:row justify-between items-center gap-6">
+                <div class="flex gap-6 text-[11px] font-bold uppercase tracking-widest opacity-60">
+                    <a href="#" class="hover:text-primary transition-colors">Terms of Use</a>
+                    <span>|</span>
+                    <a href="#" class="hover:text-primary transition-colors">Privacy Policy</a>
+                </div>
+                <span class="text-[11px] font-bold uppercase tracking-widest opacity-40">© 2026 icreatebrand.com - All Rights Reserved</span>
             </div>
         </div>
     </footer>
@@ -157,5 +281,43 @@
 
     <!-- External JS -->
     <script src="script.js"></script>
+    <script>
+        // Hero Reveal
+        window.addEventListener('load', () => {
+            gsap.from(".hero-sub", { opacity: 0, y: 50, duration: 1, delay: 0.5 });
+            gsap.from(".hero-main", { opacity: 0, y: 100, duration: 1.5, delay: 0.7, ease: "power4.out" });
+            
+            ScrollTrigger.refresh();
+        });
+
+        // Scroll Reveals
+        gsap.utils.toArray('.reveal').forEach(el => {
+            gsap.from(el, {
+                y: 100,
+                opacity: 0,
+                duration: 1.2,
+                ease: "power4.out",
+                scrollTrigger: {
+                    trigger: el,
+                    start: "top 90%",
+                    toggleActions: "play none none none"
+                }
+            });
+        });
+
+        // Service Image Parallax
+        gsap.utils.toArray('.service-img-wrapper img').forEach(img => {
+            gsap.to(img, {
+                y: -50,
+                ease: "none",
+                scrollTrigger: {
+                    trigger: img.parentElement,
+                    start: "top bottom",
+                    end: "bottom top",
+                    scrub: true
+                }
+            });
+        });
+    </script>
 </body>
 </html>

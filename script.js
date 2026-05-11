@@ -254,9 +254,24 @@ document.addEventListener('DOMContentLoaded', () => {
             stagger: 0.2,
             scrollTrigger: {
                 trigger: section,
-                start: "top 80%",
-                toggleActions: "play reverse play reverse"
+                start: "top 85%",
+                toggleActions: "play none none none"
             }
+        });
+    });
+
+    // 11. Floating Animation for Tag Bento Items
+    const tagBentoItems = document.querySelectorAll('.tag-bento-item');
+    tagBentoItems.forEach((item, index) => {
+        gsap.to(item, {
+            y: "random(-10, 10)",
+            x: "random(-5, 5)",
+            rotation: "random(-1, 1)",
+            duration: "random(2, 4)",
+            repeat: -1,
+            yoyo: true,
+            ease: "sine.inOut",
+            delay: index * 0.1
         });
     });
 });

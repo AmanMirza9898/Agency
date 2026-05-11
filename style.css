@@ -248,3 +248,30 @@ h1, h2, h3, h4, h5 {
 #main-header.text-invert img {
     filter: none;
 }
+
+/* Tag Bento Items */
+.tag-bento-item {
+    transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+    position: relative;
+    overflow: hidden;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.tag-bento-item:hover {
+    background: rgba(255, 255, 255, 0.15) !important;
+    border-color: rgba(255, 255, 255, 0.3) !important;
+    box-shadow: 0 0 40px rgba(255, 255, 255, 0.05);
+    color: #ffffff;
+}
+
+.tag-bento-item.glass {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.text-stroke-dark {
+    -webkit-text-stroke: 1px #0a0a0a;
+    color: transparent;
+}
