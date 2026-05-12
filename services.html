@@ -25,51 +25,292 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <!-- External CSS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --primary: #000;
+            --secondary: #666;
+            --accent: #ff3b30;
+            --bg-light: #fbfbfb;
+            --glass: rgba(255, 255, 255, 0.4);
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background-color: var(--bg-light);
+            color: var(--primary);
+            overflow-x: hidden;
+        }
+
         /* Header Logo Switching Logic */
-        .header-logo { filter: brightness(0); transition: filter 0.4s; }
+        .header-logo { filter: brightness(0) !important; transition: filter 0.4s; }
         .text-invert .header-logo { filter: brightness(0) invert(1) !important; }
         .text-invert a, .text-invert button { color: #fff !important; }
-
-        /* Horizontal Scroll System */
-        .svc-horizontal-container { position: relative; width: 100%; overflow: hidden; background: #f8f8f8; }
-        .svc-horizontal-wrap { display: flex; width: fit-content; will-change: transform; }
-        .svc-slide { 
-            flex: 0 0 100vw; 
-            min-height: 100vh; 
-            display: flex; 
-            align-items: center; 
-            justify-content: center; 
-            padding: 0 10vw;
+        
+        .footer-logo-persistent { filter: brightness(0) invert(1) !important; }
+        
+        /* Force Header Logo White in Dark Sections */
+        .svc-cta-dark #main-header:not(.text-invert) .header-logo,
+        .svc-footer-dark #main-header:not(.text-invert) .header-logo {
+            filter: brightness(0) invert(1) !important;
         }
 
-        /* Existing Styles Re-integrating */
-        .text-stroke-dark { -webkit-text-stroke: 2px #0a0a0a; color: transparent; }
-        .text-stroke-light { -webkit-text-stroke: 1px #fff; color: transparent; }
-        
+        /* Noise Texture Overlay */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("https://grainy-gradients.vercel.app/noise.svg");
+            opacity: 0.04;
+            pointer-events: none;
+            z-index: 9999;
+        }
+
+        .grid-bg {
+            position: relative;
+            background-image: 
+                linear-gradient(to right, rgba(0,0,0,0.02) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(0,0,0,0.02) 1px, transparent 1px);
+            background-size: 60px 60px;
+        }
+
+        /* Premium Title Section */
+        .svc-explorer-header {
+            padding: 140px 0 60px;
+            text-align: center;
+        }
+
+        .svc-explorer-title {
+            font-size: clamp(60px, 12vw, 160px);
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: -6px;
+            line-height: 0.85;
+            margin-bottom: 20px;
+            color: #000;
+        }
+
+        /* iOS Style Pill Navigation */
+        .tab-nav-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 100px;
+            position: sticky;
+            top: 100px; /* Adjusted to sit below header */
+            z-index: 150;
+            pointer-events: none; /* Only buttons should be interactive */
+        }
+
+        .tab-nav {
+            background: var(--glass);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            padding: 6px;
+            border-radius: 100px;
+            display: flex;
+            gap: 4px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.05), inset 0 0 0 1px rgba(255,255,255,0.4);
+            pointer-events: auto;
+            position: relative;
+        }
+
+        .tab-slider {
+            position: absolute;
+            top: 6px;
+            left: 6px;
+            height: calc(100% - 12px);
+            background: #000;
+            border-radius: 100px;
+            z-index: 0;
+            transition: all 0.6s cubic-bezier(0.19, 1, 0.22, 1);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+        }
+
+        .tab-btn {
+            border: none;
+            background: transparent;
+            padding: 12px 28px;
+            border-radius: 100px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: color 0.5s ease;
+            color: var(--secondary);
+            white-space: nowrap;
+            position: relative;
+            z-index: 1;
+        }
+
+        .tab-btn.active {
+            color: #fff !important;
+        }
+
+        /* Category Header */
+        .category-header {
+            max-width: 800px;
+            margin: 0 auto 120px;
+            text-align: center;
+        }
+
+        .category-header p {
+            font-size: clamp(18px, 2.5vw, 24px);
+            line-height: 1.4;
+            color: #444;
+            font-weight: 400;
+            letter-spacing: -0.5px;
+        }
+
+        /* Service List Refinement */
+        .service-list {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .service-list-item {
+            display: grid;
+            grid-template-columns: 80px 1.2fr 2fr 60px;
+            padding: 60px 0;
+            border-top: 1px solid #eee;
+            align-items: start;
+            transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+            cursor: pointer;
+            position: relative;
+        }
+
+        .service-list-item::after {
+            content: '';
+            position: absolute;
+            inset: 0 -40px;
+            background: #fff;
+            z-index: -1;
+            opacity: 0;
+            transform: scaleY(0.9);
+            transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+            border-radius: 24px;
+        }
+
+        .service-list-item:hover::after {
+            opacity: 1;
+            transform: scaleY(1);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.06);
+        }
+
+        .service-icon {
+            color: #000 !important;
+            transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .service-list-item:hover .service-icon {
+            transform: scale(1.2) rotate(12deg);
+            color: var(--accent) !important;
+        }
+
+        .service-content-title h3 {
+            font-size: clamp(24px, 3vw, 36px);
+            font-weight: 800;
+            line-height: 1;
+            margin: 0;
+            color: #000 !important; /* Force Black */
+            letter-spacing: -1.5px;
+            transition: transform 0.5s ease;
+        }
+
+        .service-list-item:hover .service-content-title h3 {
+            transform: translateX(15px);
+        }
+
+        .service-content-desc p {
+            font-size: 16px;
+            color: #444 !important; /* Darker Gray */
+            line-height: 1.7;
+            margin: 0;
+            padding-right: 60px;
+            transition: color 0.5s ease;
+        }
+
+        .service-list-item:hover .service-content-desc p {
+            color: #000 !important;
+        }
+
+        .service-arrow {
+            display: flex;
+            justify-content: flex-end;
+            transition: all 0.5s ease;
+            opacity: 0.4;
+            color: #000 !important;
+        }
+
+        .service-list-item:hover .service-arrow {
+            transform: translate(10px, -10px);
+            opacity: 1;
+            color: var(--accent);
+        }
+
+        /* Transitions */
+        .tab-content {
+            display: none;
+            opacity: 0;
+            min-height: 70vh; /* Prevent page collapse */
+            padding-top: 40px;
+        }
+
+        .tab-content.active {
+            display: block;
+            opacity: 1;
+        }
+
+        @media (max-width: 1024px) {
+            .service-list-item {
+                grid-template-columns: 60px 1.5fr 2fr 40px;
+                padding: 40px 0;
+            }
+        }
+
         @media (max-width: 768px) {
-            .svc-horizontal-wrap { flex-direction: column; width: 100%; }
-            .svc-slide { flex: 0 0 auto; padding: 100px 20px; min-height: auto; }
+            .svc-explorer-header { padding: 100px 0 40px; }
+            .tab-nav-container { top: 20px; }
+            .tab-nav { overflow-x: auto; max-width: 92vw; padding: 4px; }
+            .tab-btn { padding: 10px 20px; font-size: 13px; }
+            
+            .category-header { margin-bottom: 60px; }
+            .category-header p { font-size: 18px; }
+
+            .service-list-item {
+                grid-template-columns: 1fr 40px;
+                padding: 40px 0;
+            }
+            .service-list-item::after { inset: 0 -15px; }
+            .service-icon { grid-column: 1; margin-bottom: 25px; }
+            .service-content-title { grid-column: 1; margin-bottom: 15px; }
+            .service-content-title h3 { font-size: 24px; }
+            .service-content-desc { grid-column: 1 / 3; }
+            .service-arrow { grid-column: 2; grid-row: 2; align-self: center; }
         }
     </style>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/style.css">
 </head>
-<body class="bg-light text-dark">
+<body class="bg-white text-dark">
     <!-- Custom Cursor -->
     <div id="cursor"></div>
     <div id="cursor-follower"></div>
 
     <!-- Header -->
-    <header id="main-header" class="fixed top-0 left-0 w-full z-[100] py-6 px-6 md:px-12 flex justify-between items-center transition-colors duration-300">
-        <a href="index.html" class="block"><img src="Assets/images/ICB-white.png" alt="ICB Logo" class="h-12 md:h-16 header-logo"></a>
-        <div class="flex gap-8 items-center">
+    <header id="main-header" class="fixed top-0 left-0 w-full z-[210] py-6 px-6 md:px-12 flex justify-between items-center transition-colors duration-300 pointer-events-none">
+        <a href="index.html" class="block pointer-events-auto"><img src="Assets/images/ICB-white.png" alt="ICB Logo" class="h-12 md:h-16 header-logo"></a>
+        <div class="flex gap-8 items-center pointer-events-auto">
             <a href="contact.html" class="text-sm font-bold tracking-[0.2em] uppercase hidden md:block magnetic">LET'S TALK!</a>
             <button id="menu-toggle" class="text-sm font-bold tracking-[0.2em] uppercase magnetic">MENU</button>
         </div>
     </header>
 
     <!-- Fullscreen Menu -->
-    <div id="menu" class="fixed inset-0 z-[90] bg-dark text-light hidden flex-col justify-start pt-32 md:pt-40 items-start text-left px-6 md:px-24">
+    <div id="menu" class="fixed inset-0 z-[200] bg-dark text-light hidden flex-col justify-start pt-32 md:pt-40 items-start text-left px-6 md:px-24">
         <div class="flex flex-col gap-2 md:gap-4">
             <div class="overflow-hidden"><a href="index.html" class="menu-link block text-5xl md:text-[90px] font-black tracking-tighter leading-[0.85] pr-4 hover-stroke transition-all">HOME</a></div>
             <div class="overflow-hidden"><a href="about.html" class="menu-link block text-5xl md:text-[90px] font-black tracking-tighter leading-[0.85] pr-4 hover-stroke transition-all">ABOUT</a></div>
@@ -81,168 +322,585 @@
     </div>
 
     <main>
-        <!-- Hero Section -->
-        <section class="relative h-screen flex flex-col justify-center items-center px-6 text-center overflow-hidden bg-light">
-            <div class="absolute inset-0 bg-gradient-to-b from-primary/10 to-transparent pointer-events-none"></div>
-            <div class="relative z-10">
-                <span class="font-bold tracking-[0.5em] uppercase text-[10px] text-primary mb-6 block hero-sub">Capabilities</span>
-                <h1 class="text-[12vw] font-black tracking-tighter leading-[0.8] uppercase hero-main">
-                    OUR<br/>
-                    <span class="text-stroke-dark" style="-webkit-text-stroke: 2px #0a0a0a; color: transparent;">SERVICES.</span>
-                </h1>
-                <p class="mt-12 text-xl md:text-2xl text-zinc-400 max-w-3xl mx-auto hero-para">
-                    We combine strategy, design, and technology to build iconic digital brands and high-performance platforms.
-                </p>
+        <!-- Hero Section Removed for Exact SS Match -->
+        
+        <!-- SERVICES EXPLORER -->
+        <section id="services-explorer" class="bg-white grid-bg">
+            <div class="max-w-7xl mx-auto px-6">
+                <div class="svc-explorer-header">
+                    <h2 class="svc-explorer-title">Services</h2>
+                </div>
+
+                <!-- Tab Navigation -->
+                <div class="tab-nav-container">
+                    <div class="tab-nav">
+                        <div class="tab-slider"></div>
+                        <button class="tab-btn active" data-tab="web">Website Design & Development</button>
+                        <button class="tab-btn" data-tab="software">Software & App Development</button>
+                        <button class="tab-btn" data-tab="branding">Branding & Creative</button>
+                        <button class="tab-btn" data-tab="marketing">Online Marketing</button>
+                    </div>
+                </div>
+
+                <!-- Tab Content Wrapper -->
+                <div id="tab-content-wrapper" style="min-height: 800px; position: relative;">
+                    <!-- Tab Content: Web Design & Development -->
+                    <div id="web" class="tab-content active">
+                    <div class="category-header">
+                        <p>Our website design and development services transform how clients meet you, creating aesthetically functional websites that open your business to new possibilities. We love bringing artistic vision to life, going beyond limits to fulfill our clients’ digital dreams, and exceeding expectations every time.</p>
+                    </div>
+                    <div class="service-list">
+                        <!-- Item 1: Web Designing -->
+                        <div class="service-list-item">
+                            <div class="service-icon"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 19l7-7 3 3-7 7-3-3z"></path><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"></path><path d="M2 2l7.586 7.586"></path><circle cx="11" cy="11" r="2"></circle></svg></div>
+                            <div class="service-content-title"><h3>Web<br>Designing</h3></div>
+                            <div class="service-content-desc"><p>When your audience can easily guide, they will want to stay, engage, and enjoy the journey through your content. We are an interactive web designing agency in Gurgaon, passionate about branding your business.</p></div>
+                            <div class="service-arrow"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg></div>
+                        </div>
+                        <!-- Item 2: Ecommerce Development -->
+                        <div class="service-list-item">
+                            <div class="service-icon"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg></div>
+                            <div class="service-content-title"><h3>Ecommerce<br>Development</h3></div>
+                            <div class="service-content-desc"><p>At our full-service eCommerce web development agency in Gurgaon, we focus on human-centered digital solutions powered by e-commerce. Our team of creative knuckleheads is dedicated to identifying problems and delivering future-ready products that polish your brand.</p></div>
+                            <div class="service-arrow"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg></div>
+                        </div>
+                        <!-- Item 3: Web Development -->
+                        <div class="service-list-item">
+                            <div class="service-icon"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg></div>
+                            <div class="service-content-title"><h3>Web<br>Development</h3></div>
+                            <div class="service-content-desc"><p>Our digital natives understand the evolving landscape of technology and design, creating pixel-perfect experiences cut according to your needs while providing full-stack support across all platforms.</p></div>
+                            <div class="service-arrow"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg></div>
+                        </div>
+                        <!-- Item 4: Wordpress Web Design -->
+                        <div class="service-list-item">
+                            <div class="service-icon"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5z"></path><path d="M2 17l10 5 10-5"></path><path d="M2 12l10 5 10-5"></path></svg></div>
+                            <div class="service-content-title"><h3>Wordpress<br>Web Design</h3></div>
+                            <div class="service-content-desc"><p>We take pride in converting websites into profit-making portals by offering WordPress web design services in Gurgaon that streamline your digital presence. From transforming brands into web masterpieces to making sure future-proof designs, we deliver solutions that make the internet a better place for your customers.</p></div>
+                            <div class="service-arrow"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg></div>
+                        </div>
+                        <!-- Item 5: Wordpress Development -->
+                        <div class="service-list-item">
+                            <div class="service-icon"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg></div>
+                            <div class="service-content-title"><h3>Wordpress<br>Development</h3></div>
+                            <div class="service-content-desc"><p>Our commitment at our WordPress web development company, to excellence and innovation means you can trust us to deliver high-quality, user-friendly websites that power up your brand and bring unimaginable results.</p></div>
+                            <div class="service-arrow"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg></div>
+                        </div>
+                        <!-- Item 6: Magento Development -->
+                        <div class="service-list-item">
+                            <div class="service-icon"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5z"></path><path d="M2 17l10 5 10-5"></path></svg></div>
+                            <div class="service-content-title"><h3>Magento<br>Development</h3></div>
+                            <div class="service-content-desc"><p>Our Magento development agency stands out because our values are evident in business practices. We provide Magento development services in India that are designed for businesses of all sizes, with a focus on websites that go the extra mile.</p></div>
+                            <div class="service-arrow"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg></div>
+                        </div>
+                        <!-- Item 7: Shopify Development -->
+                        <div class="service-list-item">
+                            <div class="service-icon"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"></path><path d="M3 6h18"></path><path d="M16 10a4 4 0 0 1-8 0"></path></svg></div>
+                            <div class="service-content-title"><h3>Shopify<br>Development</h3></div>
+                            <div class="service-content-desc"><p>Our Shopify development services in India focus on building solutions that reduce friction, making shopping easy for your customers and driving your business forward. With sophisticated development and a strategic mindset, we help you achieve your eCommerce goals efficiently, without breaking the bank.</p></div>
+                            <div class="service-arrow"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg></div>
+                        </div>
+                        <!-- Item 8: UI/UX Design -->
+                        <div class="service-list-item">
+                            <div class="service-icon"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"></circle><path d="M8 12h8"></path><path d="M12 8v8"></path></svg></div>
+                            <div class="service-content-title"><h3>UI/UX<br>Design</h3></div>
+                            <div class="service-content-desc"><p>As a trusted UI/UX design company, we focus on creating human-centered digital products that not only meet client needs but also increase customer retention. Our expertise lies in uncovering hidden insights and delivering visionary solutions that consistently exceed expectations, helping your brand thrive in a competitive digital landscape.</p></div>
+                            <div class="service-arrow"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg></div>
+                        </div>
+                        <!-- Item 9: Small Business Website Designing -->
+                        <div class="service-list-item">
+                            <div class="service-icon"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="9" y1="3" x2="9" y2="21"></line></svg></div>
+                            <div class="service-content-title"><h3>Small Business<br>Website Designing</h3></div>
+                            <div class="service-content-desc"><p>When your company has to survive mounting pressure from both longtime competitors and new market entrants, our small business website design agency equips you with the tools to stay ahead.</p></div>
+                            <div class="service-arrow"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg></div>
+                        </div>
+                        <!-- Item 10: Ecommerce Services -->
+                        <div class="service-list-item">
+                            <div class="service-icon"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg></div>
+                            <div class="service-content-title"><h3>Ecommerce<br>Services</h3></div>
+                            <div class="service-content-desc"><p>If your focus is B2C, B2B, or D2C, our ecommerce digital marketing services empower you to expand your footprint and capture new opportunities in your industry. Our team brings the best ecommerce web development practices to every project.</p></div>
+                            <div class="service-arrow"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg></div>
+                        </div>
+                        <!-- Item 11: Ecommerce Selling -->
+                        <div class="service-list-item">
+                            <div class="service-icon"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg></div>
+                            <div class="service-content-title"><h3>Ecommerce<br>Selling</h3></div>
+                            <div class="service-content-desc"><p>Our digital marketing and ecommerce team specializes in creating ecommerce environments that enhance your product offerings, improve customer experiences, and provide a seamless shopping journey.</p></div>
+                            <div class="service-arrow"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg></div>
+                        </div>
+                        <!-- Item 12: Ecommerce Products Selling -->
+                        <div class="service-list-item">
+                            <div class="service-icon"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line></svg></div>
+                            <div class="service-content-title"><h3>Ecommerce<br>Products Selling</h3></div>
+                            <div class="service-content-desc"><p>At our ecommerce company, we're passionate about delivering the tools, strategies, and solutions needed for our clients to thrive in the competitive world of digital commerce.</p></div>
+                            <div class="service-arrow"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg></div>
+                        </div>
+                        <!-- Item 13: Ecommerce Customer Product -->
+                        <div class="service-list-item">
+                            <div class="service-icon"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg></div>
+                            <div class="service-content-title"><h3>Ecommerce<br>Customer Product</h3></div>
+                            <div class="service-content-desc"><p>Our commitment to empowering your ecommerce journey with customized solutions guarantees that you can drive sustainable growth, reach new customers, and enhance operational efficiency.</p></div>
+                            <div class="service-arrow"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg></div>
+                        </div>
+                        <!-- Item 14: Ecommerce Stock Management -->
+                        <div class="service-list-item">
+                            <div class="service-icon"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="7.5 4.21 12 6.81 16.5 4.21"></polyline><polyline points="7.5 19.79 7.5 14.6 3 12"></polyline><polyline points="21 12 16.5 14.6 16.5 19.79"></polyline><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg></div>
+                            <div class="service-content-title"><h3>Ecommerce<br>Stock Management</h3></div>
+                            <div class="service-content-desc"><p>Inventory management involves the entire process of tracking, managing, and optimizing stock levels to ensure products are available when customers need them.</p></div>
+                            <div class="service-arrow"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg></div>
+                        </div>
+                        <!-- Item 15: Ecommerce Payment Gateway -->
+                        <div class="service-list-item">
+                            <div class="service-icon"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect><line x1="1" y1="10" x2="23" y2="10"></line></svg></div>
+                            <div class="service-content-title"><h3>Ecommerce<br>Payment Gateway</h3></div>
+                            <div class="service-content-desc"><p>One of the most essential aspects of running a modern ecommerce website is the ability to process recurring payments. We help you integrate systems that support automated billing.</p></div>
+                            <div class="service-arrow"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg></div>
+                        </div>
+                        <!-- Item 16: Ecommerce Logistic Management -->
+                        <div class="service-list-item">
+                            <div class="service-icon"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></svg></div>
+                            <div class="service-content-title"><h3>Ecommerce<br>Logistic Management</h3></div>
+                            <div class="service-content-desc"><p>We create ecommerce websites that ensure smooth integration between payments, order management, inventory tracking, and logistics for a seamless business operation.</p></div>
+                            <div class="service-arrow"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg></div>
+                        </div>
+                        <!-- Item 17: Ecommerce Products -->
+                        <div class="service-list-item">
+                            <div class="service-icon"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle></svg></div>
+                            <div class="service-content-title"><h3>Ecommerce<br>Products</h3></div>
+                            <div class="service-content-desc"><p>Research shows that product photography can have a serious impact on your company's bottom line. Picture perfect shots can boost conversion rates and foster brand trust.</p></div>
+                            <div class="service-arrow"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg></div>
+                        </div>
+                        <!-- Item 18: E-Commerce Maintenance -->
+                        <div class="service-list-item">
+                            <div class="service-icon"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg></div>
+                            <div class="service-content-title"><h3>E-Commerce<br>Maintenance</h3></div>
+                            <div class="service-content-desc"><p>Investing in ecommerce website maintenance is a necessity for building long-term customer relationships and sustaining consistent sales through a reliable platform.</p></div>
+                            <div class="service-arrow"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg></div>
+                        </div>
+                        <!-- Item 19: B2C Designing Website -->
+                        <div class="service-list-item">
+                            <div class="service-icon"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg></div>
+                            <div class="service-content-title"><h3>B2C Designing<br>Website</h3></div>
+                            <div class="service-content-desc"><p>We offer you convenience and quality, allowing you to get up and running with a stunning B2C website that engages your direct customers effectively.</p></div>
+                            <div class="service-arrow"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg></div>
+                        </div>
+                        <!-- Item 20: Corporate Profile Website -->
+                        <div class="service-list-item">
+                            <div class="service-icon"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="2" y1="10" x2="22" y2="10"></line></svg></div>
+                            <div class="service-content-title"><h3>Corporate Profile<br>Website</h3></div>
+                            <div class="service-content-desc"><p>We understand your business to the core, helping you build a digital profile that speaks volumes about your brand, values, and vision in the corporate world.</p></div>
+                            <div class="service-arrow"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg></div>
+                        </div>
+                        <!-- Item 21: B2B Designing Website -->
+                        <div class="service-list-item">
+                            <div class="service-icon"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path></svg></div>
+                            <div class="service-content-title"><h3>B2B Designing<br>Website</h3></div>
+                            <div class="service-content-desc"><p>We design B2B websites that set the pace in an ever-evolving industry, ensuring lightning-fast load times and flawless navigation for professional organization needs.</p></div>
+                            <div class="service-arrow"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg></div>
+                        </div>
+                        <!-- Item 22: Portfolio Website -->
+                        <div class="service-list-item">
+                            <div class="service-icon"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg></div>
+                            <div class="service-content-title"><h3>Portfolio<br>Website</h3></div>
+                            <div class="service-content-desc"><p>Our approach revolves around understanding your unique story and translating it into a digital space that engages, inspires, and converts your audience.</p></div>
+                            <div class="service-arrow"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg></div>
+                        </div>
+                        <!-- Item 23: Informative Website -->
+                        <div class="service-list-item">
+                            <div class="service-icon"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path><circle cx="12" cy="12" r="3"></circle></svg></div>
+                            <div class="service-content-title"><h3>Informative<br>Website</h3></div>
+                            <div class="service-content-desc"><p>A great branding website doesn’t only look appealing, it strategically integrates your brand’s unique identity into every element, from visuals to messaging, creating a cohesive digital experience.</p></div>
+                            <div class="service-arrow"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg></div>
+                        </div>
+                        <!-- Item 24: Branding Website -->
+                        <div class="service-list-item">
+                            <div class="service-icon"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5z"></path><path d="M2 17l10 5 10-5"></path><path d="M2 12l10 5 10-5"></path></svg></div>
+                            <div class="service-content-title"><h3>Branding<br>Website</h3></div>
+                            <div class="service-content-desc"><p>We specialize in creating branding websites that strategically integrate your brand's unique identity into every element, creating a cohesive digital experience that resonates with your audience.</p></div>
+                            <div class="service-arrow"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg></div>
+                        </div>
+                        <!-- Item 25: Dynamic Website -->
+                        <div class="service-list-item">
+                            <div class="service-icon"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg></div>
+                            <div class="service-content-title"><h3>Dynamic<br>Website</h3></div>
+                            <div class="service-content-desc"><p>As a leading web design company, we focus on the latest technologies, tools, and trends to bring your vision to life. Every website we design is a platform that empowers brands and connects them with their audiences.</p></div>
+                            <div class="service-arrow"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg></div>
+                        </div>
+                        <!-- Item 26: Promotional Website -->
+                        <div class="service-list-item">
+                            <div class="service-icon"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5z"></path><path d="M2 17l10 5 10-5"></path><path d="M2 12l10 5 10-5"></path></svg></div>
+                            <div class="service-content-title"><h3>Promotional<br>Website</h3></div>
+                            <div class="service-content-desc"><p>Effective promotional website design offers more than just a beautiful layout, it establishes a critical touchpoint for your business that serves immediate promotional needs and creates value for the future.</p></div>
+                            <div class="service-arrow"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg></div>
+                        </div>
+                        <!-- Item 27: Responsive Design -->
+                        <div class="service-list-item">
+                            <div class="service-icon"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="3"></circle><circle cx="19" cy="5" r="2"></circle><circle cx="5" cy="19" r="2"></circle><path d="M17.3 6.7l-3.6 3.6"></path><path d="M10.3 13.7l-3.6 3.6"></path><circle cx="19" cy="19" r="2"></circle><circle cx="5" cy="5" r="2"></circle><path d="M17.3 17.3l-3.6-3.6"></path><path d="M10.3 10.3L6.7 6.7"></path></svg></div>
+                            <div class="service-content-title"><h3>Responsive<br>Design</h3></div>
+                            <div class="service-content-desc"><p>We specialize in responsive web design and development, creating websites that flow like water across all media, ensuring your audience experiences smooth, engaging, and functional interactions on any device.</p></div>
+                            <div class="service-arrow"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg></div>
+                        </div>
+                        <!-- Item 28: Website Redesign Services -->
+                        <div class="service-list-item">
+                            <div class="service-icon"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21.17 8.06a2 2 0 0 1 .15 2.5l-9.17 9.17a2 2 0 0 1-2.5.15l-4.14 4.14a2 2 0 1 1-2.83-2.83l4.14-4.14a2 2 0 0 1 .15-2.5l9.17-9.17a2 2 0 0 1 2.5-.15l4.14-4.14a2 2 0 1 1 2.83 2.83l-4.14 4.14z"></path></svg></div>
+                            <div class="service-content-title"><h3>Website Redesign<br>Services</h3></div>
+                            <div class="service-content-desc"><p>We specialize in website redesign services that blend aesthetics with performance. We create responsive, user-focused websites that adapt seamlessly across all devices, delivering smooth and functional experiences.</p></div>
+                            <div class="service-arrow"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tab Content: Software -->
+                <div id="software" class="tab-content">
+                    <div class="category-header">
+                        <p>We are a software and mobile app development company in Gurgaon, specialized in developing custom-designed mobile apps for both iOS and Android platforms. Our mobile app developers in Gurgaon create high-quality apps that are user-friendly, secure, and packed with features.</p>
+                    </div>
+                    <div class="service-list">
+                        <!-- Item 1: Custom Software Development -->
+                        <div class="service-list-item">
+                            <div class="service-icon"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line><polyline points="7 8 10 11 7 14"></polyline><line x1="14" y1="14" x2="17" y2="14"></line></svg></div>
+                            <div class="service-content-title"><h3>Custom Software<br>Development</h3></div>
+                            <div class="service-content-desc"><p>Looking to build the next big thing? From enterprise-grade platforms to lean MVPs, we stand tall as a top software development company. Let's build something incredible together.</p></div>
+                            <div class="service-arrow"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg></div>
+                        </div>
+                        <!-- Item 2: Mobile App Development -->
+                        <div class="service-list-item">
+                            <div class="service-icon"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect><line x1="12" y1="18" x2="12.01" y2="18"></line></svg></div>
+                            <div class="service-content-title"><h3>Mobile App<br>Development</h3></div>
+                            <div class="service-content-desc"><p>Partner with our mobile app developer agency to stand out from the rest. An app from the right team gives your brand an edge, pushing you ahead of the competition.</p></div>
+                            <div class="service-arrow"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg></div>
+                        </div>
+                        <!-- Item 3: Android Application Development -->
+                        <div class="service-list-item">
+                            <div class="service-icon"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 10a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v7a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-7Z"></path><path d="M7 9V5a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1v4"></path><path d="M8 13v1"></path><path d="M16 13v1"></path><path d="M2 12v3"></path><path d="M22 12v3"></path></svg></div>
+                            <div class="service-content-title"><h3>Android Application<br>Development</h3></div>
+                            <div class="service-content-desc"><p>We transform digital ideas into real business results. Whether you need a native or hybrid app, our team delivers solutions that are data and performance-centered.</p></div>
+                            <div class="service-arrow"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg></div>
+                        </div>
+                        <!-- Item 4: iPhone Application Development -->
+                        <div class="service-list-item">
+                            <div class="service-icon"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 20.94c1.88 0 3.85-.76 5.22-2.13a.5.5 0 0 0-.15-.81 5.92 5.92 0 0 1-3.66-5.46 5.92 5.92 0 0 1 3.66-5.46.5.5 0 0 0 .15-.81 7.4 7.4 0 0 0-11.45 6.27 7.4 7.4 0 0 0 6.23 7.54ZM12 6.5V2"></path></svg></div>
+                            <div class="service-content-title"><h3>iPhone Application<br>Development</h3></div>
+                            <div class="service-content-desc"><p>Our team offers unmatched flexibility, ensuring you can adapt without breaking the bank. With our expertise, your app thrives in a tightly controlled environment.</p></div>
+                            <div class="service-arrow"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg></div>
+                        </div>
+                        <!-- Item 5: Real Estate Software Development -->
+                        <div class="service-list-item">
+                            <div class="service-icon"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 21h18"></path><path d="M3 7l9-4 9 4v14H3V7z"></path><path d="M9 21V11h6v10"></path></svg></div>
+                            <div class="service-content-title"><h3>Real Estate Software<br>Development</h3></div>
+                            <div class="service-content-desc"><p>We design custom property management software that boost sales and enhance client experiences. Our expert team delivers user-friendly, innovative platforms built to drive growth.</p></div>
+                            <div class="service-arrow"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg></div>
+                        </div>
+                        <!-- Item 6: Real Estate CRM Software -->
+                        <div class="service-list-item">
+                            <div class="service-icon"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg></div>
+                            <div class="service-content-title"><h3>Real Estate CRM<br>Software</h3></div>
+                            <div class="service-content-desc"><p>Tailored for realtors, our CRM system offers seamless integration, automation, and real-time analytics to enhance client relationships and business performance.</p></div>
+                            <div class="service-arrow"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- BRANDING TAB -->
+                <div id="branding" class="tab-content">
+                    <div class="category-header">
+                        <p>We craft compelling brand identities that resonate with your audience and tell your unique story. From logos to complete brand guidelines, we make your business unforgettable.</p>
+                    </div>
+                    <div class="service-list">
+                        <!-- Item 1: Branding and Design Agency -->
+                        <div class="service-list-item">
+                            <div class="service-icon"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 19l7-7 3 3-7 7-3-3z"></path><path d="M18 13l-1.5-1.5"></path><path d="M2 2h5v5H2z"></path><path d="M2 17h5v5H2z"></path><path d="M17 2h5v5h-5z"></path></svg></div>
+                            <div class="service-content-title"><h3>Branding and<br>Design Agency</h3></div>
+                            <div class="service-content-desc"><p>Why settle for ordinary? We specialize in releasing brands from the limits of traditional design, delivering the 'big brand experience' that makes your business unforgettable.</p></div>
+                            <div class="service-arrow"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg></div>
+                        </div>
+                        <!-- Item 2: Best Creative Agency in India -->
+                        <div class="service-list-item">
+                            <div class="service-icon"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 18h6"></path><path d="M10 22h4"></path><path d="M12 2a7 7 0 0 0-7 7c0 2.32 1.25 4.34 3 5.45V18h8v-3.55c1.75-1.11 3-3.13 3-5.45a7 7 0 0 0-7-7z"></path></svg></div>
+                            <div class="service-content-title"><h3>Best Creative<br>Agency in India</h3></div>
+                            <div class="service-content-desc"><p>Our creative agency is known to create experiences that are worthy of attention. With packages so stunning, your product is sure to get picked from the shelves.</p></div>
+                            <div class="service-arrow"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg></div>
+                        </div>
+                        <!-- Item 3: Product Design Company -->
+                        <div class="service-list-item">
+                            <div class="service-icon"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg></div>
+                            <div class="service-content-title"><h3>Product Design<br>Company</h3></div>
+                            <div class="service-content-desc"><p>Our specialized product design services make sure that your packaging not only attracts attention but also communicates your brand's value effectively and drives engagement.</p></div>
+                            <div class="service-arrow"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg></div>
+                        </div>
+                        <!-- Item 4: India's Top Logo Design Company -->
+                        <div class="service-list-item">
+                            <div class="service-icon"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5z"></path><path d="M2 17l10 5 10-5"></path><path d="M2 12l10 5 10-5"></path></svg></div>
+                            <div class="service-content-title"><h3>India's Top Logo<br>Design Company</h3></div>
+                            <div class="service-content-desc"><p>Beyond aesthetics lies purpose. Our logo design services go beyond aesthetics, designing logos that bring life and meaning to your brand and help you hypergrow.</p></div>
+                            <div class="service-arrow"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg></div>
+                        </div>
+                        <!-- Item 5: Graphic Design Company -->
+                        <div class="service-list-item">
+                            <div class="service-icon"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg></div>
+                            <div class="service-content-title"><h3>Graphic Design<br>Company</h3></div>
+                            <div class="service-content-desc"><p>We co-create with you, combining colors, fonts, and design elements to build a vibrant brand identity. Let's join hands with our graphic design company and soar high.</p></div>
+                            <div class="service-arrow"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg></div>
+                        </div>
+                        <!-- Item 6: Packaging Design Company -->
+                        <div class="service-list-item">
+                            <div class="service-icon"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="7.5 4.21 12 6.81 16.5 4.21"></polyline><polyline points="7.5 19.79 7.5 14.6 3 12"></polyline><polyline points="21 12 16.5 14.6 16.5 19.79"></polyline><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg></div>
+                            <div class="service-content-title"><h3>Packaging Design<br>Company</h3></div>
+                            <div class="service-content-desc"><p>We make design tangible by blending creativity and functionality. Our package design agency crafts visually compelling packaging that tells your brand's story.</p></div>
+                            <div class="service-arrow"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg></div>
+                        </div>
+                        <!-- Item 7: Video Production Company -->
+                        <div class="service-list-item">
+                            <div class="service-icon"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"></rect><line x1="7" y1="2" x2="7" y2="22"></line><line x1="17" y1="2" x2="17" y2="22"></line><line x1="2" y1="12" x2="22" y2="12"></line><line x1="2" y1="7" x2="7" y2="7"></line><line x1="2" y1="17" x2="7" y2="17"></line><line x1="17" y1="17" x2="22" y2="17"></line><line x1="17" y1="7" x2="22" y2="7"></line></svg></div>
+                            <div class="service-content-title"><h3>Video Production<br>Company</h3></div>
+                            <div class="service-content-desc"><p>Our video production company makes your brand relevant by removing friction from the buying process through amazing shots and high-quality production.</p></div>
+                            <div class="service-arrow"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg></div>
+                        </div>
+                        <!-- Item 8: Advertising Agency -->
+                        <div class="service-list-item">
+                            <div class="service-icon"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M11 5L6 9H2v6h4l5 4V5z"></path><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path><path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path></svg></div>
+                            <div class="service-content-title"><h3>Advertising<br>Agency</h3></div>
+                            <div class="service-content-desc"><p>As an advertising company, we're purpose-built to meet your exact needs. Our breadth of services is strengthened by the depth of expertise behind them.</p></div>
+                            <div class="service-arrow"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg></div>
+                        </div>
+                        <!-- Item 9: Brochure Design -->
+                        <div class="service-list-item">
+                            <div class="service-icon"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg></div>
+                            <div class="service-content-title"><h3>Brochure<br>Design</h3></div>
+                            <div class="service-content-desc"><p>As a brochure design company, we use every fold to enhance your brand's voice. We turn simple layouts into complex narratives, folding creativity into every corner.</p></div>
+                            <div class="service-arrow"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tab Content: Marketing -->
+                <div id="marketing" class="tab-content">
+                    <div class="category-header">
+                        <p>Driving growth through data-driven digital marketing strategies. We help you reach your target audience and convert them into loyal customers.</p>
+                    </div>
+                    <div class="service-list">
+                        <!-- Item 1: Public Relations Agency -->
+                        <div class="service-list-item">
+                            <div class="service-icon"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg></div>
+                            <div class="service-content-title"><h3>Public Relations<br>Agency</h3></div>
+                            <div class="service-content-desc"><p>We love cultivating curiosity that leads to innovative solutions, and protecting your reputation through every change.</p></div>
+                            <div class="service-arrow"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg></div>
+                        </div>
+                        <!-- Item 2: Digital Marketing Agency -->
+                        <div class="service-list-item">
+                            <div class="service-icon"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"></circle><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"></path><path d="M2 12h20"></path></svg></div>
+                            <div class="service-content-title"><h3>Digital Marketing<br>Agency</h3></div>
+                            <div class="service-content-desc"><p>Turning everyday interactions into memorable experiences. We prosper by helping brands through identity crises and guiding them toward a stronger digital presence.</p></div>
+                            <div class="service-arrow"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg></div>
+                        </div>
+                        <!-- Item 3: Best SEO Company in Gurgaon -->
+                        <div class="service-list-item">
+                            <div class="service-icon"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg></div>
+                            <div class="service-content-title"><h3>Best SEO Company<br>in Gurgaon</h3></div>
+                            <div class="service-content-desc"><p>Revenue-generating digital marketing solutions fit for your needs. Our focus is to push your brand to the above fold region.</p></div>
+                            <div class="service-arrow"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg></div>
+                        </div>
+                        <!-- Item 4: Best PPC Agency in Gurgaon -->
+                        <div class="service-list-item">
+                            <div class="service-icon"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="6"></circle><circle cx="12" cy="12" r="2"></circle></svg></div>
+                            <div class="service-content-title"><h3>Best PPC Agency<br>in Gurgaon</h3></div>
+                            <div class="service-content-desc"><p>Focus on lining up your brand promises with performance, helping you reach mass-market consumers and build relationships that last.</p></div>
+                            <div class="service-arrow"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg></div>
+                        </div>
+                        <!-- Item 5: Social Media Marketing Agency -->
+                        <div class="service-list-item">
+                            <div class="service-icon"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg></div>
+                            <div class="service-content-title"><h3>Social Media<br>Marketing Agency</h3></div>
+                            <div class="service-content-desc"><p>We help your brand defy norms and deliver a proactive, responsive strategy with a focus on creating a disruptive difference.</p></div>
+                            <div class="service-arrow"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg></div>
+                        </div>
+                        <!-- Item 6: Search Engine Marketing Agency -->
+                        <div class="service-list-item">
+                            <div class="service-icon"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg></div>
+                            <div class="service-content-title"><h3>Search Engine<br>Marketing Agency</h3></div>
+                            <div class="service-content-desc"><p>Effective strategies involve more than just visibility. We use analytics to provide insights that allow you to refine your approach continually.</p></div>
+                            <div class="service-arrow"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg></div>
+                        </div>
+                        <!-- Item 7: Video Marketing Agency -->
+                        <div class="service-list-item">
+                            <div class="service-icon"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"></rect><path d="M7 2v20M17 2v20M2 12h20M2 7h5M2 17h5M17 17h5M17 7h5"></path></svg></div>
+                            <div class="service-content-title"><h3>Video Marketing<br>Agency</h3></div>
+                            <div class="service-content-desc"><p>Our DNA is rooted in premium content. We are a video marketing agency that makes a lasting impact to revamp your brand's presence.</p></div>
+                            <div class="service-arrow"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg></div>
+                        </div>
+                        <!-- Item 8: Ecommerce Marketing Agency -->
+                        <div class="service-list-item">
+                            <div class="service-icon"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4H6z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg></div>
+                            <div class="service-content-title"><h3>Ecommerce Marketing<br>Agency</h3></div>
+                            <div class="service-content-desc"><p>Gets your business seen and empowers you with tools that make selling less daunting. We deliver results that push you to be a category leader.</p></div>
+                            <div class="service-arrow"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg></div>
+                        </div>
+                        <!-- Item 9: Content Marketing Agency -->
+                        <div class="service-list-item">
+                            <div class="service-icon"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg></div>
+                            <div class="service-content-title"><h3>Content Marketing<br>Agency</h3></div>
+                            <div class="service-content-desc"><p>We specialize in creating phygital experiences that change how people connect with brands. Our agency shines a light on what makes your brand unique.</p></div>
+                            <div class="service-arrow"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg></div>
+                        </div>
+                        <!-- Item 10: Email Marketing Agency -->
+                        <div class="service-list-item">
+                            <div class="service-icon"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg></div>
+                            <div class="service-content-title"><h3>Email Marketing<br>Agency</h3></div>
+                            <div class="service-content-desc"><p>We believe everyone has an email! Let us be your primary source of marketing success and soar the highest.</p></div>
+                            <div class="service-arrow"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg></div>
+                        </div>
+                        <!-- Item 11: Local SEO Agency -->
+                        <div class="service-list-item">
+                            <div class="service-icon"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg></div>
+                            <div class="service-content-title"><h3>Local SEO<br>Agency</h3></div>
+                            <div class="service-content-desc"><p>Navigate the complexities of local search marketing and maximize your visibility. Giving your business the edge it needs to thrive.</p></div>
+                            <div class="service-arrow"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg></div>
+                        </div>
+                        <!-- Item 12: Adwords Agency -->
+                        <div class="service-list-item">
+                            <div class="service-icon"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5z"></path><path d="M2 17l10 5 10-5"></path><path d="M2 12l10 5 10-5"></path></svg></div>
+                            <div class="service-content-title"><h3>Adwords<br>Agency</h3></div>
+                            <div class="service-content-desc"><p>Our Adword services love to go beyond the basics. We help you publicize your business the way Google wants you to.</p></div>
+                            <div class="service-arrow"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg></div>
+                        </div>
+                        <!-- Item 13: Ecommerce Digital Marketing -->
+                        <div class="service-list-item">
+                            <div class="service-icon"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg></div>
+                            <div class="service-content-title"><h3>Ecommerce Digital<br>Marketing</h3></div>
+                            <div class="service-content-desc"><p>Boost sales and drive measurable growth. We provide actionable analytics that guide your strategy and identify high-conversion opportunities.</p></div>
+                            <div class="service-arrow"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg></div>
+                        </div>
+                        <!-- Item 14: E-Commerce Content Writing -->
+                        <div class="service-list-item">
+                            <div class="service-icon"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg></div>
+                            <div class="service-content-title"><h3>E-Commerce Content<br>Writing</h3></div>
+                            <div class="service-content-desc"><p>Your journey begins with self-awareness. We understand that every business is unique, and that means your content should be as well.</p></div>
+                            <div class="service-arrow"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg></div>
+                        </div>
+                        <!-- Item 15: Enterprise SEO Marketing -->
+                        <div class="service-list-item">
+                            <div class="service-icon"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg></div>
+                            <div class="service-content-title"><h3>Enterprise SEO<br>Marketing</h3></div>
+                            <div class="service-content-desc"><p>Helping businesses dominate search results and achieve long-term success with data-driven strategies and scalable solutions.</p></div>
+                            <div class="service-arrow"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg></div>
+                        </div>
+                        <!-- Item 16: Small Business Owner SEO -->
+                        <div class="service-list-item">
+                            <div class="service-icon"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg></div>
+                            <div class="service-content-title"><h3>Small Business<br>Owner SEO</h3></div>
+                            <div class="service-content-desc"><p>White hat SEO services designed to help small businesses improve their rankings without compromising on integrity or success.</p></div>
+                            <div class="service-arrow"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg></div>
+                        </div>
+                        <!-- Item 17: White Hat SEO Marketing -->
+                        <div class="service-list-item">
+                            <div class="service-icon"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg></div>
+                            <div class="service-content-title"><h3>White Hat SEO<br>Marketing</h3></div>
+                            <div class="service-content-desc"><p>Ensuring that your website remains compliant with search engine guidelines while achieving high, sustainable rankings.</p></div>
+                            <div class="service-arrow"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg></div>
+                        </div>
+                        <!-- Item 18: Guaranteed SEO Marketing -->
+                        <div class="service-list-item">
+                            <div class="service-icon"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg></div>
+                            <div class="service-content-title"><h3>Guaranteed SEO<br>Marketing</h3></div>
+                            <div class="service-content-desc"><p>Offering a comprehensive suite of services designed to secure top rankings for your website and drive measurable results.</p></div>
+                            <div class="service-arrow"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg></div>
+                        </div>
+                        <!-- Item 19: Local SEO Marketing -->
+                        <div class="service-list-item">
+                            <div class="service-icon"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg></div>
+                            <div class="service-content-title"><h3>Local SEO<br>Marketing</h3></div>
+                            <div class="service-content-desc"><p>Designed to deliver measurable results that drive growth. Dominating local search engine results and converting visitors into clients.</p></div>
+                            <div class="service-arrow"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg></div>
+                        </div>
+                        <!-- Item 20: Global SEO Marketing -->
+                        <div class="service-list-item">
+                            <div class="service-icon"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"></circle><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg></div>
+                            <div class="service-content-title"><h3>Global SEO<br>Marketing</h3></div>
+                            <div class="service-content-desc"><p>Tailored to help you rise above the noise, gain visibility, and attract qualified traffic from around the world using advanced techniques.</p></div>
+                            <div class="service-arrow"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg></div>
+                        </div>
+                        <!-- Item 21: E Commerce SEO -->
+                        <div class="service-list-item">
+                            <div class="service-icon"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4H6z"></path><line x1="3" y1="6" x2="21" y2="6"></line></svg></div>
+                            <div class="service-content-title"><h3>E Commerce<br>SEO</h3></div>
+                            <div class="service-content-desc"><p>Transforming your online store into a powerhouse through customized ecommerce search engine optimization techniques.</p></div>
+                            <div class="service-arrow"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg></div>
+                        </div>
+                        <!-- Item 22: Video SEO Marketing -->
+                        <div class="service-list-item">
+                            <div class="service-icon"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="23 7 16 12 23 17 23 7"></polygon><rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect></svg></div>
+                            <div class="service-content-title"><h3>Video SEO<br>Marketing</h3></div>
+                            <div class="service-content-desc"><p>Specializing in YouTube SEO services that help businesses increase visibility, reach, and engagement with our video optimization.</p></div>
+                            <div class="service-arrow"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg></div>
+                        </div>
+                        <!-- Item 23: Multilingual SEO Marketing -->
+                        <div class="service-list-item">
+                            <div class="service-icon"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg></div>
+                            <div class="service-content-title"><h3>Multilingual SEO<br>Marketing</h3></div>
+                            <div class="service-content-desc"><p>Ensuring your brand speaks to customers in different regions through multilingual SEO marketing as your business expands.</p></div>
+                            <div class="service-arrow"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg></div>
+                        </div>
+                        <!-- Item 24: Online Reputation Management -->
+                        <div class="service-list-item">
+                            <div class="service-icon"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><path d="M8 11l3 3 5-5"></path></svg></div>
+                            <div class="service-content-title"><h3>Online Reputation<br>Management</h3></div>
+                            <div class="service-content-desc"><p>Offering personalized and impactful services that help businesses and individuals navigate the evolving media landscape.</p></div>
+                            <div class="service-arrow"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg></div>
+                        </div>
+                        <!-- Item 25: SMO Marketing -->
+                        <div class="service-list-item">
+                            <div class="service-icon"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg></div>
+                            <div class="service-content-title"><h3>SMO<br>Marketing</h3></div>
+                            <div class="service-content-desc"><p>Crafting human-centric experiences that deeply connect with people, ensuring your brand reflects its audience and perfection.</p></div>
+                            <div class="service-arrow"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg></div>
+                        </div>
+                        <!-- Item 26: Affiliate Marketing -->
+                        <div class="service-list-item">
+                            <div class="service-icon"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></div>
+                            <div class="service-content-title"><h3>Affiliate<br>Marketing</h3></div>
+                            <div class="service-content-desc"><p>Crafting strategies that help brands thrive in the affiliate marketing ecosystem. Ensuring you're always ahead of the curve.</p></div>
+                            <div class="service-arrow"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg></div>
+                        </div>
+                        <!-- Item 27: Viral Marketing -->
+                        <div class="service-list-item">
+                            <div class="service-icon"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 12c0 6-8 10-8 10s-8-4-8-10V5l8-3 8 3v7z"></path></svg></div>
+                            <div class="service-content-title"><h3>Viral<br>Marketing</h3></div>
+                            <div class="service-content-desc"><p>Specializing in crafting human-centric experiences that deeply connect. Not just creating content but curating it to perfection.</p></div>
+                            <div class="service-arrow"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg></div>
+                        </div>
+                        <!-- Item 28: Pay Per Click -->
+                        <div class="service-list-item">
+                            <div class="service-icon"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="2"></circle></svg></div>
+                            <div class="service-content-title"><h3>Pay Per<br>Click</h3></div>
+                            <div class="service-content-desc"><p>Handling the intricacies of lead generation and ad management. Delivering the highest returns with advanced tools and strategies.</p></div>
+                            <div class="service-arrow"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg></div>
+                        </div>
+                        <!-- Item 29: SMS Marketing -->
+                        <div class="service-list-item">
+                            <div class="service-icon"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg></div>
+                            <div class="service-content-title"><h3>SMS<br>Marketing</h3></div>
+                            <div class="service-content-desc"><p>Driving engagement and ensuring direct communication. Providing top-notch SMS marketing services that help businesses streamline.</p></div>
+                            <div class="service-arrow"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg></div>
+                        </div>
+                        <!-- Item 30: Google Business Listing -->
+                        <div class="service-list-item">
+                            <div class="service-icon"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg></div>
+                            <div class="service-content-title"><h3>Google Business Listing<br>& Profile Management</h3></div>
+                            <div class="service-content-desc"><p>Ensuring your profile is fully optimized and engaging so your audience finds you easily and converts confidently.</p></div>
+                            <div class="service-arrow"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg></div>
+                        </div>
+                    </div>
+                </div> <!-- End Tab Content Wrapper -->
             </div>
-            <!-- Decorative elements -->
-            <div class="absolute top-[20%] left-[10%] w-32 h-32 border border-primary/20 rounded-full animate-pulse"></div>
-            <div class="absolute bottom-[20%] right-[10%] w-48 h-48 border border-primary/20 rounded-full animate-pulse" style="animation-delay: 1s;"></div>
-        </section>
-
-        <!-- HORIZONTAL JOURNEY -->
-        <section class="svc-horizontal-container">
-            <div class="svc-horizontal-wrap">
-                <!-- Slide 01 -->
-                <div class="svc-slide">
-                    <div class="group flex flex-col md:flex-row gap-16 items-center w-full max-w-7xl">
-                        <div class="flex-1">
-                            <div class="overflow-hidden rounded-[3rem] aspect-square">
-                                <img src="Assets/images/services1.webp" alt="Branding" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
-                            </div>
-                        </div>
-                        <div class="flex-1">
-                            <div class="text-primary font-black text-xs tracking-widest mb-6">01 / BRANDING</div>
-                            <h2 class="text-5xl md:text-7xl font-black mb-8 tracking-tighter">BRAND<br/>ARCHITECTS.</h2>
-                            <p class="text-xl text-zinc-500 leading-relaxed max-w-lg mb-10">
-                                We build legacies that resonate deeply and stand the test of time. From visual identity to core positioning.
-                            </p>
-                            <div class="flex flex-wrap gap-4">
-                                <span class="px-6 py-2 border border-dark/10 rounded-full text-[10px] font-bold uppercase tracking-widest">Visual Identity</span>
-                                <span class="px-6 py-2 border border-dark/10 rounded-full text-[10px] font-bold uppercase tracking-widest">Brand Strategy</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Slide 02 -->
-                <div class="svc-slide">
-                    <div class="group flex flex-col md:flex-row gap-16 items-center w-full max-w-7xl">
-                        <div class="flex-1">
-                            <div class="overflow-hidden rounded-[3rem] aspect-square">
-                                <img src="Assets/images/service2.webp" alt="Digital" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
-                            </div>
-                        </div>
-                        <div class="flex-1">
-                            <div class="text-primary font-black text-xs tracking-widest mb-6">02 / WEB DEV</div>
-                            <h2 class="text-5xl md:text-7xl font-black mb-8 tracking-tighter">DIGITAL<br/>POWERHOUSE.</h2>
-                            <p class="text-xl text-zinc-500 leading-relaxed max-w-lg mb-10">
-                                Scalable platforms that convert visitors into advocates. High performance meets flawless design.
-                            </p>
-                            <div class="flex flex-wrap gap-4">
-                                <span class="px-6 py-2 border border-dark/10 rounded-full text-[10px] font-bold uppercase tracking-widest">Next.js</span>
-                                <span class="px-6 py-2 border border-dark/10 rounded-full text-[10px] font-bold uppercase tracking-widest">E-Commerce</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Slide 03 -->
-                <div class="svc-slide">
-                    <div class="group flex flex-col md:flex-row gap-16 items-center w-full max-w-7xl">
-                        <div class="flex-1">
-                            <div class="overflow-hidden rounded-[3rem] aspect-square">
-                                <img src="Assets/images/service3.webp" alt="Experience" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
-                            </div>
-                        </div>
-                        <div class="flex-1">
-                            <div class="text-primary font-black text-xs tracking-widest mb-6">03 / EXPERIENCE</div>
-                            <h2 class="text-5xl md:text-7xl font-black mb-8 tracking-tighter">HUMAN<br/>CENTRIC.</h2>
-                            <p class="text-xl text-zinc-500 leading-relaxed max-w-lg mb-10">
-                                Intuitive journeys that make complex technology feel effortless and enjoyable.
-                            </p>
-                            <div class="flex flex-wrap gap-4">
-                                <span class="px-6 py-2 border border-dark/10 rounded-full text-[10px] font-bold uppercase tracking-widest">UI/UX Design</span>
-                                <span class="px-6 py-2 border border-dark/10 rounded-full text-[10px] font-bold uppercase tracking-widest">User Research</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Slide 04 -->
-                <div class="svc-slide">
-                    <div class="group flex flex-col md:flex-row gap-16 items-center w-full max-w-7xl">
-                        <div class="flex-1">
-                            <div class="overflow-hidden rounded-[3rem] aspect-square">
-                                <img src="Assets/images/service4.webp" alt="Apps" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
-                            </div>
-                        </div>
-                        <div class="flex-1">
-                            <div class="text-primary font-black text-xs tracking-widest mb-6">04 / MOBILITY</div>
-                            <h2 class="text-5xl md:text-7xl font-black mb-8 tracking-tighter">POCKET<br/>INNOVATION.</h2>
-                            <p class="text-xl text-zinc-500 leading-relaxed max-w-lg mb-10">
-                                Powerful mobile experiences for an audience on the go. Native performance on every device.
-                            </p>
-                            <div class="flex flex-wrap gap-4">
-                                <span class="px-6 py-2 border border-dark/10 rounded-full text-[10px] font-bold uppercase tracking-widest">iOS / Android</span>
-                                <span class="px-6 py-2 border border-dark/10 rounded-full text-[10px] font-bold uppercase tracking-widest">React Native</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Slide 05 -->
-                <div class="svc-slide">
-                    <div class="group flex flex-col md:flex-row gap-16 items-center w-full max-w-7xl">
-                        <div class="flex-1">
-                            <div class="overflow-hidden rounded-[3rem] aspect-square">
-                                <img src="Assets/images/service5.webp" alt="Systems" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
-                            </div>
-                        </div>
-                        <div class="flex-1">
-                            <div class="text-primary font-black text-xs tracking-widest mb-6">05 / SYSTEMS</div>
-                            <h2 class="text-5xl md:text-7xl font-black mb-8 tracking-tighter">SCALABLE<br/>LOGIC.</h2>
-                            <p class="text-xl text-zinc-500 leading-relaxed max-w-lg mb-10">
-                                Custom software and backend systems built to scale with your business growth.
-                            </p>
-                            <div class="flex flex-wrap gap-4">
-                                <span class="px-6 py-2 border border-dark/10 rounded-full text-[10px] font-bold uppercase tracking-widest">Node.js</span>
-                                <span class="px-6 py-2 border border-dark/10 rounded-full text-[10px] font-bold uppercase tracking-widest">Cloud Systems</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Slide 06 -->
-                <div class="svc-slide">
-                    <div class="group flex flex-col md:flex-row gap-16 items-center w-full max-w-7xl">
-                        <div class="flex-1">
-                            <div class="overflow-hidden rounded-[3rem] aspect-square">
-                                <img src="Assets/images/service6.webp" alt="Creative" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
-                            </div>
-                        </div>
-                        <div class="flex-1">
-                            <div class="text-primary font-black text-xs tracking-widest mb-6">06 / CREATIVE</div>
-                            <h2 class="text-5xl md:text-7xl font-black mb-8 tracking-tighter">VISUAL<br/>STORIES.</h2>
-                            <p class="text-xl text-zinc-500 leading-relaxed max-w-lg mb-10">
-                                Compelling narratives and visual content that elevate your brand across all digital touchpoints.
-                            </p>
-                            <div class="flex flex-wrap gap-4">
-                                <span class="px-6 py-2 border border-dark/10 rounded-full text-[10px] font-bold uppercase tracking-widest">Content Strategy</span>
-                                <span class="px-6 py-2 border border-dark/10 rounded-full text-[10px] font-bold uppercase tracking-widest">Motion Graphics</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>            </div>
         </section>
 
         <!-- CTA Section -->
         <section class="svc-cta-dark py-32 px-6 bg-[#0a0a0a] text-light text-center relative overflow-hidden">
-            <div class="absolute inset-0 bg-primary/5 pointer-events-none"></div>
+            <div class="absolute inset-0 bg-zinc-900/50 pointer-events-none"></div>
             <div class="max-w-4xl mx-auto relative z-10">
                 <h2 class="text-6xl md:text-8xl font-black tracking-tighter leading-tight mb-12">
                     READY TO START<br/><span class="text-stroke-light" style="-webkit-text-stroke: 1px #fff; color: transparent;">A REVOLUTION?</span>
                 </h2>
-                <a href="contact.html" class="px-12 py-5 bg-primary text-dark font-black uppercase rounded-full text-lg magnetic hover:scale-110 transition-transform inline-block">
+                <a href="contact.html" class="px-12 py-5 bg-white text-dark font-black uppercase rounded-full text-lg magnetic hover:scale-110 transition-transform inline-block">
                     Let's Talk →
                 </a>
             </div>
@@ -255,17 +913,8 @@
             <div class="grid grid-cols-1 md:grid-cols-3 gap-16 mb-20">
                 <!-- Col 1: Logo & Newsletter -->
                 <div class="space-y-8">
-                    <img src="Assets/images/ICB-white.png" alt="ICB Logo" class="h-12 header-logo" style="filter: brightness(0) invert(1);">
+                    <img src="Assets/images/ICB-white.png" alt="ICB Logo" class="h-12 footer-logo-persistent" style="filter: brightness(0) invert(1) !important;">
                     <p class="text-zinc-400 text-sm max-w-xs">A Gurgaon-based design and development agency</p>
-                    <div class="space-y-4">
-                        <h4 class="text-xl font-bold">Newsletter</h4>
-                        <div class="relative max-w-sm">
-                            <input type="email" placeholder="Enter your email" class="w-full bg-zinc-900 border border-white/10 rounded-full py-4 px-6 outline-none focus:border-primary transition-colors text-sm">
-                            <button class="absolute right-2 top-1/2 -translate-y-1/2 bg-primary text-dark w-10 h-10 rounded-full flex items-center justify-center hover:scale-110 transition-transform">
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-                            </button>
-                        </div>
-                    </div>
                 </div>
 
                 <!-- Col 2: Useful Links -->
@@ -277,12 +926,6 @@
                         <a href="projects.html" class="hover:text-white transition-colors">Projects</a>
                         <a href="about.html" class="hover:text-white transition-colors">About</a>
                         <a href="contact.html" class="hover:text-white transition-colors">Contact</a>
-                        <a href="#" class="hover:text-white transition-colors">Blogs</a>
-                    </div>
-                    <div class="flex flex-wrap gap-3 pt-4">
-                        <a href="#" class="px-6 py-2 border border-white/10 rounded-full text-[10px] font-bold uppercase tracking-widest hover:bg-white hover:text-dark transition-all">Linkedin</a>
-                        <a href="#" class="px-6 py-2 border border-white/10 rounded-full text-[10px] font-bold uppercase tracking-widest hover:bg-white hover:text-dark transition-all">Facebook</a>
-                        <a href="#" class="px-6 py-2 border border-white/10 rounded-full text-[10px] font-bold uppercase tracking-widest hover:bg-white hover:text-dark transition-all">Instagram</a>
                     </div>
                 </div>
 
@@ -301,11 +944,6 @@
 
             <!-- Bottom Bar -->
             <div class="pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-6 text-center">
-                <div class="flex gap-6 text-[11px] font-bold uppercase tracking-widest opacity-60">
-                    <a href="#" class="hover:text-primary transition-colors">Terms of Use</a>
-                    <span>|</span>
-                    <a href="#" class="hover:text-primary transition-colors">Privacy Policy</a>
-                </div>
                 <span class="text-[11px] font-bold uppercase tracking-widest opacity-40">© 2026 icreatebrand.com - All Rights Reserved</span>
             </div>
         </div>
@@ -315,48 +953,105 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
     <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
-    <script src="script.js"></script>
+    <script src="js/script.js"></script>
     <script>
         window.addEventListener('load', () => {
             // Hero Animation
             const heroTl = gsap.timeline({ defaults: { ease: "power4.out" } });
             heroTl
                 .from(".hero-sub", { opacity: 0, y: 30, duration: 1, delay: 0.3 })
-                .from(".hero-main", { opacity: 0, y: 100, duration: 1.4 }, "-=0.6")
-                .from(".hero-para", { opacity: 0, y: 30, duration: 1 }, "-=0.8");
+                .from(".hero-main", { opacity: 0, y: 100, duration: 1.4 }, "-=0.6");
 
-            // HORIZONTAL SCROLL LOGIC
-            const horizontalWrap = document.querySelector('.svc-horizontal-wrap');
-            const slides = gsap.utils.toArray('.svc-slide');
-            
-            if (window.innerWidth > 768) {
-                const totalWidth = horizontalWrap.scrollWidth - window.innerWidth;
-                
-                gsap.to(horizontalWrap, {
-                    x: -totalWidth,
-                    ease: "none",
-                    scrollTrigger: {
-                        trigger: ".svc-horizontal-container",
-                        pin: true,
-                        start: "top top",
-                        end: () => "+=" + horizontalWrap.scrollWidth,
-                        scrub: 1,
-                        invalidateOnRefresh: true,
-                        // Force header to stay black during horizontal scroll
-                        onUpdate: () => document.getElementById('main-header').classList.remove('text-invert')
-                    }
-                });
+            // Tab Switching Logic
+            const tabButtons = document.querySelectorAll('.tab-btn');
+            const tabContents = document.querySelectorAll('.tab-content');
+            const tabSlider = document.querySelector('.tab-slider');
+
+            function updateSlider(btn) {
+                tabSlider.style.width = btn.offsetWidth + 'px';
+                tabSlider.style.left = btn.offsetLeft + 'px';
             }
 
-            // Precise Header Color Change for Dark Sections on this page
-            const darkParts = document.querySelectorAll('.svc-cta-dark, .svc-footer-dark');
-            darkParts.forEach(part => {
-                ScrollTrigger.create({
-                    trigger: part,
-                    start: "top 60px",
-                    onEnter: () => document.getElementById('main-header').classList.add('text-invert'),
-                    onLeaveBack: () => document.getElementById('main-header').classList.remove('text-invert')
+            // Set initial slider position
+            updateSlider(document.querySelector('.tab-btn.active'));
+
+            window.addEventListener('resize', () => {
+                updateSlider(document.querySelector('.tab-btn.active'));
+            });
+
+            let isSwitching = false;
+            tabButtons.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    if (isSwitching) return;
+                    const targetTab = btn.getAttribute('data-tab');
+                    if (document.querySelector('.tab-btn.active').getAttribute('data-tab') === targetTab) return;
+
+                    isSwitching = true;
+                    // Update buttons & slider
+                    tabButtons.forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    updateSlider(btn);
+
+                    // --- ULTIMATE JUMP PREVENTION ---
+                    const wrapper = document.getElementById('tab-content-wrapper');
+                    const currentHeight = wrapper.offsetHeight;
+                    const scrollPos = window.scrollY;
+
+                    // 1. Lock height and pause scrolling
+                    wrapper.style.height = currentHeight + 'px';
+                    wrapper.style.overflow = 'hidden';
+                    if (window.lenis) window.lenis.stop();
+
+                    // 2. Switch content
+                    tabContents.forEach(content => {
+                        if (content.id === targetTab) {
+                            gsap.set(content, { display: 'block', opacity: 1 });
+                            gsap.from(content.querySelectorAll('.service-list-item'), {
+                                opacity: 0,
+                                y: 30,
+                                stagger: 0.03,
+                                duration: 0.5,
+                                ease: "power2.out",
+                                clearProps: "all"
+                            });
+                        } else {
+                            gsap.set(content, { display: 'none', opacity: 0 });
+                        }
+                    });
+
+                    // 3. Sync and Release
+                    setTimeout(() => {
+                        ScrollTrigger.refresh();
+                        wrapper.style.height = 'auto'; 
+                        wrapper.style.overflow = 'visible';
+                        if (window.lenis) {
+                            window.lenis.start();
+                            window.lenis.scrollTo(scrollPos, { immediate: true });
+                        }
+                        window.scrollTo(0, scrollPos);
+                        isSwitching = false;
+                    }, 250);
                 });
+            });
+
+            // Initial animation for first tab
+            gsap.from('#web .service-list-item', {
+                opacity: 0,
+                y: 30,
+                stagger: 0.05,
+                duration: 0.8,
+                ease: "power2.out",
+                delay: 0.5,
+                clearProps: "all"
+            });
+
+            // Smooth reveal for header
+            gsap.from(".svc-explorer-title", {
+                opacity: 0,
+                y: 50,
+                duration: 1,
+                ease: "power2.out",
+                clearProps: "all"
             });
         });
     </script>

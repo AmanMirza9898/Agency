@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     // 1. Initialize Lenis (Smooth Scroll)
-    const lenis = new Lenis({
+    window.lenis = new Lenis({
         duration: 1.2,
         easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
         orientation: 'vertical',
@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     function raf(time) {
-        lenis.raf(time);
+        window.lenis.raf(time);
         requestAnimationFrame(raf);
     }
     requestAnimationFrame(raf);
@@ -147,21 +147,52 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // 9. Smart Header Color Toggle
+    // 9. Smart Header Color Toggle (Intersection Observer - High Performance)
     const header = document.getElementById('main-header');
-    const darkSections = document.querySelectorAll('section.bg-dark, section.bg-zinc-900, footer.bg-dark');
+    const darkSections = document.querySelectorAll('section.bg-dark, section.bg-zinc-900, footer.bg-dark, .svc-footer-dark, .svc-cta-dark, footer');
     
     if (header && darkSections.length > 0) {
-        darkSections.forEach(section => {
-            ScrollTrigger.create({
-                trigger: section,
-                start: "top 50px", // When the dark section reaches near the top (header area)
-                end: "bottom 50px",
-                onEnter: () => header.classList.add('text-invert'),
-                onLeave: () => header.classList.remove('text-invert'),
-                onEnterBack: () => header.classList.add('text-invert'),
-                onLeaveBack: () => header.classList.remove('text-invert'),
+        const observerOptions = {
+            root: null,
+            rootMargin: '-60px 0px -90% 0px', // Precise detection at the header area
+            threshold: 0
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    header.classList.add('text-invert');
+                } else {
+                    // Only remove if no other dark section is intersecting
+                    const stillOverDark = Array.from(entries).some(e => e.target !== entry.target && e.isIntersecting);
+                    if (!stillOverDark) {
+                        // Double check with all sections
+                        let currentlyOver = false;
+                        darkSections.forEach(s => {
+                            const rect = s.getBoundingClientRect();
+                            if (rect.top <= 80 && rect.bottom >= 0) currentlyOver = true;
+                        });
+                        if (!currentlyOver) header.classList.remove('text-invert');
+                    }
+                }
             });
+        }, observerOptions);
+
+        darkSections.forEach(section => observer.observe(section));
+
+        // Fallback for ScrollTrigger sync
+        ScrollTrigger.create({
+            start: 0,
+            end: "max",
+            onUpdate: () => {
+                let overDark = false;
+                darkSections.forEach(s => {
+                    const rect = s.getBoundingClientRect();
+                    if (rect.top <= 80 && rect.bottom >= 0) overDark = true;
+                });
+                if (overDark) header.classList.add('text-invert');
+                else header.classList.remove('text-invert');
+            }
         });
     }
 
@@ -175,6 +206,12 @@ document.addEventListener('DOMContentLoaded', () => {
     function closeMenu() {
         if (!isMenuOpen) return;
         isMenuOpen = false;
+        
+        // Restore header logo if it wasn't inverted before
+        if (header && !headerOriginalState) {
+            header.classList.remove('text-invert');
+        }
+
         gsap.to(menu, { 
             clipPath: "circle(0% at 95% 5%)", 
             duration: 1.2, 
@@ -185,13 +222,14 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
         menuToggle.innerText = "MENU";
-        lenis.start();
+        window.lenis.start();
     }
 
     if (menu && menuToggle) {
         menuToggle.addEventListener('click', () => {
             if (!isMenuOpen) {
                 isMenuOpen = true;
+                // Force white logo for dark menu
                 if (header) {
                     headerOriginalState = header.classList.contains('text-invert');
                     header.classList.add('text-invert');
@@ -202,12 +240,13 @@ document.addEventListener('DOMContentLoaded', () => {
                     { clipPath: "circle(0% at 95% 5%)" }, 
                     { clipPath: "circle(150% at 95% 5%)", duration: 1.2, ease: "power4.inOut" }
                 );
+                // Animate links
                 gsap.fromTo('.menu-link', 
                     { y: "100%" }, 
                     { y: "0%", duration: 1.2, ease: "power4.out", stagger: 0.15, delay: 0.4 }
                 );
                 menuToggle.innerText = "CLOSE";
-                lenis.stop();
+                window.lenis.stop();
             } else {
                 if (header && !headerOriginalState) {
                     header.classList.remove('text-invert');
@@ -216,7 +255,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        // Close menu when a link is clicked
         menuLinks.forEach(link => {
             link.addEventListener('click', (e) => {
                 const targetId = link.getAttribute('href');
@@ -224,9 +262,9 @@ document.addEventListener('DOMContentLoaded', () => {
                     e.preventDefault();
                     closeMenu();
                     // We use Lenis to scroll to the target section smoothly
-                    lenis.scrollTo(targetId);
+                    window.lenis.scrollTo(targetId);
                 } else if (targetId) {
-                    e.preventDefault(); // Ensure no conflict
+                    e.preventDefault();
                     window.location.href = targetId;
                 }
             });
