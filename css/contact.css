@@ -1,0 +1,15 @@
+/* Contact Page Specific Styles */
+.contact-form input, .contact-form textarea {
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid #eee;
+    padding: 20px 0;
+    width: 100%;
+    font-size: 18px;
+    outline: none;
+    transition: border-color 0.4s ease;
+}
+
+.contact-form input:focus, .contact-form textarea:focus {
+    border-color: #000;
+}

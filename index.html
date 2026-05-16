@@ -30,6 +30,8 @@
 
     <!-- External CSS -->
     <link rel="stylesheet" href="css/style.css">
+    <!-- Page Specific CSS -->
+    <link rel="stylesheet" href="css/index.css">
 </head>
 <body class="bg-primary text-dark">
 
@@ -73,6 +75,14 @@
                     <button class="bg-dark text-light px-10 py-5 rounded-full text-lg font-bold hover:bg-white hover:text-dark transition-all shadow-2xl border border-dark magnetic">Start Your Project</button>
                 </div>
             </div>
+
+            <!-- SVG Filter for Liquid Text (Optimized) -->
+            <svg id="water-filter-svg">
+                <filter id="liquid-wave">
+                    <feTurbulence type="fractalNoise" baseFrequency="0.015" numOctaves="1" result="noise" seed="1" />
+                    <feDisplacementMap in="SourceGraphic" in2="noise" scale="0" xChannelSelector="R" yChannelSelector="G" />
+                </filter>
+            </svg>
             
             <!-- Promise Hand -->
             <img src="Assets/images/promise_hand.png" alt="Promise Hand" class="promise-hand absolute right-[-10%] md:right-0 bottom-[-5%] md:bottom-[5%] w-[250px] md:w-[500px] object-contain z-0 pointer-events-none opacity-40 md:opacity-100" />
@@ -196,14 +206,42 @@
                     <span class="text-6xl md:text-8xl font-black text-white/10 uppercase hover:text-white transition-colors cursor-pointer">Apple</span>
                     <span class="text-6xl md:text-8xl font-black text-white/10 uppercase hover:text-white transition-colors cursor-pointer">Tesla</span>
                     <span class="text-6xl md:text-8xl font-black text-white/10 uppercase hover:text-white transition-colors cursor-pointer">Netflix</span>
-                    <span class="text-6xl md:text-8xl font-black text-white/10 uppercase hover:text-white transition-colors cursor-pointer">Amazon</span>
-                    <span class="text-6xl md:text-8xl font-black text-white/10 uppercase hover:text-white transition-colors cursor-pointer">SpaceX</span>
                 </div>
             </div>
         </section>
 
-        <!-- 5. Industries We Cater (Bento) -->
+        <!-- 3. Work Section (The 3D Stack) -->
+        <section id="work" class="min-h-screen bg-[#e5e5e5] flex items-center justify-center relative overflow-hidden">
+            <div class="work-stack" id="stack-container">
+                <!-- Project Cards (7 Cards for same density as image) -->
+                <div class="work-card"><div class="project-title">OAKLEY</div><img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=2599&auto=format&fit=crop" alt="Oakley"></div>
+                <div class="work-card"><div class="project-title">SAMSUNG</div><img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=2670&auto=format&fit=crop" alt="Samsung"></div>
+                <div class="work-card"><div class="project-title">RAY-BAN</div><img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=2564&auto=format&fit=crop" alt="Ray-Ban"></div>
+                <div class="work-card"><div class="project-title">APPLE</div><img src="https://images.unsplash.com/photo-1491933382434-500287f9b54b?q=80&w=2564&auto=format&fit=crop" alt="Apple"></div>
+                <div class="work-card"><div class="project-title">SONY</div><img src="https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?q=80&w=2564&auto=format&fit=crop" alt="Sony"></div>
+                <div class="work-card"><div class="project-title">NIKON</div><img src="https://images.unsplash.com/photo-1516035069371-29a1b244cc32?q=80&w=2564&auto=format&fit=crop" alt="Nikon"></div>
+                <div class="work-card"><div class="project-title">CANON</div><img src="https://images.unsplash.com/photo-1512790182412-b19e6d62bc39?q=80&w=2564&auto=format&fit=crop" alt="Canon"></div>
+                <div class="plus-icon">+</div>
+            </div>
+        </section>
 
+        <!-- 4. Services Section -->
+        <section id="services" class="py-32 bg-dark text-light overflow-hidden">
+            <div class="container mx-auto px-6">
+                <div class="flex flex-col md:flex-row justify-between items-start mb-24 gap-12">
+                    <div class="md:w-1/2">
+                        <h2 class="text-7xl md:text-8xl font-black tracking-tighter uppercase leading-none reveal-text">Our<br/><span class="text-primary italic">Expertise</span></h2>
+                    </div>
+                    <div class="md:w-1/3 mt-8 md:mt-0">
+                        <p class="text-xl text-light/60 font-medium leading-relaxed">From digital strategy to visual storytelling, we bridge the gap between complex technology and human emotion.</p>
+                    </div>
+                </div>
+                <!-- Services Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- Service items go here... -->
+                </div>
+            </div>
+        </section>
 
         <!-- 6. About Us -->
         <section id="about" class="section-padding bg-primary">
@@ -448,11 +486,92 @@
     </main>
 
     <!-- GSAP & Lenis CDNs -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.ripples/0.5.3/jquery.ripples.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
     <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
+    <script src="https://www.curtainsjs.com/build/curtains.min.js"></script>
 
     <!-- External JS -->
     <script src="js/script.js"></script>
+    <!-- Page Specific Script -->
+    <script src="js/index.js"></script>
+
+    <!-- Shaders for Full Liquid Effect -->
+    <script id="liquid-vs" type="x-shader/x-vertex">
+        precision mediump float;
+        attribute vec3 aVertexPosition;
+        attribute vec2 aTextureCoord;
+        uniform mat4 uMVMatrix;
+        uniform mat4 uPMatrix;
+        varying vec2 vTextureCoord;
+        void main() {
+            gl_Position = uPMatrix * uMVMatrix * vec4(aVertexPosition, 1.0);
+            vTextureCoord = aTextureCoord;
+        }
+    </script>
+    <script id="liquid-fs" type="x-shader/x-fragment">
+        precision mediump float;
+        varying vec2 vTextureCoord;
+        uniform float uTime;
+        uniform vec2 uMouse;
+
+        void main() {
+            vec2 st = vTextureCoord;
+            
+            // Interactive Liquid Flow Logic
+            float dist = distance(st, uMouse * 0.5 + 0.5);
+            float ripple = sin(dist * 10.0 - uTime * 0.05) * 0.03;
+            
+            // Distort coordinates
+            vec2 distortedTV = st + vec2(ripple);
+            
+            // For true content distortion, we would need to map the HTML content 
+            // as a texture, but since we are using Curtains on a container:
+            // We'll apply a subtle wave to the entire plane.
+            gl_FragColor = vec4(0.0, 0.0, 0.0, 0.0); // Keep it transparent for content visibility
+        }
+    </script>
+
+    <!-- Shaders for Curtains.js -->
+    <script id="ripple-vs" type="x-shader/x-vertex">
+        precision mediump float;
+        attribute vec3 aVertexPosition;
+        attribute vec2 aTextureCoord;
+        uniform mat4 uMVMatrix;
+        uniform mat4 uPMatrix;
+        varying vec2 vTextureCoord;
+        void main() {
+            gl_Position = uPMatrix * uMVMatrix * vec4(aVertexPosition, 1.0);
+            vTextureCoord = aTextureCoord;
+        }
+    </script>
+    <script id="ripple-fs" type="x-shader/x-fragment">
+        precision mediump float;
+        varying vec2 vTextureCoord;
+        uniform float uTime;
+        uniform vec2 uMouse;
+        uniform vec2 uRes;
+        uniform float uRadius;
+        uniform float uStrength;
+        
+        void main() {
+            vec2 st = vTextureCoord;
+            vec2 mouse = uMouse * 0.5 + 0.5;
+            float dist = distance(st, mouse);
+            
+            vec2 distortion = vec2(0.0);
+            if(dist < uRadius) {
+                float force = (uRadius - dist) / uRadius;
+                distortion = (st - mouse) * force * uStrength * sin(dist * 20.0 - uTime * 0.1);
+            }
+            
+            // This is a simplified "liquid lens" shader
+            // For real text distortion, we'd need to render text to texture first
+            // But we'll use a simpler displacement on the plane itself
+            gl_FragColor = vec4(0.0, 0.0, 0.0, 0.0); 
+        }
+    </script>
 </body>
 </html>

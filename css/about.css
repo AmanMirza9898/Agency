@@ -1,0 +1,17 @@
+/* About Page Specific Styles */
+.text-stroke-dark {
+    -webkit-text-stroke: 1px #000;
+    color: transparent;
+}
+
+.hero-main {
+    line-height: 0.8;
+}
+
+.team-card {
+    transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.team-card:hover {
+    transform: translateY(-10px);
+}

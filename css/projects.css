@@ -1,0 +1,16 @@
+/* Projects Page Specific Styles */
+.project-title {
+    font-size: clamp(40px, 8vw, 120px);
+    font-weight: 900;
+    line-height: 0.9;
+    letter-spacing: -4px;
+}
+
+.project-item {
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+    transition: all 0.5s ease;
+}
+
+.project-item:hover {
+    padding-left: 20px;
+}

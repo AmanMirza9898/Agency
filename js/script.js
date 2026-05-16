@@ -74,11 +74,13 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // 4. Hero Reveal Animation
-    const heroTl = gsap.timeline({ defaults: { ease: "power4.out" } });
-    heroTl.from(".hero-title", { y: 150, opacity: 0, duration: 1.5, delay: 0.5 })
-          .from(".hero-desc", { y: 50, opacity: 0, duration: 1 }, "-=1")
-          .from(".hero-cta", { scale: 0.8, opacity: 0, duration: 1 }, "-=0.8");
+    // 4. Hero Reveal Animation (Safety check for existence)
+    if (document.querySelector('.hero-title')) {
+        const heroTl = gsap.timeline({ defaults: { ease: "power4.out" } });
+        heroTl.from(".hero-title", { y: 150, opacity: 0, duration: 1.5, delay: 0.5 })
+              .from(".hero-desc", { y: 50, opacity: 0, duration: 1 }, "-=1")
+              .from(".hero-cta", { scale: 0.8, opacity: 0, duration: 1 }, "-=0.8");
+    }
 
     // 5. Card Stacking (Services)
     const cards = document.querySelectorAll('.stack-card');
@@ -253,7 +255,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
                 closeMenu();
             }
-        });
+        }); 
 
         menuLinks.forEach(link => {
             link.addEventListener('click', (e) => {

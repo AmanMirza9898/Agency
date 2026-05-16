@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Projects | ICB - Premium Creative Agency</title>
+    <title>Work | ICB - Premium Creative Agency</title>
     <meta name="description" content="ICB Projects - Featured Work and Case Studies.">
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -23,31 +23,135 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <!-- External CSS -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <!-- Page Specific CSS -->
+    <link rel="stylesheet" href="css/projects.css">
     <link rel="stylesheet" href="css/style.css">
     <style>
-        .project-card-wrapper {
-            perspective: 1000px;
+        body { font-family: 'Outfit', sans-serif; background-color: #0a0a0a; color: #fff; cursor: none; }
+        
+        .work-hero-text {
+            font-size: clamp(3rem, 15vw, 15rem);
+            line-height: 0.8;
+            font-weight: 900;
+            letter-spacing: -0.04em;
         }
-        .project-image-container {
-            transition: transform 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+
+        .project-card {
+            position: relative;
+            width: 100%;
+            margin-bottom: 20vh;
         }
-        .project-card:hover .project-image-container {
-            transform: scale(1.05) rotateX(2deg) rotateY(-2deg);
+
+        .project-img-wrapper {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 16/10;
+            overflow: hidden;
+            border-radius: 20px;
+            cursor: pointer;
         }
-        .project-details {
-            transform: translateY(20px);
+
+        .project-img-wrapper img {
+            width: 100%;
+            height: 120%;
+            object-fit: cover;
+            transform: translateY(-10%);
+        }
+
+        .project-info {
+            margin-top: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+
+        .project-title {
+            font-size: clamp(1.5rem, 4vw, 4rem);
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: -0.02em;
+            line-height: 1;
+        }
+
+        .project-meta {
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: rgba(255,255,255,0.4);
+            font-weight: 600;
+        }
+
+        /* Filter Styles */
+        .filter-btn {
+            padding: 12px 24px;
+            border-radius: 100px;
+            border: 1px solid rgba(255,255,255,0.1);
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            transition: all 0.4s ease;
+            color: rgba(255,255,255,0.5);
+        }
+
+        .filter-btn.active {
+            background: #fff;
+            color: #000;
+            border-color: #fff;
+        }
+
+        /* Hover Overlay */
+        .project-hover-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0,0,0,0.4);
             opacity: 0;
-            transition: all 0.5s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.5s ease;
+            backdrop-filter: blur(10px);
         }
-        .project-card:hover .project-details {
-            transform: translateY(0);
+
+        .project-card:hover .project-hover-overlay {
             opacity: 1;
         }
+
+        .view-btn {
+            width: 120px;
+            height: 120px;
+            background: #fff;
+            color: #000;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 14px;
+            text-transform: uppercase;
+            transform: scale(0.5);
+            opacity: 0;
+            transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        .project-card:hover .view-btn {
+            transform: scale(1);
+            opacity: 1;
+        }
+
+        /* Sticky Header Tweaks for Work Page */
+        #main-header {
+            mix-blend-mode: difference;
+        }
+        #main-header.text-invert {
+            color: #fff;
+        }
+        #main-header img { filter: invert(1); }
+
     </style>
 </head>
-<body class="bg-light text-dark">
+<body class="bg-dark text-light">
     <!-- Custom Cursor -->
     <div id="cursor"></div>
     <div id="cursor-follower"></div>
@@ -61,7 +165,7 @@
         </div>
     </header>
 
-    <!-- Fullscreen Menu -->
+    <!-- Fullscreen Menu (Same as index) -->
     <div id="menu" class="fixed inset-0 z-[90] bg-dark text-light hidden flex-col justify-start pt-32 md:pt-40 items-start text-left px-6 md:px-24">
         <div class="flex flex-col gap-2 md:gap-4">
             <div class="overflow-hidden"><a href="index.html" class="menu-link block text-5xl md:text-[90px] font-black tracking-tighter leading-[0.85] pr-4 hover-stroke transition-all">HOME</a></div>
@@ -74,174 +178,144 @@
     </div>
 
     <main>
-        <!-- Hero Section -->
-        <section class="relative min-h-[80vh] flex flex-col justify-center items-center px-6 text-center overflow-hidden bg-light">
-            <div class="absolute inset-0 bg-gradient-to-b from-primary/5 to-transparent pointer-events-none"></div>
-            <div class="relative z-10">
-                <span class="font-bold tracking-[0.5em] uppercase text-[10px] text-primary mb-6 block hero-sub">Case Studies</span>
-                <h1 class="text-[12vw] font-black tracking-tighter leading-[0.8] uppercase hero-main text-dark">
+        <!-- Cinematic Hero Section -->
+        <section class="min-h-screen flex flex-col justify-end px-6 md:px-12 pb-20 relative overflow-hidden">
+            <div class="absolute inset-0 bg-gradient-to-t from-dark via-dark/80 to-transparent z-10"></div>
+            
+            <!-- Floating Background Elements -->
+            <div class="absolute top-20 right-[10%] w-[40vw] h-[40vw] bg-primary/20 rounded-full blur-[150px] opacity-30 animate-pulse"></div>
+
+            <div class="relative z-20">
+                <p class="text-sm font-bold tracking-[0.4em] uppercase mb-10 opacity-60 hero-sub">Case Studies 2024—2026</p>
+                <h1 class="work-hero-text">
                     SELECTED<br/>
-                    <span class="text-stroke-dark">WORKS.</span>
+                    <span class="text-stroke">WORKS.</span>
                 </h1>
+            </div>
+
+            <!-- Scroll Indicator -->
+            <div class="absolute bottom-10 right-12 z-20 flex flex-col items-center gap-4">
+                <span class="text-[10px] font-bold uppercase tracking-widest vertical-text opacity-40">Scroll to Explore</span>
+                <div class="w-[1px] h-20 bg-gradient-to-b from-primary to-transparent"></div>
             </div>
         </section>
 
-        <!-- Projects Grid -->
-        <section class="py-32 px-6 bg-light">
-            <div class="max-w-7xl mx-auto">
-                <!-- Filter Bar -->
-                <div class="flex flex-wrap gap-8 mb-24 reveal border-b border-dark/10 pb-8">
-                    <button class="text-sm font-bold uppercase tracking-widest text-primary">All Projects</button>
-                    <button class="text-sm font-bold uppercase tracking-widest text-zinc-400 hover:text-dark transition-colors">Branding</button>
-                    <button class="text-sm font-bold uppercase tracking-widest text-zinc-400 hover:text-dark transition-colors">Digital</button>
-                    <button class="text-sm font-bold uppercase tracking-widest text-zinc-400 hover:text-dark transition-colors">Development</button>
-                </div>
+        <!-- Filter Bar -->
+        <section class="py-20 px-6 md:px-12 bg-dark">
+            <div class="flex flex-wrap gap-4 items-center justify-start md:justify-center">
+                <button class="filter-btn active">All Projects</button>
+                <button class="filter-btn">Branding</button>
+                <button class="filter-btn">E-Commerce</button>
+                <button class="filter-btn">Mobile Apps</button>
+                <button class="filter-btn">Digital Strategy</button>
+            </div>
+        </section>
 
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-x-20 gap-y-40">
-                    <!-- Project 1 -->
-                    <div class="project-card reveal group">
-                        <div class="project-card-wrapper">
-                            <div class="project-image-container relative rounded-[3rem] overflow-hidden aspect-[4/5] bg-primary/20">
-                                <img src="Assets/images/our-work-2.png" alt="Portable Display" class="w-full h-full object-cover">
-                                <div class="absolute inset-0 bg-primary/10 group-hover:bg-transparent transition-colors duration-700"></div>
-                                <div class="absolute bottom-12 left-12 project-details">
-                                    <span class="bg-primary text-dark px-4 py-2 rounded-full text-[10px] font-black uppercase tracking-widest">Branding</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="mt-10">
-                            <h3 class="text-4xl md:text-5xl font-black uppercase tracking-tighter group-hover:text-primary transition-colors">Portable Display</h3>
-                            <div class="mt-4 flex justify-between items-center">
-                                <p class="text-zinc-500 text-lg">Next-gen hardware identity.</p>
-                                <span class="text-xs font-bold uppercase tracking-widest opacity-30">2025</span>
-                            </div>
+        <!-- Projects Showcase -->
+        <section id="work-grid" class="pb-40 px-6 md:px-12">
+            <div class="max-w-[1400px] mx-auto">
+                
+                <!-- Project 1: Featured (Large) -->
+                <div class="project-card featured-project" data-category="Branding">
+                    <div class="project-img-wrapper">
+                        <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?q=80&w=2000&auto=format&fit=crop" alt="Premium Branding" class="parallax-img">
+                        <div class="project-hover-overlay">
+                            <div class="view-btn">View Case</div>
                         </div>
                     </div>
+                    <div class="project-info">
+                        <div>
+                            <h3 class="project-title">The Artisan Hub</h3>
+                            <p class="project-meta">Branding • Identity • 2026</p>
+                        </div>
+                        <div class="hidden md:block max-w-sm text-right">
+                            <p class="text-white/40 text-sm leading-relaxed">Defining the future of handmade luxury through a minimalist visual language and immersive brand storytelling.</p>
+                        </div>
+                    </div>
+                </div>
 
-                    <!-- Project 2 (Staggered) -->
-                    <div class="project-card reveal md:mt-40 group">
-                        <div class="project-card-wrapper">
-                            <div class="project-image-container relative rounded-[3rem] overflow-hidden aspect-[4/5] bg-primary/20">
-                                <img src="Assets/images/our-work-3.png" alt="App Development" class="w-full h-full object-cover">
-                                <div class="absolute inset-0 bg-primary/10 group-hover:bg-transparent transition-colors duration-700"></div>
-                                <div class="absolute bottom-12 left-12 project-details">
-                                    <span class="bg-primary text-dark px-4 py-2 rounded-full text-[10px] font-black uppercase tracking-widest">Digital</span>
-                                </div>
+                <!-- Project 2 & 3 Grid (Side by Side) -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-x-20 md:gap-x-40">
+                    
+                    <!-- Project 2 -->
+                    <div class="project-card" data-category="E-Commerce">
+                        <div class="project-img-wrapper aspect-[4/5]">
+                            <img src="https://images.unsplash.com/photo-1556742044-3c52d6e88c02?q=80&w=2000&auto=format&fit=crop" alt="E-Commerce" class="parallax-img">
+                            <div class="project-hover-overlay">
+                                <div class="view-btn">Explore</div>
                             </div>
                         </div>
-                        <div class="mt-10">
-                            <h3 class="text-4xl md:text-5xl font-black uppercase tracking-tighter group-hover:text-primary transition-colors">FinApp NextGen</h3>
-                            <div class="mt-4 flex justify-between items-center">
-                                <p class="text-zinc-500 text-lg">Mobile banking redefined.</p>
-                                <span class="text-xs font-bold uppercase tracking-widest opacity-30">2025</span>
+                        <div class="project-info">
+                            <div>
+                                <h3 class="project-title">Luxe Cart</h3>
+                                <p class="project-meta">E-Commerce • 2025</p>
                             </div>
                         </div>
                     </div>
 
                     <!-- Project 3 -->
-                    <div class="project-card reveal group">
-                        <div class="project-card-wrapper">
-                            <div class="project-image-container relative rounded-[3rem] overflow-hidden aspect-[4/5] bg-primary/20">
-                                <img src="Assets/images/our-work-4.png" alt="Website Development" class="w-full h-full object-cover">
-                                <div class="absolute inset-0 bg-primary/10 group-hover:bg-transparent transition-colors duration-700"></div>
-                                <div class="absolute bottom-12 left-12 project-details">
-                                    <span class="bg-primary text-dark px-4 py-2 rounded-full text-[10px] font-black uppercase tracking-widest">Web Dev</span>
-                                </div>
+                    <div class="project-card md:mt-60" data-category="Mobile Apps">
+                        <div class="project-img-wrapper aspect-[4/5]">
+                            <img src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?q=80&w=2000&auto=format&fit=crop" alt="Mobile App" class="parallax-img">
+                            <div class="project-hover-overlay">
+                                <div class="view-btn">Launch</div>
                             </div>
                         </div>
-                        <div class="mt-10">
-                            <h3 class="text-4xl md:text-5xl font-black uppercase tracking-tighter group-hover:text-primary transition-colors">Aura Studios</h3>
-                            <div class="mt-4 flex justify-between items-center">
-                                <p class="text-zinc-500 text-lg">Immersive WebGL experience.</p>
-                                <span class="text-xs font-bold uppercase tracking-widest opacity-30">2024</span>
+                        <div class="project-info">
+                            <div>
+                                <h3 class="project-title">FinApp Pro</h3>
+                                <p class="project-meta">UI/UX • Mobile • 2025</p>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Project 4 (Staggered) -->
-                    <div class="project-card reveal md:mt-40 group">
-                        <div class="project-card-wrapper">
-                            <div class="project-image-container relative rounded-[3rem] overflow-hidden aspect-[4/5] bg-primary/20">
-                                <img src="Assets/images/our-work-5.png" alt="Packaging" class="w-full h-full object-cover">
-                                <div class="absolute inset-0 bg-primary/10 group-hover:bg-transparent transition-colors duration-700"></div>
-                                <div class="absolute bottom-12 left-12 project-details">
-                                    <span class="bg-primary text-dark px-4 py-2 rounded-full text-[10px] font-black uppercase tracking-widest">Branding</span>
-                                </div>
-                            </div>
+                </div>
+
+                <!-- Project 4: Large Horizontal -->
+                <div class="project-card" data-category="Digital Strategy">
+                    <div class="project-img-wrapper aspect-[21/9]">
+                        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2000&auto=format&fit=crop" alt="Strategy" class="parallax-img">
+                        <div class="project-hover-overlay">
+                            <div class="view-btn">Deep Dive</div>
                         </div>
-                        <div class="mt-10">
-                            <h3 class="text-4xl md:text-5xl font-black uppercase tracking-tighter group-hover:text-primary transition-colors">Brew & Co.</h3>
-                            <div class="mt-4 flex justify-between items-center">
-                                <p class="text-zinc-500 text-lg">Premium coffee branding.</p>
-                                <span class="text-xs font-bold uppercase tracking-widest opacity-30">2024</span>
-                            </div>
+                    </div>
+                    <div class="project-info">
+                        <div>
+                            <h3 class="project-title">Global Reach</h3>
+                            <p class="project-meta">Strategy • Digital • 2024</p>
+                        </div>
+                        <div class="hidden md:block max-w-sm text-right">
+                            <p class="text-white/40 text-sm leading-relaxed">A data-driven digital expansion for a Fortune 500 company, resulting in a 400% increase in cross-border engagement.</p>
                         </div>
                     </div>
                 </div>
+
             </div>
         </section>
 
+        <!-- Next Page Section -->
+        <section class="py-40 px-6 border-t border-white/5 text-center">
+            <h2 class="text-[8vw] font-black uppercase tracking-tighter text-white/10 hover:text-primary transition-colors cursor-pointer mb-8">Next: Services</h2>
+            <p class="text-sm font-bold uppercase tracking-[0.5em] opacity-40">Let's create something together</p>
+        </section>
 
     </main>
 
-    <!-- Footer -->
+    <!-- Footer (Same as index) -->
     <footer class="bg-dark text-light pt-20 pb-10 px-6 md:px-12 relative overflow-hidden border-t border-white/5">
-        <div class="max-w-7xl mx-auto">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-16 mb-20">
-                <!-- Col 1: Logo & Newsletter -->
-                <div class="space-y-8">
-                    <img src="Assets/images/ICB-white.png" alt="ICB Logo" class="h-12">
-                    <p class="text-zinc-400 text-sm max-w-xs">A Gurgaon-based design and development agency</p>
-                    <div class="space-y-4">
-                        <h4 class="text-xl font-bold">Newsletter</h4>
-                        <div class="relative max-w-sm">
-                            <input type="email" placeholder="Enter your email" class="w-full bg-zinc-900 border border-white/10 rounded-full py-4 px-6 outline-none focus:border-primary transition-colors text-sm">
-                            <button class="absolute right-2 top-1/2 -translate-y-1/2 bg-primary text-dark w-10 h-10 rounded-full flex items-center justify-center hover:scale-110 transition-transform">
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Col 2: Useful Links -->
-                <div class="md:border-l md:border-white/10 md:pl-16 space-y-8">
-                    <h4 class="text-2xl font-bold">Useful Links</h4>
-                    <div class="grid grid-cols-2 gap-y-4 gap-x-8 text-zinc-400 font-medium">
-                        <a href="index.html" class="hover:text-white transition-colors">Home</a>
-                        <a href="services.html" class="hover:text-white transition-colors">Services</a>
-                        <a href="projects.html" class="hover:text-white transition-colors">Projects</a>
-                        <a href="about.html" class="hover:text-white transition-colors">About</a>
-                        <a href="contact.html" class="hover:text-white transition-colors">Contact</a>
-                        <a href="#" class="hover:text-white transition-colors">Blogs</a>
-                    </div>
-                    <div class="flex flex-wrap gap-3 pt-4">
-                        <a href="#" class="px-6 py-2 border border-white/10 rounded-full text-[10px] font-bold uppercase tracking-widest hover:bg-white hover:text-dark transition-all">Linkedin</a>
-                        <a href="#" class="px-6 py-2 border border-white/10 rounded-full text-[10px] font-bold uppercase tracking-widest hover:bg-white hover:text-dark transition-all">Facebook</a>
-                        <a href="#" class="px-6 py-2 border border-white/10 rounded-full text-[10px] font-bold uppercase tracking-widest hover:bg-white hover:text-dark transition-all">Instagram</a>
-                    </div>
-                </div>
-
-                <!-- Col 3: Contact Info -->
-                <div class="md:border-l md:border-white/10 md:pl-16 space-y-8">
-                    <h4 class="text-2xl font-bold">Contact</h4>
-                    <div class="space-y-6 text-zinc-400 text-sm leading-relaxed">
-                        <p>716 - Ocus Quantum, Sector 51, Gurgaon,<br>Haryana India - 122003</p>
-                        <div class="pt-4 border-t border-white/5 space-y-4">
-                            <p class="font-bold text-white">P: +91 84489 97129</p>
-                            <p class="font-bold text-white uppercase">E: CONTACT@ICREATEBRAND.COM</p>
-                        </div>
-                    </div>
-                </div>
+        <div class="max-w-7xl mx-auto text-center md:text-left">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-12 mb-20">
+                <h2 class="text-4xl md:text-7xl font-black tracking-tighter">HAVE A PROJECT?<br/><span class="text-primary italic">LET'S TALK.</span></h2>
+                <a href="contact.html" class="bg-white text-dark px-10 py-6 rounded-full font-black uppercase tracking-widest hover:scale-105 transition-transform">Get in Touch</a>
             </div>
-
-            <!-- Bottom Bar -->
-            <div class="pt-8 border-t border-white/10 flex flex-col md:row justify-between items-center gap-6">
-                <div class="flex gap-6 text-[11px] font-bold uppercase tracking-widest opacity-60">
-                    <a href="#" class="hover:text-primary transition-colors">Terms of Use</a>
-                    <span>|</span>
-                    <a href="#" class="hover:text-primary transition-colors">Privacy Policy</a>
+            
+            <div class="pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-6 text-[10px] font-bold uppercase tracking-widest opacity-40">
+                <p>© 2026 icreatebrand.com - All Rights Reserved</p>
+                <div class="flex gap-8">
+                    <a href="#">Instagram</a>
+                    <a href="#">LinkedIn</a>
+                    <a href="#">Behance</a>
                 </div>
-                <span class="text-[11px] font-bold uppercase tracking-widest opacity-40">© 2026 icreatebrand.com - All Rights Reserved</span>
             </div>
         </div>
     </footer>
@@ -253,43 +327,7 @@
 
     <!-- External JS -->
     <script src="js/script.js"></script>
-    <script>
-        // Hero Reveal
-        window.addEventListener('load', () => {
-            gsap.from(".hero-sub", { opacity: 0, y: 50, duration: 1, delay: 0.5 });
-            gsap.from(".hero-main", { opacity: 0, y: 100, duration: 1.5, delay: 0.7, ease: "power4.out" });
-            
-            ScrollTrigger.refresh();
-        });
-
-        // Scroll Reveals
-        gsap.utils.toArray('.reveal').forEach(el => {
-            gsap.from(el, {
-                y: 100,
-                opacity: 0,
-                duration: 1.2,
-                ease: "power4.out",
-                scrollTrigger: {
-                    trigger: el,
-                    start: "top 95%",
-                    toggleActions: "play none none none"
-                }
-            });
-        });
-
-        // Project Image Parallax
-        gsap.utils.toArray('.project-image-container img').forEach(img => {
-            gsap.to(img, {
-                y: -50,
-                ease: "none",
-                scrollTrigger: {
-                    trigger: img.parentElement,
-                    start: "top bottom",
-                    end: "bottom top",
-                    scrub: true
-                }
-            });
-        });
-    </script>
+    <!-- Page Specific Script -->
+    <script src="js/projects.js"></script>
 </body>
 </html>
