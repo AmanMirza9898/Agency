@@ -60,7 +60,7 @@
 
     <main>
         <!-- SERVICE ENVELOPE SECTION -->
-        <section id="service-delivery" class="min-h-[500vh] bg-white relative overflow-hidden">
+        <section id="service-delivery" class="min-h-screen bg-white relative overflow-hidden">
             <!-- Dedicated Parallax Background -->
             <div class="svc-parallax-bg absolute inset-0 pointer-events-none opacity-50"></div>
 
@@ -83,15 +83,15 @@
                     <!-- Cards (Inside Envelope) -->
                     <div class="envelope-cards-container absolute left-1/2 bottom-4 -translate-x-1/2 w-[90vw] max-w-[320px] h-[340px] md:h-[400px] flex flex-col items-center z-10">
                         <!-- Card 1 -->
-                        <div class="service-card-v2" data-service="web">
-                            <div class="card-inner overflow-hidden p-8 flex flex-col justify-between h-full bg-[#FDFDFD]">
+                        <div class="service-card-v2 hover-cursor-explore" data-service="web">
+                            <div class="card-inner overflow-hidden p-8 flex flex-col justify-between h-full bg-[#FDFDFD] backdrop-blur-md border border-white/20 shadow-[0_8px_32px_rgba(0,0,0,0.05)] rounded-xl">
                                 <div class="font-thunder text-[250px] absolute -right-16 -top-24 opacity-[0.03] text-black leading-none pointer-events-none select-none">01</div>
                                 <div class="card-header relative z-10">
                                     <span class="text-xs font-bold tracking-[0.4em] uppercase opacity-40 mb-2 block">Service</span>
-                                    <h3 class="font-thunder text-6xl tracking-tighter leading-none">WEB<br/>DESIGN</h3>
+                                    <h3 class="font-thunder text-6xl tracking-tighter leading-none">WEB<br/>DEV</h3>
                                 </div>
                                 <div class="card-body relative z-10">
-                                    <p class="text-sm opacity-60 text-[#1A1A1A]">High-end aesthetic websites that convert visitors into loyal customers.</p>
+                                    <p class="text-sm opacity-60 text-[#1A1A1A]">High-end, performance-driven websites that convert visitors into loyal customers.</p>
                                     <div class="mt-6 flex justify-end">
                                         <div class="w-10 h-10 rounded-full border border-black/10 flex items-center justify-center opacity-50"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
                                     </div>
@@ -99,15 +99,15 @@
                             </div>
                         </div>
                         <!-- Card 2 -->
-                        <div class="service-card-v2" data-service="software">
-                            <div class="card-inner overflow-hidden p-8 flex flex-col justify-between h-full bg-[#FDFDFD]">
+                        <div class="service-card-v2 hover-cursor-explore" data-service="software">
+                            <div class="card-inner overflow-hidden p-8 flex flex-col justify-between h-full bg-[#FDFDFD] backdrop-blur-md border border-white/20 shadow-[0_8px_32px_rgba(0,0,0,0.05)] rounded-xl">
                                 <div class="font-thunder text-[250px] absolute -right-16 -top-24 opacity-[0.03] text-black leading-none pointer-events-none select-none">02</div>
                                 <div class="card-header relative z-10">
                                     <span class="text-xs font-bold tracking-[0.4em] uppercase opacity-40 mb-2 block">Service</span>
-                                    <h3 class="font-thunder text-6xl tracking-tighter leading-none">SOFTWARE<br/>DEV</h3>
+                                    <h3 class="font-thunder text-6xl tracking-tighter leading-none">APP<br/>DEV</h3>
                                 </div>
                                 <div class="card-body relative z-10">
-                                    <p class="text-sm opacity-60 text-[#1A1A1A]">Custom built scalable software solutions for web and mobile platforms.</p>
+                                    <p class="text-sm opacity-60 text-[#1A1A1A]">Custom built, scalable native and hybrid mobile applications.</p>
                                     <div class="mt-6 flex justify-end">
                                         <div class="w-10 h-10 rounded-full border border-black/10 flex items-center justify-center opacity-50"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
                                     </div>
@@ -115,15 +115,15 @@
                             </div>
                         </div>
                         <!-- Card 3 -->
-                        <div class="service-card-v2" data-service="branding">
-                            <div class="card-inner overflow-hidden p-8 flex flex-col justify-between h-full bg-[#FDFDFD]">
+                        <div class="service-card-v2 hover-cursor-explore" data-service="branding">
+                            <div class="card-inner overflow-hidden p-8 flex flex-col justify-between h-full bg-[#FDFDFD] backdrop-blur-md border border-white/20 shadow-[0_8px_32px_rgba(0,0,0,0.05)] rounded-xl">
                                 <div class="font-thunder text-[250px] absolute -right-16 -top-24 opacity-[0.03] text-black leading-none pointer-events-none select-none">03</div>
                                 <div class="card-header relative z-10">
                                     <span class="text-xs font-bold tracking-[0.4em] uppercase opacity-40 mb-2 block">Service</span>
-                                    <h3 class="font-thunder text-6xl tracking-tighter leading-none">BRAND<br/>STRATEGY</h3>
+                                    <h3 class="font-thunder text-6xl tracking-tighter leading-none">GRAPHIC<br/>DESIGN</h3>
                                 </div>
                                 <div class="card-body relative z-10">
-                                    <p class="text-sm opacity-60 text-[#1A1A1A]">Iconic visual identities that resonate deeply with your target audience.</p>
+                                    <p class="text-sm opacity-60 text-[#1A1A1A]">Iconic visual identities, packaging, and brand collateral.</p>
                                     <div class="mt-6 flex justify-end">
                                         <div class="w-10 h-10 rounded-full border border-black/10 flex items-center justify-center opacity-50"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
                                     </div>
@@ -131,15 +131,16 @@
                             </div>
                         </div>
                         <!-- Card 4 -->
-                        <div class="service-card-v2" data-service="marketing">
-                            <div class="card-inner overflow-hidden p-8 flex flex-col justify-between h-full bg-[#1A1A1A] text-[#FDFDFD]">
-                                <div class="font-thunder text-[250px] absolute -right-16 -top-24 opacity-5 text-white leading-none pointer-events-none select-none">04</div>
+                        <div class="service-card-v2 hover-cursor-explore" data-service="marketing">
+                            <div class="card-inner overflow-hidden p-8 flex flex-col justify-between h-full bg-[#1A1A1A] text-[#FDFDFD] backdrop-blur-md shadow-[0_8px_32px_rgba(255,184,0,0.1)] rounded-xl relative">
+                                <div class="absolute inset-0 bg-gradient-to-br from-[#1A1A1A] to-[#2A2A2A] pointer-events-none"></div>
+                                <div class="font-thunder text-[250px] absolute -right-16 -top-24 opacity-5 text-white leading-none pointer-events-none select-none z-0">04</div>
                                 <div class="card-header relative z-10">
                                     <span class="text-xs font-bold tracking-[0.4em] uppercase opacity-40 mb-2 block text-white">Service</span>
-                                    <h3 class="font-thunder text-6xl tracking-tighter leading-none text-white">DIGITAL<br/>MARKETING</h3>
+                                    <h3 class="font-thunder text-6xl tracking-tighter leading-none text-white">SEO &<br/>MARKETING</h3>
                                 </div>
                                 <div class="card-body relative z-10">
-                                    <p class="text-sm opacity-60 text-white">Data-driven marketing strategies engineered to hyper-grow your online presence.</p>
+                                    <p class="text-sm opacity-60 text-white">Data-driven marketing and SEO strategies to dominate search results.</p>
                                     <div class="mt-6 flex justify-end">
                                         <div class="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center opacity-50"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
                                     </div>
@@ -147,8 +148,8 @@
                             </div>
                         </div>
                         <!-- Card 5 -->
-                        <div class="service-card-v2" data-service="uiux">
-                            <div class="card-inner overflow-hidden p-8 flex flex-col justify-between h-full bg-[#FDFDFD]">
+                        <div class="service-card-v2 hover-cursor-explore" data-service="uiux">
+                            <div class="card-inner overflow-hidden p-8 flex flex-col justify-between h-full bg-[#FDFDFD] backdrop-blur-md border border-white/20 shadow-[0_8px_32px_rgba(0,0,0,0.05)] rounded-xl">
                                 <div class="font-thunder text-[250px] absolute -right-16 -top-24 opacity-[0.03] text-black leading-none pointer-events-none select-none">05</div>
                                 <div class="card-header relative z-10">
                                     <span class="text-xs font-bold tracking-[0.4em] uppercase opacity-40 mb-2 block">Service</span>
@@ -163,15 +164,15 @@
                             </div>
                         </div>
                         <!-- Card 6 -->
-                        <div class="service-card-v2" data-service="content">
-                            <div class="card-inner overflow-hidden p-8 flex flex-col justify-between h-full bg-[#FDFDFD]">
+                        <div class="service-card-v2 hover-cursor-explore" data-service="content">
+                            <div class="card-inner overflow-hidden p-8 flex flex-col justify-between h-full bg-[#FDFDFD] backdrop-blur-md border border-white/20 shadow-[0_8px_32px_rgba(0,0,0,0.05)] rounded-xl">
                                 <div class="font-thunder text-[250px] absolute -right-16 -top-24 opacity-[0.03] text-black leading-none pointer-events-none select-none">06</div>
                                 <div class="card-header relative z-10">
                                     <span class="text-xs font-bold tracking-[0.4em] uppercase opacity-40 mb-2 block">Service</span>
-                                    <h3 class="font-thunder text-6xl tracking-tighter leading-none">CONTENT<br/>STRATEGY</h3>
+                                    <h3 class="font-thunder text-6xl tracking-tighter leading-none">SMM &<br/>CONTENT</h3>
                                 </div>
                                 <div class="card-body relative z-10">
-                                    <p class="text-sm opacity-60 text-[#1A1A1A]">Compelling storytelling that resonates with your audience and drives action.</p>
+                                    <p class="text-sm opacity-60 text-[#1A1A1A]">Viral social media campaigns and storytelling that drive engagement.</p>
                                     <div class="mt-6 flex justify-end">
                                         <div class="w-10 h-10 rounded-full border border-black/10 flex items-center justify-center opacity-50"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
                                     </div>
@@ -208,77 +209,6 @@
                 </div>
             </div>
         </section>
-
-        <div class="stack-container">
-            <!-- 2. OUR PROCESS SECTION (Editorial Stacking) -->
-            <section id="svc-process" class="stack-section bg-lines bg-[#FDFDFD] relative text-[#1A1A1A] border-t border-black/10 shadow-[0_-20px_40px_rgba(0,0,0,0.05)]">
-                <div class="max-w-[1400px] mx-auto w-full px-8 md:px-16 flex flex-col md:flex-row justify-between items-center gap-16 relative">
-                    <!-- Left: Massive Title -->
-                    <div class="md:w-1/2 reveal-elem">
-                        <span class="text-xs font-bold tracking-[0.4em] uppercase opacity-40 mb-8 block">Methodology</span>
-                        <h2 class="font-thunder text-[12vw] md:text-[8vw] tracking-tighter">THE ICB<br/><span class="text-transparent" style="-webkit-text-stroke: 2px #1A1A1A;">PROCESS.</span></h2>
-                    </div>
-                    
-                    <!-- Right: Staggered Steps -->
-                    <div class="md:w-1/2 flex flex-col gap-12">
-                        <div class="relative reveal-elem">
-                            <div class="font-thunder text-[150px] absolute -left-12 -top-16 opacity-5 leading-none">01</div>
-                            <h3 class="font-thunder text-5xl mb-4 relative z-10">DISCOVERY</h3>
-                            <p class="text-lg opacity-60 max-w-md relative z-10">We dig deep into your brand's core to understand your goals, audience, and market position.</p>
-                        </div>
-                        <div class="relative reveal-elem md:ml-12">
-                            <div class="font-thunder text-[150px] absolute -left-12 -top-16 opacity-5 leading-none">02</div>
-                            <h3 class="font-thunder text-5xl mb-4 relative z-10">STRATEGY</h3>
-                            <p class="text-lg opacity-60 max-w-md relative z-10">Crafting a bespoke roadmap that aligns with your vision and ensures maximum digital impact.</p>
-                        </div>
-                        <div class="relative reveal-elem md:ml-24">
-                            <div class="font-thunder text-[150px] absolute -left-12 -top-16 opacity-5 leading-none">03</div>
-                            <h3 class="font-thunder text-5xl mb-4 relative z-10">EXECUTION</h3>
-                            <p class="text-lg opacity-60 max-w-md relative z-10">Launching robust, scalable solutions with premium, cinematic visuals that captivate.</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- 3. CAPABILITIES SECTION (Editorial Stacking) -->
-            <section id="svc-capabilities" class="stack-section bg-[#1A1A1A] text-[#FDFDFD] relative shadow-[0_-20px_40px_rgba(0,0,0,0.2)]">
-                <!-- Subtle grid lines for dark theme -->
-                <div class="absolute inset-0" style="background-image: linear-gradient(to right, rgba(255,255,255,0.03) 1px, transparent 1px); background-size: 25vw 25vw;"></div>
-                
-                <div class="max-w-[1400px] mx-auto w-full px-8 md:px-16 relative">
-                    <div class="flex flex-col md:flex-row gap-16 items-start">
-                        <!-- Left: Image & Text -->
-                        <div class="md:w-1/2 reveal-elem relative group overflow-hidden rounded-[20px] aspect-[4/5]">
-                            <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&q=80&w=1200" class="absolute inset-0 w-full h-full object-cover opacity-40 group-hover:scale-105 transition-transform duration-1000 grayscale">
-                            <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
-                            <div class="absolute bottom-10 left-10 right-10">
-                                <h3 class="font-thunder text-6xl tracking-tighter mb-4">CINEMATIC<br/>EXPERIENCES</h3>
-                                <p class="text-lg opacity-60">We don't just build websites; we craft digital journeys.</p>
-                            </div>
-                        </div>
-
-                        <!-- Right: Massive Numbers & Tech Stack -->
-                        <div class="md:w-1/2 flex flex-col justify-between h-full py-12">
-                            <div class="reveal-elem">
-                                <span class="text-xs font-bold tracking-[0.4em] uppercase opacity-40 mb-4 block">Our Impact</span>
-                                <h2 class="font-thunder text-[15vw] md:text-[12vw] leading-none tracking-tighter">99<span class="text-accent">%</span></h2>
-                                <p class="text-xl font-medium mt-4 tracking-widest uppercase opacity-80">Client Satisfaction</p>
-                            </div>
-                            
-                            <div class="mt-24 reveal-elem">
-                                <span class="text-xs font-bold tracking-[0.4em] uppercase opacity-40 mb-6 block">Capabilities</span>
-                                <div class="flex flex-wrap gap-4">
-                                    <span class="px-6 py-3 border border-white/20 rounded-full text-sm font-bold uppercase tracking-widest hover:bg-white hover:text-black transition-colors cursor-default">Frontend Dev</span>
-                                    <span class="px-6 py-3 border border-white/20 rounded-full text-sm font-bold uppercase tracking-widest hover:bg-white hover:text-black transition-colors cursor-default">WebGL</span>
-                                    <span class="px-6 py-3 border border-white/20 rounded-full text-sm font-bold uppercase tracking-widest hover:bg-white hover:text-black transition-colors cursor-default">GSAP Motion</span>
-                                    <span class="px-6 py-3 border border-white/20 rounded-full text-sm font-bold uppercase tracking-widest hover:bg-white hover:text-black transition-colors cursor-default">UI/UX Strategy</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-        </div>
 
         <!-- CTA Section -->
         <section class="svc-cta-dark py-32 px-6 bg-[#0a0a0a] text-light text-center relative overflow-hidden">

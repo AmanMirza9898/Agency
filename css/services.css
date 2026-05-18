@@ -61,6 +61,65 @@
     filter: brightness(0) invert(1) !important;
 }
 
+/* --- CUSTOM CURSOR DOSSIER STATES --- */
+#cursor.explore-state {
+    width: 80px;
+    height: 80px;
+    background-color: white;
+    mix-blend-mode: normal;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#cursor.explore-state::after {
+    content: "VIEW";
+    font-size: 10px;
+    font-weight: 800;
+    color: black;
+    letter-spacing: 2px;
+}
+#cursor-follower.explore-state {
+    opacity: 0;
+}
+
+#cursor.code-state {
+    width: 60px;
+    height: 60px;
+    background-color: #0a0a0a;
+    border: 1px solid #333;
+    mix-blend-mode: normal;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#cursor.code-state::after {
+    content: "< />";
+    font-size: 14px;
+    font-weight: 800;
+    color: #4ade80; /* Tailwind green-400 */
+    font-family: monospace;
+}
+#cursor-follower.code-state {
+    opacity: 0;
+}
+
+#cursor.brush-state {
+    width: 60px;
+    height: 60px;
+    background-color: #FFB800;
+    mix-blend-mode: normal;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#cursor.brush-state::after {
+    content: "🖌️";
+    font-size: 20px;
+}
+#cursor-follower.brush-state {
+    opacity: 0;
+}
+
 /* Noise Texture Overlay */
 .svc-noise::before {
     content: "";

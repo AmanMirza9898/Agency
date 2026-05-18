@@ -3,8 +3,6 @@ document.addEventListener('DOMContentLoaded', () => {
     gsap.registerPlugin(ScrollTrigger);
 
     initEnvelopeAnimation();
-
-
     // Refresh ScrollTrigger after a small delay to ensure layout is ready
     window.addEventListener('load', () => {
         setTimeout(() => {
@@ -31,7 +29,7 @@ function initEnvelopeAnimation() {
         scrollTrigger: {
             trigger: section,
             start: "top top",
-            end: "+=600%", 
+            end: "+=400%", 
             scrub: 1, 
             pin: true,
             anticipatePin: 1,
@@ -75,9 +73,10 @@ function initEnvelopeAnimation() {
         ease: "power2.inOut"
     }, "<");
     
-    // Fix Overlap: drop flap behind cards exactly halfway through opening
+    // Fix Overlap: drop flap behind cards exactly halfway through opening (when it's pointing straight up)
     tl.set(flap, { zIndex: 5 }, "<1");
 
+    // Seal drops off beautifully
     tl.to(seal, {
         y: 150,
         rotate: 45,
@@ -85,19 +84,19 @@ function initEnvelopeAnimation() {
         scale: 0.8,
         duration: 1.5,
         ease: "back.in(1.5)"
-    }, "-=1.8");
+    }, "<"); // starts at the same time as the z-index drop (t=1.1)
 
     // 3. Card Pop-Out Phase (Realistic Pull & Fan)
     const isMobile = window.innerWidth < 768;
     
-    // Step 3a: Pull straight up out of envelope
+    // Step 3a: Pull straight up out of envelope (Wait until flap is fully behind)
     tl.to(cards, {
         y: -250,
         opacity: 1,
         duration: 1.5,
         ease: "power2.out",
         stagger: 0.05
-    }, "-=1.5");
+    }, "-=0.5"); // Starts 0.5s before seal drop finishes, so t=2.1. By this time flap is fully behind!
 
     // Step 3b: Fan out elegantly
     cards.forEach((card, index) => {
@@ -115,7 +114,7 @@ function initEnvelopeAnimation() {
     });
 
     // 4. Envelope Close & Fade Out
-    tl.set(flap, { zIndex: 30 }, "+=0.5"); // bring flap back to front
+    tl.set(flap, { zIndex: 30 }, "+=0.5"); // bring flap back to front before closing
     tl.to(flap, {
         rotateX: 0,
         duration: 1.5,
@@ -139,32 +138,35 @@ function initEnvelopeAnimation() {
         ease: "power3.in"
     }, "+=0.2");
 
-    // 5. Final Grid Settlement (Readable Layout)
+    // 5. Final Grid Settlement (Readable Layout with 3D Entrance)
     tl.set('.envelope-cards-container', { zIndex: 40 }, "-=3"); // Bring cards fully in front of envelope pocket
+    
     cards.forEach((card, i) => {
         let gridX, gridY;
 
         if (isMobile) {
             // Mobile: 1 column
-            const row = i;
             gridX = 0;
-            gridY = -600 + (row * 470); // 450px card height + 20px gap
+            gridY = -600 + (i * 470);
         } else {
             // Desktop: 3 columns, 2 rows
-            const row = Math.floor(i / 3); // 0, 1
-            const col = i % 3; // 0, 1, 2
-            gridX = (col - 1) * 340; // 320px width + 20px spacing
-            gridY = row === 0 ? -500 : -30; // 450px height + 20px gap
+            const row = Math.floor(i / 3); 
+            const col = i % 3; 
+            gridX = (col - 1) * 340; 
+            gridY = row === 0 ? -500 : -30; 
         }
 
+        // 3D Flip & Deal Entrance
         tl.to(card, {
             x: gridX,
             y: gridY,
-            rotate: 0,
-            scale: 1, // Physical size maintained perfectly!
+            rotateX: 360, // Full 3D Flip
+            rotateY: 0,
+            rotateZ: 0,
+            scale: 1,
             duration: 2.5,
-            ease: "power4.inOut"
-        }, "-=3"); // Starts while envelope closes
+            ease: "expo.inOut"
+        }, `-=${3 - (i * 0.15)}`); // Staggered dealing
     });
 
     // --- INTERACTIVE CARDS LOGIC ---
@@ -174,13 +176,29 @@ function initEnvelopeAnimation() {
     cardElements.forEach(card => {
         const inner = card.querySelector('.card-inner');
         
-        // Hover effects
+        // Hover effects: Straighten up and scale
         card.addEventListener('mouseenter', () => {
-            gsap.to(inner, { scale: 1.05, duration: 0.4, ease: "power2.out", overwrite: "auto" });
+            const baseRot = parseFloat(card.dataset.rot) || 0;
+            // To straighten, we rotate the inner content by the opposite of the outer card's rotation
+            gsap.to(inner, { 
+                scale: 1.08, 
+                rotation: -baseRot, 
+                boxShadow: "0 30px 60px rgba(0,0,0,0.4)",
+                duration: 0.5, 
+                ease: "back.out(1.5)", 
+                overwrite: "auto" 
+            });
         });
         
         card.addEventListener('mouseleave', () => {
-            gsap.to(inner, { scale: 1, duration: 0.4, ease: "power2.out", overwrite: "auto" });
+            gsap.to(inner, { 
+                scale: 1, 
+                rotation: 0, 
+                boxShadow: "0 10px 30px rgba(0,0,0,0.1)",
+                duration: 0.4, 
+                ease: "power2.out", 
+                overwrite: "auto" 
+            });
         });
 
         // Click to animate to front of stack
@@ -232,5 +250,3 @@ function initEnvelopeAnimation() {
         });
     }, 1000);
 }
-
-
