@@ -7,10 +7,11 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 /* ─────────────────────────────────────────────────────
-   SERVICES DATABASE
+   SERVICES DATABASE (With Unique Preview Images)
    ───────────────────────────────────────────────────── */
 const servicesData = {
     website: {
+        previewImage: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=600&auto=format&fit=crop",
         intro: "Our website design and development services in Gurgaon transform how clients meet you, creating aesthetically functional websites that open your business to new possibilities. We love bringing artistic vision to life, going beyond limits to fulfill our clients' digital dreams, and exceeding expectations every time.",
         items: [
             {
@@ -241,6 +242,7 @@ const servicesData = {
         ]
     },
     software: {
+        previewImage: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?q=80&w=600&auto=format&fit=crop",
         intro: "We build custom, scalable software and mobile applications that optimize business operations and offer rich, interactive user experiences. From enterprise platforms to native mobile applications, we cover all layers of design and development.",
         items: [
             {
@@ -264,6 +266,7 @@ const servicesData = {
         ]
     },
     branding: {
+        previewImage: "https://images.unsplash.com/photo-1626785774573-4b799315345d?q=80&w=600&auto=format&fit=crop",
         intro: "Our branding services establish strong visual foundations that help businesses connect with their target audience on an emotional level. We build memorable designs, logo guidelines, packaging details, and full brand books.",
         items: [
             {
@@ -287,6 +290,7 @@ const servicesData = {
         ]
     },
     marketing: {
+        previewImage: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=600&auto=format&fit=crop",
         intro: "Drive traffic, generate leads, and capture search intent through data-driven campaigns. We design content strategies, optimize visibility, and run engaging social media ad funnels.",
         items: [
             {
@@ -311,64 +315,73 @@ const servicesData = {
     }
 };
 
-/* Card variant cycle */
 const VARIANTS = ['variant-a', 'variant-b', 'variant-c'];
 
 /* ─────────────────────────────────────────────────────
-   INIT
+   INIT (With Strict Pointer Stacking Controls)
    ───────────────────────────────────────────────────── */
 function initTabbedServices() {
     const tabs      = document.querySelectorAll('.tab-btn');
     const bubble    = document.querySelector('.tab-active-bubble');
     const introText = document.getElementById('tab-intro-text');
     const cardsList = document.getElementById('services-cards-list');
+    const hoverPreview = document.getElementById('tab-hover-preview');
+    const previewImg = hoverPreview?.querySelector('img');
 
     let activeTab = document.querySelector('.tab-btn.active') || tabs[0];
 
     function updateBubble(el, animate = true) {
         if (!el || !bubble) return;
         gsap.to(bubble, {
-            left: el.offsetLeft, width: el.offsetWidth,
-            height: el.offsetHeight, top: el.offsetTop,
-            duration: animate ? 0.45 : 0,
-            ease: "power3.out"
+            left: el.offsetLeft, 
+            width: el.offsetWidth,
+            height: el.offsetHeight, 
+            top: el.offsetTop,
+            duration: animate ? 0.35 : 0,
+            ease: "power2.out"
         });
     }
 
-    /* ─────────────────────────────────────────────────────
-       FLOATING ARROW SETUP
-       Two-element trick:
-       • outer wrapper  → position only (direct style.transform, zero lag)
-       • inner .card-arrow-btn → scale / opacity only (GSAP, only on enter/leave)
-       ───────────────────────────────────────────────────── */
+    /* Floating Arrow Setup */
     const arrowWrap = document.createElement('div');
-    arrowWrap.style.cssText =
-        'position:fixed;top:0;left:0;pointer-events:none;z-index:9000;will-change:transform;';
+    arrowWrap.style.cssText = 'position:fixed;top:0;left:0;pointer-events:none;z-index:9000;will-change:transform;transform:translate3d(-100px, -100px, 0);';
 
     const floatingArrow = document.createElement('div');
     floatingArrow.className = 'card-arrow-btn';
     floatingArrow.innerHTML = '&#8599;';
-    floatingArrow.style.cssText = 'position:relative;opacity:0;transform:scale(0);';
+    floatingArrow.style.cssText = 'position:relative;opacity:0;transform:scale(0.3);transition: opacity 0.15s ease, transform 0.2s cubic-bezier(0.25, 1, 0.5, 1);';
 
     arrowWrap.appendChild(floatingArrow);
     document.body.appendChild(arrowWrap);
 
-    const ARROW_HALF = 36; // 72px arrow → 36px offset to center on cursor
+    const ARROW_HALF = 36;
+    let mouseX = -100, mouseY = -100;
+    let ticking = false;
 
-    // ── Global mousemove: direct style.transform = ZERO JS overhead ──
     window.addEventListener('mousemove', (e) => {
-        arrowWrap.style.transform =
-            `translate(${e.clientX - ARROW_HALF}px, ${e.clientY - ARROW_HALF}px)`;
+        mouseX = e.clientX - ARROW_HALF;
+        mouseY = e.clientY - ARROW_HALF;
+
+        if (!ticking) {
+            requestAnimationFrame(() => {
+                arrowWrap.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0)`;
+                ticking = false;
+            });
+            ticking = true;
+        }
     }, { passive: true });
 
     setTimeout(() => updateBubble(activeTab, false), 150);
     window.addEventListener('resize', () => updateBubble(activeTab, false));
 
-    /* ── Render Cards ─────────────────────────────── */
     function renderTabContent(category) {
         tabs.forEach(t => t.classList.remove('active'));
         const targetTab = document.querySelector(`.tab-btn[data-tab="${category}"]`);
-        if (targetTab) { targetTab.classList.add('active'); activeTab = targetTab; updateBubble(activeTab, true); }
+        if (targetTab) { 
+            targetTab.classList.add('active'); 
+            activeTab = targetTab; 
+            updateBubble(activeTab, true); 
+        }
 
         const data = servicesData[category];
         if (!data) return;
@@ -376,6 +389,7 @@ function initTabbedServices() {
         if (introText) introText.innerHTML = data.intro;
 
         if (cardsList) {
+            const fragment = document.createDocumentFragment();
             cardsList.innerHTML = '';
 
             data.items.forEach((item, index) => {
@@ -384,7 +398,6 @@ function initTabbedServices() {
                 card.className = `premium-card ${variant}`;
 
                 card.innerHTML = `
-                    <!-- LEFT: text content -->
                     <div class="premium-card-left">
                         <div class="premium-card-badges">
                             ${item.badges.map(b => `<span class="premium-badge">${b}</span>`).join('')}
@@ -396,64 +409,85 @@ function initTabbedServices() {
                             </h3>
                         </div>
                     </div>
-
-                    <!-- RIGHT: image -->
                     <div class="premium-card-right">
                         <div class="premium-card-image-wrapper">
-                            <img class="premium-card-image"
-                                src="${item.image}"
-                                alt="${item.titlePart1}${item.titlePart2}"
-                                loading="lazy">
-                            <div class="premium-card-image-mask"
-                                style="background:linear-gradient(90deg,${item.fadeColor} 0%,transparent 55%)">
-                            </div>
+                            <img class="premium-card-image" src="${item.image}" alt="${item.titlePart1}${item.titlePart2}" loading="lazy">
+                            <div class="premium-card-image-mask" style="background:linear-gradient(90deg,${item.fadeColor} 0%,transparent 55%)"></div>
                         </div>
                     </div>
                 `;
 
-                /* Click → open modal */
                 card.addEventListener('click', () => {
                     openServiceModal(item.titlePart1 + item.titlePart2, item.desc, item.image);
                 });
 
-                // mouseenter → GSAP scale/opacity only (position already at cursor via global listener)
                 card.addEventListener('mouseenter', () => {
-                    document.getElementById('cursor')?.classList.add('explore-state');
-                    document.getElementById('cursor-follower')?.classList.add('explore-state');
-                    gsap.killTweensOf(floatingArrow);
-                    gsap.to(floatingArrow, {
-                        opacity: 1, scale: 1,
-                        duration: 0.25, ease: 'back.out(1.7)',
-                        overwrite: true
-                    });
+                    const mainCursor = document.getElementById('cursor');
+                    const followerCursor = document.getElementById('cursor-follower');
+                    
+                    if (mainCursor) mainCursor.style.opacity = '0';
+                    if (followerCursor) followerCursor.style.opacity = '0';
+
+                    floatingArrow.style.transition = 'opacity 0.15s ease, transform 0.2s cubic-bezier(0.25, 1, 0.5, 1)';
+                    floatingArrow.style.opacity = '1';
+                    floatingArrow.style.transform = 'scale(1)';
                 });
 
-                // mouseleave → hide only
                 card.addEventListener('mouseleave', () => {
-                    document.getElementById('cursor')?.classList.remove('explore-state');
-                    document.getElementById('cursor-follower')?.classList.remove('explore-state');
-                    gsap.killTweensOf(floatingArrow);
-                    gsap.to(floatingArrow, {
-                        opacity: 0, scale: 0.3,
-                        duration: 0.18, ease: 'power2.in',
-                        overwrite: true
-                    });
+                    const mainCursor = document.getElementById('cursor');
+                    const followerCursor = document.getElementById('cursor-follower');
+                    
+                    if (mainCursor) mainCursor.style.opacity = '';
+                    if (followerCursor) followerCursor.style.opacity = '';
+
+                    floatingArrow.style.transition = 'opacity 0.12s ease, transform 0.15s ease';
+                    floatingArrow.style.opacity = '0';
+                    floatingArrow.style.transform = 'scale(0.3)';
                 });
 
-                cardsList.appendChild(card);
+                fragment.appendChild(card);
             });
 
-            /* Entrance animation — force3D prevents GPU flicker */
+            cardsList.appendChild(fragment);
+
             gsap.fromTo(cardsList.children,
-                { opacity: 0, y: 60, force3D: true },
-                { opacity: 1, y: 0,  force3D: true, duration: 0.75, stagger: 0.1, ease: "power3.out" }
+                { opacity: 0, y: 30 },
+                { opacity: 1, y: 0, duration: 0.4, stagger: 0.05, ease: "power2.out" }
             );
         }
     }
 
     tabs.forEach(tab => {
         tab.addEventListener('click', () => renderTabContent(tab.getAttribute('data-tab')));
-        tab.addEventListener('mouseenter', () => updateBubble(tab, true));
+        
+        tab.addEventListener('mouseenter', () => {
+            updateBubble(tab, true);
+            
+            const category = tab.getAttribute('data-tab');
+            if (hoverPreview && previewImg && servicesData[category]?.previewImage) {
+                previewImg.src = servicesData[category].previewImage;
+                
+                const rect = tab.getBoundingClientRect();
+                const capsuleRect = tab.parentElement.getBoundingClientRect();
+                
+                // Absolute structural layout math
+                const exactX = (rect.left - capsuleRect.left) + (rect.width / 2) - 140;
+                
+                hoverPreview.style.left = `${exactX}px`;
+                // Structural Fix: Top parameters pushed lower to directly overlap and hide the tab text block seamlessly
+                hoverPreview.style.top = `-10px`; 
+                
+                hoverPreview.style.opacity = '1';
+                hoverPreview.style.transform = 'translate3d(0, 0, 0) scale(1)';
+            }
+        });
+
+        tab.addEventListener('mouseleave', () => {
+            if (hoverPreview) {
+                hoverPreview.style.opacity = '0';
+                hoverPreview.style.transform = 'scale(0.8)';
+            }
+        });
     });
 
     const tabCapsule = document.querySelector('.tab-capsule');
@@ -478,16 +512,18 @@ function openServiceModal(title, desc, image) {
     document.body.style.overflow = 'hidden';
 
     gsap.fromTo(modal.querySelector('.detail-container'),
-        { opacity: 0, scale: 0.9, y: 50 },
-        { opacity: 1, scale: 1, y: 0, duration: 0.5, ease: "back.out(1.5)" }
+        { opacity: 0, scale: 0.95, y: 30 },
+        { opacity: 1, scale: 1, y: 0, duration: 0.4, ease: "power2.out" }
     );
 }
+
+window.openServiceModal = openServiceModal;
 
 function closeServiceModal() {
     const modal = document.getElementById('service-detail-view');
     if (!modal) return;
     gsap.to(modal.querySelector('.detail-container'), {
-        opacity: 0, scale: 0.9, y: 50, duration: 0.4, ease: "power2.in",
+        opacity: 0, scale: 0.95, y: 30, duration: 0.3, ease: "power2.in",
         onComplete: () => {
             modal.classList.remove('active');
             modal.style.display = 'none';
