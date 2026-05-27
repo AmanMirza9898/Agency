@@ -23,11 +23,7 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <!-- External CSS -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap" rel="stylesheet">
     <!-- Page Specific CSS -->
     <link rel="stylesheet" href="css/services.css">
 </head>
@@ -59,166 +55,48 @@
     </div>
 
     <main>
-        <!-- SERVICE ENVELOPE SECTION -->
-        <section id="service-delivery" class="min-h-screen bg-white relative overflow-hidden">
-            <!-- Dedicated Parallax Background -->
-            <div class="svc-parallax-bg absolute inset-0 pointer-events-none opacity-50"></div>
-
-            <!-- Instructions -->
-            <div class="scroll-instruction fixed bottom-10 left-1/2 -translate-x-1/2 z-50 text-[10px] font-bold uppercase tracking-[0.4em] opacity-60 pointer-events-none bg-white/40 backdrop-blur-md text-dark py-3 px-8 rounded-full shadow-lg border border-black/5">
-                Scroll to Open Service Menu
-            </div>
-
-            <!-- Intro Text -->
-            <div class="intro-text absolute top-[15%] left-1/2 -translate-x-1/2 text-center z-10 w-full pointer-events-none">
-                <h1 class="text-[12vw] font-black tracking-tighter uppercase text-dark opacity-5 leading-none">Services</h1>
-                <p class="text-sm md:text-lg font-bold text-dark/40 mt-4 tracking-[0.5em] uppercase">Scroll to unbox our expertise</p>
-            </div>
-
-            <div class="envelope-pin-container h-screen flex items-end pb-8 md:pb-12 justify-center relative z-20">
-                <div class="envelope-wrapper relative w-[90vw] max-w-[650px] h-[380px] md:h-[420px]">
-                    <!-- Envelope Back Layer -->
-                    <div class="envelope-back absolute inset-0 border border-black/5 shadow-inner"></div>
-
-                    <!-- Cards (Inside Envelope) -->
-                    <div class="envelope-cards-container absolute left-1/2 bottom-4 -translate-x-1/2 w-[90vw] max-w-[320px] h-[340px] md:h-[400px] flex flex-col items-center z-10">
-                        <!-- Card 1 -->
-                        <div class="service-card-v2 hover-cursor-explore" data-service="web">
-                            <div class="card-inner overflow-hidden p-8 flex flex-col justify-between h-full bg-[#FDFDFD] backdrop-blur-md border border-white/20 shadow-[0_8px_32px_rgba(0,0,0,0.05)] rounded-xl">
-                                <div class="font-thunder text-[250px] absolute -right-16 -top-24 opacity-[0.03] text-black leading-none pointer-events-none select-none">01</div>
-                                <div class="card-header relative z-10">
-                                    <span class="text-xs font-bold tracking-[0.4em] uppercase opacity-40 mb-2 block">Service</span>
-                                    <h3 class="font-thunder text-6xl tracking-tighter leading-none">WEB<br/>DEV</h3>
-                                </div>
-                                <div class="card-body relative z-10">
-                                    <p class="text-sm opacity-60 text-[#1A1A1A]">High-end, performance-driven websites that convert visitors into loyal customers.</p>
-                                    <div class="mt-6 flex justify-end">
-                                        <div class="w-10 h-10 rounded-full border border-black/10 flex items-center justify-center opacity-50"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Card 2 -->
-                        <div class="service-card-v2 hover-cursor-explore" data-service="software">
-                            <div class="card-inner overflow-hidden p-8 flex flex-col justify-between h-full bg-[#FDFDFD] backdrop-blur-md border border-white/20 shadow-[0_8px_32px_rgba(0,0,0,0.05)] rounded-xl">
-                                <div class="font-thunder text-[250px] absolute -right-16 -top-24 opacity-[0.03] text-black leading-none pointer-events-none select-none">02</div>
-                                <div class="card-header relative z-10">
-                                    <span class="text-xs font-bold tracking-[0.4em] uppercase opacity-40 mb-2 block">Service</span>
-                                    <h3 class="font-thunder text-6xl tracking-tighter leading-none">APP<br/>DEV</h3>
-                                </div>
-                                <div class="card-body relative z-10">
-                                    <p class="text-sm opacity-60 text-[#1A1A1A]">Custom built, scalable native and hybrid mobile applications.</p>
-                                    <div class="mt-6 flex justify-end">
-                                        <div class="w-10 h-10 rounded-full border border-black/10 flex items-center justify-center opacity-50"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Card 3 -->
-                        <div class="service-card-v2 hover-cursor-explore" data-service="branding">
-                            <div class="card-inner overflow-hidden p-8 flex flex-col justify-between h-full bg-[#FDFDFD] backdrop-blur-md border border-white/20 shadow-[0_8px_32px_rgba(0,0,0,0.05)] rounded-xl">
-                                <div class="font-thunder text-[250px] absolute -right-16 -top-24 opacity-[0.03] text-black leading-none pointer-events-none select-none">03</div>
-                                <div class="card-header relative z-10">
-                                    <span class="text-xs font-bold tracking-[0.4em] uppercase opacity-40 mb-2 block">Service</span>
-                                    <h3 class="font-thunder text-6xl tracking-tighter leading-none">GRAPHIC<br/>DESIGN</h3>
-                                </div>
-                                <div class="card-body relative z-10">
-                                    <p class="text-sm opacity-60 text-[#1A1A1A]">Iconic visual identities, packaging, and brand collateral.</p>
-                                    <div class="mt-6 flex justify-end">
-                                        <div class="w-10 h-10 rounded-full border border-black/10 flex items-center justify-center opacity-50"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Card 4 -->
-                        <div class="service-card-v2 hover-cursor-explore" data-service="marketing">
-                            <div class="card-inner overflow-hidden p-8 flex flex-col justify-between h-full bg-[#1A1A1A] text-[#FDFDFD] backdrop-blur-md shadow-[0_8px_32px_rgba(255,184,0,0.1)] rounded-xl relative">
-                                <div class="absolute inset-0 bg-gradient-to-br from-[#1A1A1A] to-[#2A2A2A] pointer-events-none"></div>
-                                <div class="font-thunder text-[250px] absolute -right-16 -top-24 opacity-5 text-white leading-none pointer-events-none select-none z-0">04</div>
-                                <div class="card-header relative z-10">
-                                    <span class="text-xs font-bold tracking-[0.4em] uppercase opacity-40 mb-2 block text-white">Service</span>
-                                    <h3 class="font-thunder text-6xl tracking-tighter leading-none text-white">SEO &<br/>MARKETING</h3>
-                                </div>
-                                <div class="card-body relative z-10">
-                                    <p class="text-sm opacity-60 text-white">Data-driven marketing and SEO strategies to dominate search results.</p>
-                                    <div class="mt-6 flex justify-end">
-                                        <div class="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center opacity-50"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Card 5 -->
-                        <div class="service-card-v2 hover-cursor-explore" data-service="uiux">
-                            <div class="card-inner overflow-hidden p-8 flex flex-col justify-between h-full bg-[#FDFDFD] backdrop-blur-md border border-white/20 shadow-[0_8px_32px_rgba(0,0,0,0.05)] rounded-xl">
-                                <div class="font-thunder text-[250px] absolute -right-16 -top-24 opacity-[0.03] text-black leading-none pointer-events-none select-none">05</div>
-                                <div class="card-header relative z-10">
-                                    <span class="text-xs font-bold tracking-[0.4em] uppercase opacity-40 mb-2 block">Service</span>
-                                    <h3 class="font-thunder text-6xl tracking-tighter leading-none">UI/UX<br/>DESIGN</h3>
-                                </div>
-                                <div class="card-body relative z-10">
-                                    <p class="text-sm opacity-60 text-[#1A1A1A]">User-centric interfaces that blend stunning visuals with seamless usability.</p>
-                                    <div class="mt-6 flex justify-end">
-                                        <div class="w-10 h-10 rounded-full border border-black/10 flex items-center justify-center opacity-50"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Card 6 -->
-                        <div class="service-card-v2 hover-cursor-explore" data-service="content">
-                            <div class="card-inner overflow-hidden p-8 flex flex-col justify-between h-full bg-[#FDFDFD] backdrop-blur-md border border-white/20 shadow-[0_8px_32px_rgba(0,0,0,0.05)] rounded-xl">
-                                <div class="font-thunder text-[250px] absolute -right-16 -top-24 opacity-[0.03] text-black leading-none pointer-events-none select-none">06</div>
-                                <div class="card-header relative z-10">
-                                    <span class="text-xs font-bold tracking-[0.4em] uppercase opacity-40 mb-2 block">Service</span>
-                                    <h3 class="font-thunder text-6xl tracking-tighter leading-none">SMM &<br/>CONTENT</h3>
-                                </div>
-                                <div class="card-body relative z-10">
-                                    <p class="text-sm opacity-60 text-[#1A1A1A]">Viral social media campaigns and storytelling that drive engagement.</p>
-                                    <div class="mt-6 flex justify-end">
-                                        <div class="w-10 h-10 rounded-full border border-black/10 flex items-center justify-center opacity-50"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+        <!-- SERVICES REDESIGN SECTION -->
+        <section id="services-redesign" class="min-h-screen relative overflow-hidden">
+            <div class="tab-section-container">
+                <!-- Tabs Capsule Navigation -->
+                <div class="tab-capsule-wrapper">
+                    <div class="tab-capsule">
+                        <div class="tab-active-bubble"></div>
+                        <button class="tab-btn active" data-tab="website">
+                            <span class="tab-dot"></span>
+                            Website Design & Development
+                        </button>
+                        <button class="tab-btn" data-tab="software">
+                            <span class="tab-dot"></span>
+                            Software & App Development
+                        </button>
+                        <button class="tab-btn" data-tab="branding">
+                            <span class="tab-dot"></span>
+                            Branding & Creative
+                        </button>
+                        <button class="tab-btn" data-tab="marketing">
+                            <span class="tab-dot"></span>
+                            Online Marketing
+                        </button>
                     </div>
-
-                    <!-- Envelope Front Pocket Layer -->
-                    <div class="envelope-front absolute inset-0 z-20 pointer-events-none drop-shadow-sm">
-                         <!-- Left Flap -->
-                         <div class="envelope-part absolute inset-0 w-full h-full bg-[#e8e8e8]" style="clip-path: polygon(0 0, 48% 50%, 0 100%);"></div>
-                         <!-- Right Flap -->
-                         <div class="envelope-part absolute inset-0 w-full h-full bg-[#e8e8e8]" style="clip-path: polygon(100% 0, 52% 50%, 100% 100%);"></div>
-                         <!-- Bottom Flap (The V shape) -->
-                         <div class="envelope-part absolute inset-0 w-full h-full bg-[#f2f2f2]" style="clip-path: polygon(0 100%, 50% 48%, 100% 100%); box-shadow: 0 -10px 20px rgba(0,0,0,0.05);"></div>
-                         
-                         <!-- Premium Seal -->
-                         <div class="envelope-seal absolute top-[48%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-20 h-20 rounded-full z-30 flex items-center justify-center">
-                            <div class="seal-inner w-full h-full rounded-full flex items-center justify-center">
-                                <span class="text-red-900 font-black text-sm tracking-tighter opacity-80" style="text-shadow: 1px 1px 0px rgba(255,255,255,0.2), -1px -1px 0px rgba(0,0,0,0.3);">ICB</span>
-                            </div>
-                         </div>
-                    </div>
-
-                    <!-- Envelope Top Flap -->
-                    <div class="envelope-top-flap absolute top-0 left-0 w-full h-full z-30 origin-top pointer-events-none drop-shadow-md">
-                        <!-- Front of the flap (Visible when closed) -->
-                        <div class="flap-front absolute inset-0 w-full h-full bg-[#f8f8f8]" style="clip-path: polygon(0 0, 100% 0, 50% 55%);"></div>
-                        <!-- Back of the flap (Visible when opened) -->
-                        <div class="flap-back absolute inset-0 w-full h-full bg-[#e0e0e0]" style="clip-path: polygon(0 0, 100% 0, 50% 55%); transform: rotateX(180deg); backface-visibility: hidden;"></div>
-                    </div>
-
+                </div>
+                <!-- Dynamic Intro Paragraph for selected category -->
+                <p class="tab-intro-paragraph" id="tab-intro-text"></p>
+                <!-- Services Cards List -->
+                <div class="services-list-container" id="services-cards-list">
+                    <!-- Cards dynamically injected here -->
                 </div>
             </div>
         </section>
 
         <!-- CTA Section -->
-        <section class="svc-cta-dark py-32 px-6 bg-[#0a0a0a] text-light text-center relative overflow-hidden">
-            <div class="absolute inset-0 bg-zinc-900/50 pointer-events-none"></div>
+        <section class="svc-cta-dark py-32 px-6 text-white text-center relative overflow-hidden">
             <div class="max-w-4xl mx-auto relative z-10">
                 <h2 class="text-6xl md:text-8xl font-black tracking-tighter leading-tight mb-12">
-                    READY TO START<br/><span class="text-stroke-light" style="-webkit-text-stroke: 1px #fff; color: transparent;">A REVOLUTION?</span>
+                    READY TO START<br/><span style="-webkit-text-stroke: 1px #FFB800; color: transparent;">A REVOLUTION?</span>
                 </h2>
-                <a href="contact.html" class="px-12 py-5 bg-white text-dark font-black uppercase rounded-full text-lg magnetic hover:scale-110 transition-transform inline-block">
-                    Let's Talk →
+                <a href="contact.html" class="px-12 py-5 font-black uppercase rounded-full text-lg magnetic hover:scale-110 transition-transform inline-block" style="background:#FFB800; color:#000;">
+                    Let's Talk &rarr;
                 </a>
             </div>
         </section>
@@ -265,6 +143,27 @@
             </div>
         </div>
     </footer>
+
+    <!-- Service Detail View Modal -->
+    <div id="service-detail-view" class="fixed inset-0 z-[5000] hidden bg-black/95 backdrop-blur-md justify-center items-center p-6 overflow-y-auto">
+        <div class="detail-close-btn absolute top-6 right-6 w-12 h-12 rounded-full bg-zinc-900 flex items-center justify-center cursor-pointer border border-white/10 hover:bg-[#FFB800] hover:text-black transition-all">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+        </div>
+        <div class="detail-container max-w-4xl w-full grid grid-cols-1 md:grid-cols-2 gap-12 items-center bg-[#111111] p-8 md:p-12 rounded-[32px] border border-white/5 relative">
+            <div class="detail-image-side aspect-[4/3] md:aspect-square bg-zinc-800 rounded-2xl overflow-hidden shadow-2xl relative border border-white/5">
+                <img src="" alt="Service Preview" class="w-full h-full object-cover">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+            </div>
+            <div class="detail-content-side flex flex-col gap-6 text-left">
+                <span class="detail-category text-[10px] font-bold uppercase tracking-widest text-[#FFB800]">Service Detail</span>
+                <h2 class="detail-title text-4xl md:text-5xl font-extrabold tracking-tight text-white leading-none"></h2>
+                <p class="detail-desc text-base text-zinc-400 leading-relaxed"></p>
+                <a href="contact.html" class="detail-cta inline-block text-center px-8 py-4 bg-[#FFB800] text-black font-bold uppercase rounded-full text-sm hover:bg-white transition-all w-fit mt-4">
+                    Get In Touch →
+                </a>
+            </div>
+        </div>
+    </div>
 
     <!-- GSAP & Lenis CDNs -->
 
