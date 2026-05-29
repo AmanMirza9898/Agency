@@ -76,7 +76,7 @@
     align-items: center;
 }
 
-/* ── Tab Capsule ──────────────────────────────────── */
+/* ── Tab Capsule (Frosted Glass UI) ──────────────── */
 .tab-capsule-wrapper {
     display: flex;
     justify-content: center;
@@ -85,10 +85,10 @@
 }
 
 .tab-capsule {
-    background: rgba(22, 22, 22, 0.45); /* Semi-transparent */
-    backdrop-filter: blur(20px) saturate(180%); /* iOS Frosted Effect */
+    background: rgba(22, 22, 22, 0.45);
+    backdrop-filter: blur(20px) saturate(180%);
     -webkit-backdrop-filter: blur(20px) saturate(180%);
-    border: 1px solid rgba(255, 255, 255, 0.08); /* Premium Glass Border */
+    border: 1px solid rgba(255, 255, 255, 0.08);
     box-shadow: 0 24px 50px rgba(0, 0, 0, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.1);
     border-radius: 100px;
     padding: 6px;
@@ -160,11 +160,17 @@
    PREMIUM CARDS
    ═══════════════════════════════════════════════════ */
 .services-list-container {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: 1fr;
     gap: 24px;
     width: 100%;
     max-width: 1200px;
+}
+
+@media (max-width: 768px) {
+    .services-list-container {
+        grid-template-columns: 1fr;
+    }
 }
 
 /* ── Card Shell ───────────────────────────────────── */
@@ -200,7 +206,6 @@
     z-index: 2;
 }
 
-/* Badges row */
 .premium-card-badges {
     display: flex;
     align-items: center;
@@ -221,7 +226,6 @@
     backdrop-filter: blur(8px);
 }
 
-/* Subtitle */
 .premium-card-subtitle {
     font-size: 13px;
     font-weight: 400;
@@ -230,21 +234,22 @@
     margin-top: auto;
 }
 
-/* Title */
 .premium-card-title {
     font-size: clamp(34px, 4vw, 58px);
-    font-weight: 900;
-    line-height: 0.92;
-    letter-spacing: -2.5px;
-    text-transform: uppercase;
+    font-weight: 400;
+    line-height: 1.1;
+    letter-spacing: -0.5px;
+    text-transform: none;
     font-family: 'Geist', sans-serif;
     color: #ffffff;
     margin-top: 12px;
 }
 
 .premium-card-title-muted {
-    color: var(--accent);
-    opacity: 0.9;
+    background: linear-gradient(180deg, #dfdfdf 0%, #888888 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    opacity: 1;
     font-weight: 400;
 }
 
@@ -275,11 +280,41 @@
     transform: scale(1.05) translate3d(0, 0, 0);
 }
 
-/* Gradient mask */
 .premium-card-image-mask {
     position: absolute;
     inset: 0;
     pointer-events: none;
+}
+
+/* ── Static Card Arrow ── */
+.premium-card-arrow {
+    position: absolute;
+    bottom: 44px;
+    right: 48px;
+    width: 64px;
+    height: 64px;
+    background: #ffffff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #000000;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.3s ease;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    z-index: 10;
+}
+
+.premium-card:hover .premium-card-arrow {
+    transform: scale(1.1) translate3d(0, 0, 0);
+    background-color: var(--accent);
+}
+
+.premium-card-arrow svg {
+    transition: transform 0.3s ease;
+}
+
+.premium-card:hover .premium-card-arrow svg {
+    transform: translate(2px, -2px);
 }
 
 /* ── Arrow Button ── */
