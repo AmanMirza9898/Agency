@@ -173,7 +173,7 @@
                     
                     <!-- Left: Title & Info -->
                     <div class="detail-hero-content transform translate-y-10 opacity-0 pt-10">
-                        <h1 class="detail-title font-black leading-[1] tracking-tighter uppercase bg-gradient-to-b from-white to-zinc-500 bg-clip-text text-transparent pb-2" style="font-size: clamp(3rem, 6vw, 100px);"></h1>
+                        <h1 class="detail-title font-black leading-[1.1] tracking-tighter uppercase bg-gradient-to-b from-white to-zinc-500 bg-clip-text text-transparent pb-2 break-words" style="font-size: clamp(2.5rem, 4.5vw, 75px);"></h1>
                         <p class="detail-hero-desc mt-6 md:mt-10 text-xl md:text-2xl text-zinc-300 font-light max-w-xl"></p>
                         <div class="detail-badges flex flex-wrap gap-3 mt-8 md:mt-12">
                             <!-- Badges injected here -->
@@ -225,7 +225,7 @@
         </div>
 
         <!-- Full Width Layout for Our Work -->
-        <div class="max-w-[1400px] mx-auto px-6 md:px-20 pb-64 md:pb-96 relative z-20">
+        <div class="max-w-[1400px] mx-auto px-6 md:px-20 pb-10 relative z-20">
             <div class="detail-main-content transform translate-y-10 opacity-0">
                 <!-- Our Work Section -->
                 <div class="space-y-12">
@@ -233,7 +233,7 @@
                     <h2 class="text-4xl md:text-6xl font-black text-center bg-gradient-to-b from-white to-zinc-500 bg-clip-text text-transparent pb-2">Our Work</h2>
                     
                     <!-- Category Filters -->
-                    <div class="flex items-center justify-center md:justify-start gap-6 overflow-x-auto pb-4 [&::-webkit-scrollbar]:hidden border-b border-white/10" style="-ms-overflow-style: none; scrollbar-width: none;">
+                    <div class="flex items-center justify-center gap-6 overflow-x-auto pb-4 [&::-webkit-scrollbar]:hidden border-b border-white/10" style="-ms-overflow-style: none; scrollbar-width: none;">
                         <button class="whitespace-nowrap text-white font-bold pb-4 border-b-2 border-[#FFB800]">All</button>
                         <button class="whitespace-nowrap text-zinc-500 hover:text-white font-medium pb-4 border-b-2 border-transparent transition-colors">Real estate</button>
                         <button class="whitespace-nowrap text-zinc-500 hover:text-white font-medium pb-4 border-b-2 border-transparent transition-colors">Alwaysdry</button>
@@ -249,9 +249,9 @@
                     </div>
 
                     <!-- Image Grid -->
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 pt-6">
+                    <div id="work-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 pt-6">
                         <!-- Item 1 -->
-                        <div class="group relative aspect-[4/3] rounded-2xl overflow-hidden bg-white/5 cursor-pointer">
+                        <div class="work-item group relative aspect-[4/3] rounded-2xl overflow-hidden bg-white/5 cursor-pointer" data-category="corporate">
                             <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&q=80&w=800" alt="Work 1" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700 ease-in-out">
                             <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
                                 <div class="w-12 h-12 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center text-white border border-white/30 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
@@ -260,7 +260,7 @@
                             </div>
                         </div>
                         <!-- Item 2 -->
-                        <div class="group relative aspect-[4/3] rounded-2xl overflow-hidden bg-white/5 cursor-pointer">
+                        <div class="work-item group relative aspect-[4/3] rounded-2xl overflow-hidden bg-white/5 cursor-pointer" data-category="it">
                             <img src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&fit=crop&q=80&w=800" alt="Work 2" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700 ease-in-out">
                             <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
                                 <div class="w-12 h-12 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center text-white border border-white/30 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
@@ -269,7 +269,7 @@
                             </div>
                         </div>
                         <!-- Item 3 -->
-                        <div class="group relative aspect-[4/3] rounded-2xl overflow-hidden bg-white/5 cursor-pointer">
+                        <div class="work-item group relative aspect-[4/3] rounded-2xl overflow-hidden bg-white/5 cursor-pointer" data-category="real estate">
                             <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=800" alt="Work 3" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700 ease-in-out">
                             <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
                                 <div class="w-12 h-12 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center text-white border border-white/30 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
@@ -278,7 +278,7 @@
                             </div>
                         </div>
                         <!-- Item 4 -->
-                        <div class="group relative aspect-[4/3] rounded-2xl overflow-hidden bg-white/5 cursor-pointer">
+                        <div class="work-item group relative aspect-[4/3] rounded-2xl overflow-hidden bg-white/5 cursor-pointer" data-category="e-commerce">
                             <img src="https://images.unsplash.com/photo-1555421689-491a97ff2040?auto=format&fit=crop&q=80&w=800" alt="Work 4" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700 ease-in-out">
                             <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
                                 <div class="w-12 h-12 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center text-white border border-white/30 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
@@ -287,7 +287,7 @@
                             </div>
                         </div>
                         <!-- Item 5 -->
-                        <div class="group relative aspect-[4/3] rounded-2xl overflow-hidden bg-white/5 cursor-pointer">
+                        <div class="work-item group relative aspect-[4/3] rounded-2xl overflow-hidden bg-white/5 cursor-pointer" data-category="restaurant">
                             <img src="https://images.unsplash.com/photo-1522199755839-a2bacb67c546?auto=format&fit=crop&q=80&w=800" alt="Work 5" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700 ease-in-out">
                             <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
                                 <div class="w-12 h-12 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center text-white border border-white/30 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
@@ -296,7 +296,7 @@
                             </div>
                         </div>
                         <!-- Item 6 -->
-                        <div class="group relative aspect-[4/3] rounded-2xl overflow-hidden bg-white/5 cursor-pointer">
+                        <div class="work-item group relative aspect-[4/3] rounded-2xl overflow-hidden bg-white/5 cursor-pointer" data-category="gym">
                             <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=800" alt="Work 6" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700 ease-in-out">
                             <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
                                 <div class="w-12 h-12 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center text-white border border-white/30 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
@@ -484,8 +484,196 @@
                         </div>
                     </div>
                 </div>
+                
+                <!-- More Services Carousel -->
+                <div class="mt-32 border-t border-white/10 pt-20 overflow-hidden relative">
+                    <!-- Header & Nav -->
+                    <div class="flex items-center justify-between mb-12">
+                        <h2 class="text-5xl md:text-6xl font-black bg-gradient-to-b from-white to-zinc-500 bg-clip-text text-transparent pb-2">More Services</h2>
+                        <div class="flex items-center gap-4">
+                            <button id="carousel-prev" class="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center text-white hover:bg-[#FFB800] hover:text-black hover:border-[#FFB800] transition-all duration-300">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+                            </button>
+                            <button id="carousel-next" class="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center text-white hover:bg-[#FFB800] hover:text-black hover:border-[#FFB800] transition-all duration-300">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- 3D Carousel Track -->
+                    <div id="services-carousel-3d" class="relative h-[450px] w-full perspective-[1500px] overflow-hidden">
+                        
+                        <!-- Card 1 -->
+                        <div class="carousel-card absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-[320px] md:max-w-[400px] h-full bg-black rounded-3xl p-8 border border-white/10 flex flex-col justify-between cursor-pointer shadow-2xl">
+                            <div>
+                                <div class="text-[#FFB800] mb-6">
+                                    <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                                </div>
+                                <h3 class="text-2xl font-bold text-white mb-4">Ecommerce Products Selling</h3>
+                                <p class="text-zinc-400 text-base leading-relaxed">At our ecommerce company, we're passionate about delivering the tools, strategies, and solutions needed for our clients to thrive in the competitive world of digital commerce. Our commitment to empowering your ecommerce journey with customized solutions...</p>
+                            </div>
+                            <div class="w-12 h-12 rounded-full border border-[#FFB800] flex items-center justify-center text-[#FFB800] self-start">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                            </div>
+                        </div>
+
+                        <!-- Card 2 -->
+                        <div class="carousel-card absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-[320px] md:max-w-[400px] h-full bg-black rounded-3xl p-8 border border-white/10 flex flex-col justify-between cursor-pointer shadow-2xl">
+                            <div>
+                                <div class="text-[#FFB800] mb-6">
+                                    <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                                </div>
+                                <h3 class="text-2xl font-bold text-white mb-4">Ecommerce Customer Product</h3>
+                                <p class="text-zinc-400 text-base leading-relaxed">At our ecommerce company, we're passionate about delivering the tools, strategies, and solutions needed for our clients to thrive in the competitive world of digital commerce. Our commitment to empowering your ecommerce journey with customized solutions...</p>
+                            </div>
+                            <div class="w-12 h-12 rounded-full border border-[#FFB800] flex items-center justify-center text-[#FFB800] self-start">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                            </div>
+                        </div>
+
+                        <!-- Card 3 -->
+                        <div class="carousel-card absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-[320px] md:max-w-[400px] h-full bg-black rounded-3xl p-8 border border-white/10 flex flex-col justify-between cursor-pointer shadow-2xl">
+                            <div>
+                                <div class="text-[#FFB800] mb-6">
+                                    <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                                </div>
+                                <h3 class="text-2xl font-bold text-white mb-4">Inventory Management</h3>
+                                <p class="text-zinc-400 text-base leading-relaxed">Inventory management solutions designed for tracking, managing, and optimizing stock levels. Making sure your products are available when customers want them. We build intuitive ecommerce systems that allow businesses to track sales and stock easily.</p>
+                            </div>
+                            <div class="w-12 h-12 rounded-full border border-[#FFB800] flex items-center justify-center text-[#FFB800] self-start">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                            </div>
+                        </div>
+
+                        <!-- Card 4 -->
+                        <div class="carousel-card absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-[320px] md:max-w-[400px] h-full bg-black rounded-3xl p-8 border border-white/10 flex flex-col justify-between cursor-pointer shadow-2xl">
+                            <div>
+                                <div class="text-[#FFB800] mb-6">
+                                    <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
+                                </div>
+                                <h3 class="text-2xl font-bold text-white mb-4">Mobile App Development</h3>
+                                <p class="text-zinc-400 text-base leading-relaxed">Take your business on the go with custom mobile applications for iOS and Android. Our app development team builds fast, secure, and user-friendly mobile experiences that connect you directly with your target audience anywhere in the world.</p>
+                            </div>
+                            <div class="w-12 h-12 rounded-full border border-[#FFB800] flex items-center justify-center text-[#FFB800] self-start">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                            </div>
+                        </div>
+
+                        <!-- Card 5 -->
+                        <div class="carousel-card absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-[320px] md:max-w-[400px] h-full bg-black rounded-3xl p-8 border border-white/10 flex flex-col justify-between cursor-pointer shadow-2xl">
+                            <div>
+                                <div class="text-[#FFB800] mb-6">
+                                    <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
+                                </div>
+                                <h3 class="text-2xl font-bold text-white mb-4">SEO Optimization</h3>
+                                <p class="text-zinc-400 text-base leading-relaxed">Boost your visibility on search engines and drive organic traffic to your website. Our SEO experts use proven strategies and data-driven techniques to improve your rankings, increase brand awareness, and maximize your digital marketing ROI.</p>
+                            </div>
+                            <div class="w-12 h-12 rounded-full border border-[#FFB800] flex items-center justify-center text-[#FFB800] self-start">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                            </div>
+                        </div>
+
+                    </div>
+                    
+                    <!-- Carousel Pagination Dots -->
+                    <div id="carousel-dots" class="flex items-center justify-center gap-3 mt-12">
+                        <!-- Dots will be generated by JS -->
+                    </div>
+                </div>
+
+                <!-- SEO Service Links Footer -->
+                <div class="mt-32 border-t border-white/10 pt-20 pb-10">
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+                        <!-- Column 1 -->
+                        <div>
+                            <h3 class="text-xl font-bold bg-gradient-to-b from-white to-zinc-500 bg-clip-text text-transparent mb-6">Branding & Creative</h3>
+                            <ul class="space-y-3">
+                                <li><a href="#" class="text-zinc-400 hover:text-[#FFB800] text-sm transition-colors block">Top Logo Designing Company in Gurgaon</a></li>
+                                <li><a href="#" class="text-zinc-400 hover:text-[#FFB800] text-sm transition-colors block">Brochure Design Services in Gurgaon</a></li>
+                                <li><a href="#" class="text-zinc-400 hover:text-[#FFB800] text-sm transition-colors block">Best Creative Agency in Gurgaon</a></li>
+                                <li><a href="#" class="text-zinc-400 hover:text-[#FFB800] text-sm transition-colors block">Best Graphic Designer in Gurgaon</a></li>
+                                <li><a href="#" class="text-zinc-400 hover:text-[#FFB800] text-sm transition-colors block">Top Logo Designer in Noida</a></li>
+                                <li><a href="#" class="text-zinc-400 hover:text-[#FFB800] text-sm transition-colors block">Creative Logo Designers in Delhi</a></li>
+                                <li><a href="#" class="text-zinc-400 hover:text-[#FFB800] text-sm transition-colors block">Best Graphic Designers in Delhi</a></li>
+                                <li><a href="#" class="text-zinc-400 hover:text-[#FFB800] text-sm transition-colors block">Best Graphic Designers in Noida</a></li>
+                                <li><a href="#" class="text-zinc-400 hover:text-[#FFB800] text-sm transition-colors block">Custom Logo Designers in Patna</a></li>
+                                <li><a href="#" class="text-zinc-400 hover:text-[#FFB800] text-sm transition-colors block">Creative Logo Designers in Kanpur</a></li>
+                            </ul>
+                        </div>
+
+                        <!-- Column 2 -->
+                        <div>
+                            <h3 class="text-xl font-bold bg-gradient-to-b from-white to-zinc-500 bg-clip-text text-transparent mb-6">Online Marketing</h3>
+                            <ul class="space-y-3">
+                                <li><a href="#" class="text-zinc-400 hover:text-[#FFB800] text-sm transition-colors block">Top Digital Marketing Agency in Gurgaon</a></li>
+                            </ul>
+                        </div>
+
+                        <!-- Column 3 -->
+                        <div>
+                            <h3 class="text-xl font-bold bg-gradient-to-b from-white to-zinc-500 bg-clip-text text-transparent mb-6">Website Design & Development</h3>
+                            <ul class="space-y-3">
+                                <li><a href="#" class="text-zinc-400 hover:text-[#FFB800] text-sm transition-colors block">Website Design Company in Gurgaon</a></li>
+                                <li><a href="#" class="text-zinc-400 hover:text-[#FFB800] text-sm transition-colors block">Website Development Company in Gurgaon</a></li>
+                                <li><a href="#" class="text-zinc-400 hover:text-[#FFB800] text-sm transition-colors block">Best Website Development Company in Noida</a></li>
+                                <li><a href="#" class="text-zinc-400 hover:text-[#FFB800] text-sm transition-colors block">Website Designing Company in Noida</a></li>
+                                <li><a href="#" class="text-zinc-400 hover:text-[#FFB800] text-sm transition-colors block">Best Website Designing Company in Delhi</a></li>
+                                <li><a href="#" class="text-zinc-400 hover:text-[#FFB800] text-sm transition-colors block">Quality Website Development Company in Delhi</a></li>
+                                <li><a href="#" class="text-zinc-400 hover:text-[#FFB800] text-sm transition-colors block">eCommerce Development Company in Delhi</a></li>
+                            </ul>
+                        </div>
+
+                        <!-- Column 4 -->
+                        <div>
+                            <h3 class="text-xl font-bold bg-gradient-to-b from-white to-zinc-500 bg-clip-text text-transparent mb-6">Software & App Development</h3>
+                            <ul class="space-y-3">
+                                <li><a href="#" class="text-zinc-400 hover:text-[#FFB800] text-sm transition-colors block">Mobile App Development Company in Gurgaon</a></li>
+                                <li><a href="#" class="text-zinc-400 hover:text-[#FFB800] text-sm transition-colors block">Mobile Apps Development Company in Delhi</a></li>
+                                <li><a href="#" class="text-zinc-400 hover:text-[#FFB800] text-sm transition-colors block">Custom Software Development Company in Delhi</a></li>
+                                <li><a href="#" class="text-zinc-400 hover:text-[#FFB800] text-sm transition-colors block">Mobile Apps Development Company in Noida</a></li>
+                                <li><a href="#" class="text-zinc-400 hover:text-[#FFB800] text-sm transition-colors block">Software Development Company in Gurgaon</a></li>
+                                <li><a href="#" class="text-zinc-400 hover:text-[#FFB800] text-sm transition-colors block">Custom Software Development in Noida</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
+
+        <!-- Main Footer Inside Modal -->
+        <footer class="svc-footer-dark bg-[#0a0a0a] text-light pt-24 pb-12 px-6 md:px-12 relative overflow-hidden border-t border-white/10 mt-10">
+            <div class="max-w-7xl mx-auto">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-16 mb-20">
+                    <div class="space-y-8">
+                        <img src="Assets/images/ICB-white.png" alt="ICB Logo" class="h-12 footer-logo-persistent" style="filter: brightness(0) invert(1) !important;">
+                        <p class="text-zinc-400 text-sm max-w-xs">A Gurgaon-based design and development agency</p>
+                    </div>
+                    <div class="md:border-l md:border-white/10 md:pl-16 space-y-8">
+                        <h4 class="text-2xl font-bold">Useful Links</h4>
+                        <div class="grid grid-cols-2 gap-y-4 gap-x-8 text-zinc-400 font-medium">
+                            <a href="index.html" class="hover:text-white transition-colors">Home</a>
+                            <a href="services.html" class="hover:text-white transition-colors">Services</a>
+                            <a href="projects.html" class="hover:text-white transition-colors">Projects</a>
+                            <a href="about.html" class="hover:text-white transition-colors">About</a>
+                            <a href="contact.html" class="hover:text-white transition-colors">Contact</a>
+                        </div>
+                    </div>
+                    <div class="md:border-l md:border-white/10 md:pl-16 space-y-8">
+                        <h4 class="text-2xl font-bold">Contact</h4>
+                        <div class="space-y-6 text-zinc-400 text-sm leading-relaxed">
+                            <p>716 - Ocus Quantum, Sector 51, Gurgaon,<br>Haryana India - 122003</p>
+                            <div class="pt-4 border-t border-white/5 space-y-4">
+                                <p class="font-bold text-white">P: +91 84489 97129</p>
+                                <p class="font-bold text-white uppercase">E: CONTACT@ICREATEBRAND.COM</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-6 text-center">
+                    <span class="text-[11px] font-bold uppercase tracking-widest opacity-40">© 2026 icreatebrand.com - All Rights Reserved</span>
+                </div>
+            </div>
+        </footer>
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>

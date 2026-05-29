@@ -1064,6 +1064,164 @@ function openServiceModal(title, subtitle, desc, image, badges = []) {
                     }
                 });
             });
+
+            // Ultra-Modern Flat-Stacked Carousel Logic
+            const carousel3d = modal.querySelector('#services-carousel-3d');
+            if (carousel3d) {
+                const cards = carousel3d.querySelectorAll('.carousel-card');
+                const prevBtn = modal.querySelector('#carousel-prev');
+                const nextBtn = modal.querySelector('#carousel-next');
+                const carouselSection = carousel3d.closest('.mt-32.border-t');
+                const dotsContainer = modal.querySelector('#carousel-dots');
+                
+                let currentIndex = Math.floor(cards.length / 2); // Start in middle
+                
+                // Create dots
+                if (dotsContainer) {
+                    dotsContainer.innerHTML = '';
+                    cards.forEach((_, i) => {
+                        const dot = document.createElement('button');
+                        dot.className = `w-3 h-3 rounded-full transition-all duration-300 ${i === currentIndex ? 'bg-[#FFB800] w-8' : 'bg-white/20 hover:bg-white/50'}`;
+                        dot.addEventListener('click', () => {
+                            if (currentIndex !== i) {
+                                currentIndex = i;
+                                updateCarousel();
+                            }
+                        });
+                        dotsContainer.appendChild(dot);
+                    });
+                }
+                
+                function updateCarousel() {
+                    // Update dots styling
+                    if (dotsContainer) {
+                        const dots = dotsContainer.querySelectorAll('button');
+                        dots.forEach((dot, i) => {
+                            dot.className = `w-3 h-3 rounded-full transition-all duration-300 ${i === currentIndex ? 'bg-[#FFB800] w-8' : 'bg-white/20 hover:bg-white/50'}`;
+                        });
+                    }
+
+                    cards.forEach((card, index) => {
+                        let offset = index - currentIndex;
+                        
+                        // Flat Stacked Math (like user's image)
+                        // tx: overlapping horizontal spread
+                        // scale: smaller as they go further out
+                        // rotateY: 0 (keep them flat)
+                        let tx = offset * 180; // Overlap spacing
+                        let tz = 0; 
+                        let rotateY = 0; 
+                        let scale = 1 - (Math.abs(offset) * 0.15); // e.g., 1, 0.85, 0.70
+                        let zIndex = 100 - Math.abs(offset);
+                        let opacity = Math.abs(offset) > 2 ? 0 : 1; // Show 5 cards max
+
+                        // Animate card into position
+                        gsap.to(card, {
+                            x: tx,
+                            z: tz,
+                            rotateY: rotateY,
+                            scale: scale,
+                            zIndex: zIndex,
+                            opacity: opacity,
+                            duration: 0.8,
+                            ease: "power3.out",
+                            transformOrigin: "center center"
+                        });
+                        
+                        // Apply active styling
+                        if (offset === 0) {
+                            card.style.borderColor = 'rgba(255, 184, 0, 0.5)'; // Yellow glow
+                            card.style.boxShadow = '0 25px 50px -12px rgba(255, 184, 0, 0.15)';
+                            card.classList.remove('pointer-events-none');
+                        } else {
+                            card.style.borderColor = 'rgba(255, 255, 255, 0.1)'; // Normal border
+                            card.style.boxShadow = 'none';
+                            // To ensure only the center one is interactive, optionally:
+                            // card.classList.add('pointer-events-none');
+                        }
+                    });
+                }
+                
+                // Initial setup
+                updateCarousel();
+                
+                // GSAP Reveal for the whole section
+                gsap.fromTo(carouselSection, 
+                    { y: 50, opacity: 0 },
+                    {
+                        y: 0,
+                        opacity: 1,
+                        duration: 1,
+                        ease: 'power4.out',
+                        scrollTrigger: {
+                            trigger: carouselSection,
+                            scroller: '#service-detail-view',
+                            start: 'top 85%',
+                            toggleActions: 'play none none none'
+                        }
+                    }
+                );
+                
+                // Button Navigation
+                if (prevBtn) {
+                    prevBtn.addEventListener('click', () => {
+                        currentIndex = Math.max(0, currentIndex - 1);
+                        updateCarousel();
+                    });
+                }
+                if (nextBtn) {
+                    nextBtn.addEventListener('click', () => {
+                        currentIndex = Math.min(cards.length - 1, currentIndex + 1);
+                        updateCarousel();
+                    });
+                }
+                
+                // Allow clicking side cards to bring them to center
+                cards.forEach((card, index) => {
+                    card.addEventListener('click', () => {
+                        if (currentIndex !== index) {
+                            currentIndex = index;
+                            updateCarousel();
+                        }
+                    });
+                });
+            }
+
+            // Our Work Category Filter Logic
+            const filterBtns = modal.querySelectorAll('.overflow-x-auto button');
+            const workItems = modal.querySelectorAll('#work-grid .work-item');
+            
+            if (filterBtns.length > 0 && workItems.length > 0) {
+                filterBtns.forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        // Reset all buttons
+                        filterBtns.forEach(b => {
+                            b.classList.remove('text-white', 'border-[#FFB800]');
+                            b.classList.add('text-zinc-500', 'border-transparent');
+                        });
+                        
+                        // Set active button
+                        btn.classList.add('text-white', 'border-[#FFB800]');
+                        btn.classList.remove('text-zinc-500', 'border-transparent');
+                        
+                        const filterValue = btn.textContent.trim().toLowerCase();
+                        
+                        // Filter items
+                        workItems.forEach(item => {
+                            const category = item.getAttribute('data-category');
+                            if (filterValue === 'all' || filterValue === category) {
+                                item.style.display = 'block';
+                                gsap.fromTo(item, 
+                                    { opacity: 0, scale: 0.9 }, 
+                                    { opacity: 1, scale: 1, duration: 0.4, ease: "power2.out" }
+                                );
+                            } else {
+                                item.style.display = 'none';
+                            }
+                        });
+                    });
+                });
+            }
         }
     }, "-=0.3");
 }
