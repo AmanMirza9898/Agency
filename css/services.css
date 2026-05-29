@@ -80,79 +80,157 @@
 .tab-capsule-wrapper {
     display: flex;
     justify-content: center;
-    margin-bottom: 56px;
+    margin-bottom: 80px;
     width: 100%;
 }
 
 .tab-capsule {
-    background: rgba(255, 255, 255, 0.6);
-    backdrop-filter: blur(20px) saturate(180%);
-    -webkit-backdrop-filter: blur(20px) saturate(180%);
-    border: 1px solid rgba(0, 0, 0, 0.05);
-    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.05), inset 0 1px 1px rgba(255, 255, 255, 0.5);
+    display: flex;
+    align-items: center;
+    background: #ffffff;
+    border: 1px solid #f0f0f0;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.04);
     border-radius: 100px;
     padding: 6px;
-    display: inline-flex;
-    align-items: center;
-    gap: 4px;
-    flex-wrap: wrap;
-    justify-content: center;
     position: relative;
+    gap: 0;
+    width: 100%;
+    max-width: 1000px;
 }
 
+/* The active slider background */
 .tab-active-bubble {
     position: absolute;
-    height: calc(100% - 12px);
-    background: var(--accent);
+    background: #111418;
     border-radius: 100px;
     z-index: 1;
     pointer-events: none;
-    box-shadow: 0 8px 24px rgba(255,184,0,0.3);
-    left: 6px; top: 6px; width: 0;
+    box-shadow: 0 10px 24px rgba(255, 184, 0, 0.15);
+    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .tab-btn {
-    padding: 14px 28px;
-    border-radius: 100px;
-    font-size: 13px;
-    font-weight: 600;
-    color: rgba(0,0,0,0.5);
-    transition: color 0.35s;
-    cursor: pointer;
-    border: none;
+    flex: 1;
+    padding: 16px 24px;
     background: transparent;
-    outline: none;
-    letter-spacing: 0.4px;
+    border: none;
+    font-family: 'Geist', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: #1f2937;
+    cursor: pointer;
     position: relative;
     z-index: 2;
-    white-space: nowrap;
+    border-radius: 100px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-family: 'Geist', sans-serif;
+    gap: 12px;
+    transition: all 0.3s ease;
 }
-.tab-btn:hover   { color: #000; }
-.tab-btn.active  { color: #000 !important; font-weight: 700; }
 
-.tab-dot {
-    width: 0; height: 6px;
-    border-radius: 50%;
-    background: #000;
-    display: inline-block;
-    transition: width 0.35s cubic-bezier(0.16,1,0.3,1),
-                margin-right 0.35s cubic-bezier(0.16,1,0.3,1);
-    margin-right: 0;
+/* Vertical Dividers */
+.tab-btn:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 1px;
+    height: 24px;
+    background: #e5e7eb;
+    transition: opacity 0.3s;
 }
-.tab-btn.active .tab-dot { width: 6px; margin-right: 8px; }
+
+/* Hide divider if button is active or hovered */
+.tab-btn.active::after,
+.tab-btn:hover::after { opacity: 0; }
+
+.tab-btn.active,
+.tab-btn:hover { 
+    color: #ffffff !important;
+}
+
+/* Fix: If the capsule is hovered, the bubble moves away from the active tab. 
+   So the active tab (if not hovered itself) should revert to its normal inactive appearance. */
+.tab-capsule:hover .tab-btn.active:not(:hover) {
+    color: #1f2937 !important;
+}
+.tab-capsule:hover .tab-btn.active:not(:hover)::after {
+    opacity: 1; /* Show divider again */
+}
+
+/* Icons */
+.tab-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #d4af37; /* Golden color */
+    transition: all 0.3s ease;
+}
+.tab-btn.active .tab-icon,
+.tab-btn:hover .tab-icon {
+    color: var(--accent); /* Brighter yellow on dark background */
+    filter: drop-shadow(0 0 6px rgba(255, 184, 0, 0.4));
+}
+.tab-capsule:hover .tab-btn.active:not(:hover) .tab-icon {
+    color: #d4af37;
+    filter: none;
+}
+
+/* Chevron */
+.tab-chevron {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: var(--accent);
+    color: #111418; /* Dark arrow */
+    margin-left: 8px;
+    opacity: 0;
+    transform: translateX(-10px) scale(0.8);
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    position: absolute;
+    right: 16px;
+}
+.tab-btn.active .tab-chevron,
+.tab-btn:hover .tab-chevron {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+}
+.tab-capsule:hover .tab-btn.active:not(:hover) .tab-chevron {
+    opacity: 0;
+    transform: translateX(-10px) scale(0.8);
+}
+
+/* When chevron is active or hovered, push text to left slightly to make space */
+.tab-text {
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.tab-btn.active .tab-text,
+.tab-btn:hover .tab-text {
+    transform: translateX(-10px);
+}
+.tab-btn.active .tab-icon,
+.tab-btn:hover .tab-icon {
+    transform: translateX(-10px);
+}
+
+.tab-capsule:hover .tab-btn.active:not(:hover) .tab-text,
+.tab-capsule:hover .tab-btn.active:not(:hover) .tab-icon {
+    transform: translateX(0);
+}
 
 /* ── Intro Paragraph ──────────────────────────────── */
 .tab-intro-paragraph {
-    max-width: 760px;
+    max-width: 800px;
     text-align: center;
-    font-size: 17px;
-    line-height: 1.7;
-    color: var(--text-desc);
-    margin-bottom: 64px;
+    font-size: 19px;
+    line-height: 1.8;
+    color: rgba(0,0,0,0.6);
+    margin-bottom: 80px;
     font-weight: 400;
 }
 
@@ -176,8 +254,8 @@
 /* ── Card Shell ───────────────────────────────────── */
 .premium-card {
     width: 100%;
-    min-height: 340px;
-    border-radius: 28px;
+    min-height: 380px;
+    border-radius: 32px;
     overflow: hidden;
     position: relative;
     display: grid;
@@ -188,12 +266,15 @@
     -webkit-backface-visibility: hidden;
     will-change: box-shadow, transform;
     isolation: isolate;
-    transition: box-shadow 0.4s ease;
-    border: 1px solid var(--border);
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    background: #111418;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.1);
 }
 
 .premium-card:hover {
-    box-shadow: 0 28px 70px rgba(0,0,0,0.08), 0 0 0 1px rgba(255,184,0,0.4);
+    transform: translateY(-4px);
+    box-shadow: 0 30px 60px rgba(0,0,0,0.2), 0 0 0 1px rgba(255,184,0,0.3);
 }
 
 /* ── Left Content Side ────────────────────────────── */
@@ -214,42 +295,40 @@
 }
 
 .premium-badge {
-    padding: 7px 16px;
+    padding: 8px 18px;
     border-radius: 100px;
-    font-size: 11px;
+    font-size: 12px;
     font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 0.8px;
-    border: 1px solid rgba(0,0,0,0.1);
-    color: rgba(0,0,0,0.7);
-    background: rgba(0,0,0,0.03);
+    letter-spacing: 1px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.05);
     backdrop-filter: blur(8px);
 }
 
 .premium-card-subtitle {
-    font-size: 13px;
-    font-weight: 400;
-    color: rgba(0,0,0,0.5);
-    letter-spacing: 0.3px;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--accent);
+    letter-spacing: 0.5px;
     margin-top: auto;
+    text-transform: uppercase;
 }
 
 .premium-card-title {
-    font-size: clamp(34px, 4vw, 58px);
-    font-weight: 400;
+    font-size: clamp(34px, 4vw, 54px);
+    font-weight: 600;
     line-height: 1.1;
     letter-spacing: -0.5px;
     text-transform: none;
     font-family: 'Geist', sans-serif;
-    color: var(--accent);
-    margin-top: 12px;
+    color: #ffffff;
+    margin-top: 16px;
 }
 
 .premium-card-title-muted {
-    background: linear-gradient(180deg, #555 0%, #999 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    opacity: 1;
+    color: rgba(255, 255, 255, 0.4);
     font-weight: 400;
 }
 
@@ -293,20 +372,24 @@
     right: 48px;
     width: 64px;
     height: 64px;
-    background: #111111;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     color: #ffffff;
-    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.3s ease;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     z-index: 10;
 }
 
 .premium-card:hover .premium-card-arrow {
     transform: scale(1.1) translate3d(0, 0, 0);
     background-color: var(--accent);
+    border-color: var(--accent);
+    color: #111418;
+    box-shadow: 0 10px 30px rgba(255, 184, 0, 0.3);
 }
 
 .premium-card-arrow svg {
@@ -339,9 +422,9 @@
 }
 
 /* ── Card Colour Variants ───────────── */
-.premium-card.variant-a { background: #ffffff; }
-.premium-card.variant-b { background: #fbfbfb; }
-.premium-card.variant-c { background: #f4f4f4; border-color: rgba(255,184,0,0.25); }
+.premium-card.variant-a { background: #111418; }
+.premium-card.variant-b { background: #15191e; }
+.premium-card.variant-c { background: #1a1e24; border-color: rgba(255,184,0,0.15); }
 
 /* ═══════════════════════════════════════════════════
    CTA SECTION
@@ -467,7 +550,18 @@
     .premium-card-left { padding: 32px; }
     .premium-card-right { height: 220px; }
     #services-redesign { padding-top: 110px; }
-    .tab-btn { padding: 10px 16px; font-size: 12px; }
+    
+    .tab-capsule { 
+        flex-direction: column; 
+        border-radius: 24px; 
+        padding: 8px;
+        gap: 4px;
+        align-items: stretch;
+    }
+    .tab-btn { padding: 16px 20px; font-size: 14px; justify-content: flex-start; }
+    .tab-btn:not(:last-child)::after { display: none; /* No vertical dividers on mobile */ }
+    .tab-active-bubble { border-radius: 20px; }
+    
     .tab-section-container { padding: 0 16px; }
 }
 
