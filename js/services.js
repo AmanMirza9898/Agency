@@ -1009,6 +1009,61 @@ function openServiceModal(title, subtitle, desc, image, badges = []) {
                     }
                 );
             }
+
+            // Animate FAQ Section on Scroll
+            const faqSection = modal.querySelector('.mt-32.border-t:last-child');
+            if (faqSection) {
+                gsap.fromTo(faqSection, 
+                    { y: 50, opacity: 0 },
+                    {
+                        y: 0,
+                        opacity: 1,
+                        duration: 0.8,
+                        ease: 'power3.out',
+                        scrollTrigger: {
+                            trigger: faqSection,
+                            scroller: '#service-detail-view',
+                            start: 'top 85%',
+                            toggleActions: 'play none none none'
+                        }
+                    }
+                );
+            }
+
+            // FAQ Accordion Logic
+            const faqBtns = modal.querySelectorAll('.faq-btn');
+            faqBtns.forEach(btn => {
+                // Ensure no duplicate listeners if modal opened multiple times
+                const newBtn = btn.cloneNode(true);
+                btn.parentNode.replaceChild(newBtn, btn);
+                
+                newBtn.addEventListener('click', function() {
+                    const content = this.nextElementSibling;
+                    const icon = this.querySelector('.faq-icon');
+                    const text = this.querySelector('h3');
+                    const isOpen = content.style.maxHeight && content.style.maxHeight !== '0px';
+                    
+                    // Close all other accordions
+                    modal.querySelectorAll('.faq-content').forEach(c => {
+                        c.style.maxHeight = '0px';
+                    });
+                    modal.querySelectorAll('.faq-icon').forEach(i => {
+                        i.style.transform = 'rotate(0deg)';
+                    });
+                    modal.querySelectorAll('.faq-btn h3').forEach(t => {
+                        t.classList.remove('text-[#FFB800]');
+                        t.classList.add('text-white');
+                    });
+                    
+                    // Open the clicked one if it wasn't open
+                    if (!isOpen) {
+                        content.style.maxHeight = content.scrollHeight + 'px';
+                        icon.style.transform = 'rotate(45deg)';
+                        text.classList.remove('text-white');
+                        text.classList.add('text-[#FFB800]');
+                    }
+                });
+            });
         }
     }, "-=0.3");
 }
