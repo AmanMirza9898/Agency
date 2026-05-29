@@ -966,6 +966,49 @@ function openServiceModal(title, subtitle, desc, image, badges = []) {
                 formCardWrapper.addEventListener('mousemove', handleMouseMove);
                 formCardWrapper.addEventListener('mouseleave', handleMouseLeave);
             }
+
+            // Animate Portfolio Grid Items on Scroll
+            const portfolioItems = modal.querySelectorAll('.group.aspect-\\[4\\/3\\]');
+            if (portfolioItems.length > 0) {
+                gsap.fromTo(portfolioItems, 
+                    { y: 50, opacity: 0 },
+                    {
+                        y: 0,
+                        opacity: 1,
+                        stagger: 0.1,
+                        duration: 0.8,
+                        ease: 'power3.out',
+                        scrollTrigger: {
+                            trigger: portfolioItems[0].parentElement,
+                            scroller: '#service-detail-view',
+                            start: 'top 85%',
+                            toggleActions: 'play none none none'
+                        }
+                    }
+                );
+            }
+
+            // Animate Offers Section on Scroll
+            const offersSection = modal.querySelector('.mt-32.border-t');
+            if (offersSection) {
+                const offerCols = offersSection.querySelectorAll('.space-y-8, .space-y-16');
+                gsap.fromTo(offerCols, 
+                    { y: 50, opacity: 0 },
+                    {
+                        y: 0,
+                        opacity: 1,
+                        stagger: 0.2,
+                        duration: 0.8,
+                        ease: 'power3.out',
+                        scrollTrigger: {
+                            trigger: offersSection,
+                            scroller: '#service-detail-view',
+                            start: 'top 85%',
+                            toggleActions: 'play none none none'
+                        }
+                    }
+                );
+            }
         }
     }, "-=0.3");
 }
