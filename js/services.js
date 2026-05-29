@@ -908,12 +908,12 @@ function openServiceModal(title, subtitle, desc, image, badges = []) {
     tl.to(modal, { y: '0%', duration: 0.7, ease: "power4.out" });
 
     // Stagger in the internal elements
-    const elementsToAnimate = modal.querySelectorAll('.detail-nav-el, .detail-hero-content, .detail-main-content');
+    const elementsToAnimate = modal.querySelectorAll('.detail-nav-el, .detail-hero-content, .detail-form-card, .detail-main-content');
     gsap.set(elementsToAnimate, { y: 30, opacity: 0 });
     tl.to(elementsToAnimate, { 
         y: 0, opacity: 1, duration: 0.6, stagger: 0.1, ease: "power3.out",
         onComplete: () => {
-            // Setup Text Scrub after modal is fully open and layout is settled
+            // Set up Text Scrub after modal is fully open and layout is settled
             ScrollTrigger.refresh();
             
             const scrollWords = modal.querySelectorAll('.scroll-word');
@@ -930,6 +930,41 @@ function openServiceModal(title, subtitle, desc, image, badges = []) {
                         scrub: 1
                     }
                 });
+            }
+
+            // 3D Tilt Effect for the Form Card
+            const formCardWrapper = modal.querySelector('.detail-form-card');
+            const formCardInner = formCardWrapper ? formCardWrapper.querySelector('div') : null;
+            if (formCardWrapper && formCardInner) {
+                // Ensure smooth transition for resetting the tilt
+                formCardInner.style.transition = 'transform 0.3s cubic-bezier(0.25, 1, 0.5, 1)';
+                
+                const handleMouseMove = (e) => {
+                    const rect = formCardWrapper.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    const centerX = rect.width / 2;
+                    const centerY = rect.height / 2;
+                    
+                    // Max tilt angle 6 degrees
+                    const rotateX = ((y - centerY) / centerY) * -6;
+                    const rotateY = ((x - centerX) / centerX) * 6;
+                    
+                    formCardInner.style.transition = 'none'; // remove transition for instant tracking
+                    formCardInner.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+                };
+                
+                const handleMouseLeave = () => {
+                    formCardInner.style.transition = 'transform 0.5s cubic-bezier(0.25, 1, 0.5, 1)';
+                    formCardInner.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
+                };
+
+                // Store handlers to remove them later
+                formCardWrapper._tiltMove = handleMouseMove;
+                formCardWrapper._tiltLeave = handleMouseLeave;
+                
+                formCardWrapper.addEventListener('mousemove', handleMouseMove);
+                formCardWrapper.addEventListener('mouseleave', handleMouseLeave);
             }
         }
     }, "-=0.3");
@@ -955,6 +990,16 @@ function closeServiceModal() {
                     st.kill();
                 }
             });
+
+            // Clean up tilt listeners
+            const formCardWrapper = modal.querySelector('.detail-form-card');
+            if (formCardWrapper && formCardWrapper._tiltMove) {
+                formCardWrapper.removeEventListener('mousemove', formCardWrapper._tiltMove);
+                formCardWrapper.removeEventListener('mouseleave', formCardWrapper._tiltLeave);
+                // reset transform
+                const formCardInner = formCardWrapper.querySelector('div');
+                if (formCardInner) formCardInner.style.transform = 'none';
+            }
 
             // Reset modal for next open
             gsap.set(modal, { y: '0%', opacity: 0 });
