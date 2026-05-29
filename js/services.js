@@ -791,7 +791,7 @@ function initTabbedServices() {
                     : leftContent + rightContent + arrowContent;
 
                 card.addEventListener('click', () => {
-                    openServiceModal(item.titlePart1 + item.titlePart2, item.desc, item.image);
+                    openServiceModal(item.titlePart1 + item.titlePart2, item.subtitle, item.desc, item.image, item.badges);
                 });
 
                 card.addEventListener('mouseenter', () => {
@@ -869,24 +869,70 @@ function initTabbedServices() {
 }
 
 /* ─────────────────────────────────────────────────────
-   MODAL
+   MODAL (FULL SCREEN CASE STUDY)
    ───────────────────────────────────────────────────── */
-function openServiceModal(title, desc, image) {
+function openServiceModal(title, subtitle, desc, image, badges = []) {
     const modal = document.getElementById('service-detail-view');
     if (!modal) return;
 
-    modal.querySelector('.detail-title').textContent  = title;
-    modal.querySelector('.detail-desc').textContent   = desc;
-    modal.querySelector('.detail-image-side img').src = image;
+    modal.querySelector('.detail-title').textContent = title;
+    
+    const heroDesc = modal.querySelector('.detail-hero-desc');
+    if (heroDesc) heroDesc.textContent = subtitle;
+
+    const descEl = modal.querySelector('.detail-desc');
+    if (descEl) {
+        // Split text into words for the scroll reveal effect
+        const words = desc.split(' ');
+        descEl.innerHTML = words.map(w => `<span class="scroll-word inline-block mr-2" style="opacity:0.15; transition: color 0.3s">${w}</span>`).join(' ');
+    }
+
+    modal.querySelector('.detail-hero-img').src = image;
+    
+    const badgesContainer = modal.querySelector('.detail-badges');
+    if (badgesContainer) {
+        badgesContainer.innerHTML = badges.map(b => 
+            `<span class="px-5 py-2 border border-white/20 bg-white/5 backdrop-blur-md rounded-full text-white font-medium text-sm">${b}</span>`
+        ).join('');
+    }
 
     modal.classList.add('active');
-    modal.style.display = 'flex';
+    modal.style.display = 'block'; // Make it a block element to allow scrolling
     document.body.style.overflow = 'hidden';
 
-    gsap.fromTo(modal.querySelector('.detail-container'),
-        { opacity: 0, scale: 0.95, y: 30 },
-        { opacity: 1, scale: 1, y: 0, duration: 0.4, ease: "power2.out" }
-    );
+    // Advanced Entrance Animation Sequence
+    const tl = gsap.timeline();
+    
+    // Animate the entire modal sliding up
+    gsap.set(modal, { y: '100%', opacity: 1 });
+    tl.to(modal, { y: '0%', duration: 0.7, ease: "power4.out" });
+
+    // Stagger in the internal elements
+    const elementsToAnimate = modal.querySelectorAll('.detail-nav-el, .detail-hero-content, .detail-main-content');
+    gsap.set(elementsToAnimate, { y: 30, opacity: 0 });
+    tl.to(elementsToAnimate, { 
+        y: 0, opacity: 1, duration: 0.6, stagger: 0.1, ease: "power3.out",
+        onComplete: () => {
+            // Setup Text Scrub after modal is fully open and layout is settled
+            ScrollTrigger.refresh();
+            
+            const scrollWords = modal.querySelectorAll('.scroll-word');
+            if (scrollWords.length > 0 && descEl) {
+                gsap.to(scrollWords, {
+                    opacity: 1,
+                    color: '#ffffff', // Fills with bright white
+                    stagger: 0.1,
+                    scrollTrigger: {
+                        trigger: descEl,
+                        scroller: '#service-detail-view',
+                        start: 'top 85%',
+                        end: 'bottom 85%',
+                        scrub: 1
+                    }
+                });
+            }
+        }
+    }, "-=0.3");
 }
 
 window.openServiceModal = openServiceModal;
@@ -894,12 +940,24 @@ window.openServiceModal = openServiceModal;
 function closeServiceModal() {
     const modal = document.getElementById('service-detail-view');
     if (!modal) return;
-    gsap.to(modal.querySelector('.detail-container'), {
-        opacity: 0, scale: 0.95, y: 30, duration: 0.3, ease: "power2.in",
+    
+    // Slide down to close
+    gsap.to(modal, {
+        y: '100%', duration: 0.5, ease: "power4.in",
         onComplete: () => {
             modal.classList.remove('active');
             modal.style.display = 'none';
             document.body.style.overflow = '';
+            
+            // Clean up ScrollTriggers
+            ScrollTrigger.getAll().forEach(st => {
+                if (st.vars.scroller === '#service-detail-view') {
+                    st.kill();
+                }
+            });
+
+            // Reset modal for next open
+            gsap.set(modal, { y: '0%', opacity: 0 });
         }
     });
 }
